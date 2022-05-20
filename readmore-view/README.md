@@ -42,6 +42,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.webtoonscorp.android:readmore:<version>"
+    implementation "com.webtoonscorp.android:readmore-view:<version>"
 }
 ```

@@ -12,7 +12,7 @@ This library provides collapsible Text widgets with 'Read more' text. (Including
 
 ## Libraries
 
-### [ReadMoreTextView](./readmore/)
+### [ReadMoreTextView](./readmore-view/)
 A library that provides collapsible `TextView` with 'Read more' text. (for Android View System)
 
 ### [ReadMoreText-Foundation](./readmore-foundation/)

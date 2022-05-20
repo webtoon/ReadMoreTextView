@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ReadMoreTextView">
+        <attr name="readMoreMaxLines" format="integer" />
+        <attr name="readMoreOverflow">
+            <flag name="clip" value="1" />
+            <flag name="ellipsis" value="2" />
+        </attr>
+        <attr name="readMoreText" format="string" />
+        <attr name="readMoreTextSize" format="dimension" />
+        <attr name="readMoreTextColor" format="reference|color" />
+        <attr name="readMoreTextUnderline" format="boolean" />
+        <attr name="readMoreTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="readMoreFontFamily" format="string" />
+        <attr name="readMoreTypeface" format="integer">
+            <enum name="normal" value="0" />
+            <enum name="sans" value="1" />
+            <enum name="serif" value="2" />
+            <enum name="monospace" value="3" />
+        </attr>
+        <attr name="readMoreTextAppearance" format="reference" />
+        <attr name="readMoreToggleEnabled" format="boolean" />
+    </declare-styleable>
+
+    <attr name="readMoreTextViewStyle" format="reference" />
+</resources>

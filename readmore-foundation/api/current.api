@@ -1,0 +1,21 @@
+// Signature format: 4.0
+package com.webtoonscorp.android.readmore.foundation {
+
+  public final class BasicReadMoreTextKt {
+    method @androidx.compose.runtime.Composable public static void BasicReadMoreText(String text, boolean expanded, optional androidx.compose.ui.Modifier modifier, optional androidx.compose.ui.text.TextStyle style, optional kotlin.jvm.functions.Function1<? super androidx.compose.ui.text.TextLayoutResult,kotlin.Unit> onTextLayout, optional boolean softWrap, optional String readMoreText, optional int readMoreMaxLines, optional int readMoreOverflow, optional androidx.compose.ui.text.SpanStyle readMoreStyle);
+    method @androidx.compose.runtime.Composable public static void BasicReadMoreText(androidx.compose.ui.text.AnnotatedString text, boolean expanded, optional androidx.compose.ui.Modifier modifier, optional androidx.compose.ui.text.TextStyle style, optional kotlin.jvm.functions.Function1<? super androidx.compose.ui.text.TextLayoutResult,kotlin.Unit> onTextLayout, optional boolean softWrap, optional java.util.Map<java.lang.String,androidx.compose.foundation.text.InlineTextContent> inlineContent, optional String readMoreText, optional int readMoreMaxLines, optional int readMoreOverflow, optional androidx.compose.ui.text.SpanStyle readMoreStyle);
+  }
+
+  @kotlin.jvm.JvmInline public final class ReadMoreTextOverflow {
+    field public static final com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow.Companion Companion;
+  }
+
+  public static final class ReadMoreTextOverflow.Companion {
+    method public int getClip();
+    method public int getEllipsis();
+    property public final int Clip;
+    property public final int Ellipsis;
+  }
+
+}
+

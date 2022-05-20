@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.ReadMoreTextView" parent="Widget.AppCompat.TextView">
+        <!-- If wants, you can set default attributes in your app theme. -->
+        <!-- <item name="readMoreMaxLines">3</item> -->
+        <!-- <item name="readMoreText">@string/read_more</item> -->
+        <!-- <item name="readMoreTextColor">?colorPrimary</item> -->
+        <!-- <item name="readMoreFontFamily">sans-serif</item> -->
+        <!-- <item name="readMoreTextSize">12sp</item> -->
+        <!-- <item name="readMoreTextStyle">bold</item> -->
+        <!-- <item name="readMoreTextUnderline">true</item> -->
+        <!-- <item name="readMoreTypeface">normal</item> -->
+        <!-- <item name="readMoreTextAppearance">@style/TextAppearance.ReadMoreTextView.Item03</item> -->
+        <!-- <item name="readMoreToggleEnabled">false</item> -->
+    </style>
+
+    <style name="TextAppearance.ReadMoreTextView.Item03" parent="">
+        <item name="android:textColor">?colorOnSurface</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+</resources>

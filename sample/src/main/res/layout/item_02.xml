@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/title_02"
+        android:textColor="?colorOnSurface"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <com.webtoonscorp.android.readmore.ReadMoreTextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="?selectableItemBackground"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/description_02"
+        android:textColor="?colorOnSurface"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        app:readMoreMaxLines="3"
+        app:readMoreText="@string/read_more"
+        app:readMoreTextColor="?colorPrimary"
+        app:readMoreTextSize="12sp"
+        app:readMoreTextStyle="bold"
+        app:readMoreTextUnderline="true" />
+
+</LinearLayout>

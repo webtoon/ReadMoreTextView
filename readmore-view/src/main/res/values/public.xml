@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="readMoreMaxLines" type="attr" />
+    <public name="readMoreOverflow" type="attr" />
+    <public name="readMoreText" type="attr" />
+    <public name="readMoreTextSize" type="attr" />
+    <public name="readMoreTextColor" type="attr" />
+    <public name="readMoreTextUnderline" type="attr" />
+    <public name="readMoreTextStyle" type="attr" />
+    <public name="readMoreFontFamily" type="attr" />
+    <public name="readMoreTypeface" type="attr" />
+    <public name="readMoreTextAppearance" type="attr" />
+    <public name="readMoreToggleEnabled" type="attr" />
+    <public name="readMoreTextViewStyle" type="attr" />
+</resources>

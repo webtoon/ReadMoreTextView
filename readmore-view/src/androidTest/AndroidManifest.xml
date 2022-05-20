@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.webtoonscorp.android.readmore.test">
+
+    <application android:theme="@style/Theme.AppCompat">
+
+        <activity
+            android:name="com.webtoonscorp.android.readmore.ReadMoreTextViewActivity"
+            android:label="@string/readmore_textview_activity" />
+
+    </application>
+</manifest>

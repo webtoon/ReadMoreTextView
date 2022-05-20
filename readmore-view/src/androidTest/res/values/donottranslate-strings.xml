@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="readmore_textview_activity">ReadMoreTextView</string>
+    <string name="sample_text1">Sample text 1</string>
+    <string name="sample_text2">Sample text 2</string>
+</resources>

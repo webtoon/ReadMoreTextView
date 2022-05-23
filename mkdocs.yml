@@ -1,0 +1,36 @@
+site_name: "ReadMoreTextView"
+site_description: "A library that provides Text components supporting 'Read more' UX for Android View and Jetpack Compose."
+site_author: "NAVER Webtoon"
+remote_branch: gh-pages
+
+# Repository
+repo_name: webtoon/ReadMoreTextView
+repo_url: https://github.com/webtoon/ReadMoreTextView
+
+# Navigation
+nav:
+  - "Overview": index.md
+  - "Changelog": changelog.md
+  - "API Docs": api/index.html
+
+# Configuration
+theme:
+  name: material
+  language: "en"
+  palette:
+    primary: green
+    accent: green
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.betterem
+  - pymdownx.superfences

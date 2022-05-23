@@ -1,0 +1,11 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:readmore-foundation
+com.webtoonscorp.android.readmore.foundation
+module:readmore-material
+com.webtoonscorp.android.readmore.material
+module:readmore-material3
+com.webtoonscorp.android.readmore.material3
+module:readmore-view
+com.webtoonscorp.android.readmore

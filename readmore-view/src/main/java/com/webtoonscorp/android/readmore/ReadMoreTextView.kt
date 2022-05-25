@@ -43,7 +43,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.readMoreTextViewStyle
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    private var readMoreMaxLines: Int = NO_LIMIT_LINES
+    private var readMoreMaxLines: Int = 2
     private var readMoreOverflow: Overflow = Overflow.Ellipsis
     private var readMoreText: String? = null
     private var readMoreTextSize: Int = -1
@@ -319,8 +319,8 @@ public class ReadMoreTextView @JvmOverloads constructor(
     }
 
     private fun CharSequence.substringOf(layout: Layout, line: Int): CharSequence {
-        val lastLineStartIndex = layout.getLineVisibleEnd(line - 2)
-        val lastLineEndIndex = layout.getLineVisibleEnd(line - 1)
+        val lastLineStartIndex = layout.getLineStart(line - 1)
+        val lastLineEndIndex = layout.getLineEnd(line - 1)
         return subSequence(lastLineStartIndex, lastLineEndIndex)
     }
 

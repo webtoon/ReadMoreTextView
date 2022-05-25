@@ -10,8 +10,18 @@ repo_url: https://github.com/webtoon/ReadMoreTextView
 # Navigation
 nav:
   - "Overview": index.md
-  - "Changelog": changelog.md
-  - "API Docs": api/index.html
+  - "View":
+      - 'Guide': readmore-view.md
+      - 'API': api/readmore-view/
+  - "Foundation":
+      - 'Guide': readmore-foundation.md
+      - 'API': api/readmore-foundation/
+  - "Material":
+      - 'Guide': readmore-material.md
+      - 'API': api/readmore-material/
+  - "Material3":
+      - 'Guide': readmore-material3.md
+      - 'API': api/readmore-material3/
 
 # Configuration
 theme:

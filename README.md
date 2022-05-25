@@ -5,26 +5,71 @@
 
 This library provides collapsible Text widgets with 'Read more' text. (Including [Jetpack Compose][compose])
 
-| Collapsed                               | Expanded                              |
-| --------------------------------------- | ------------------------------------- |
-| <img width="300" src="docs/images/collapsed.png" /> | <img width="300" src="docs/images/expanded.png" /> |
+| **Collapsed** | <img width="300" src="docs/collapsed.png" /> |
+| ------------- | -------------------------------------------- |
+| **Expanded**  | <img width="300" src="docs/expanded.png" />  |
 
 
 ## Libraries
 
-### [ReadMoreTextView](./readmore-view/)
+### [ReadMore-View](./readmore-view/)
 A library that provides collapsible `TextView` with 'Read more' text. (for Android View System)
 
-### [ReadMoreText-Foundation](./readmore-foundation/)
+### [ReadMore-Foundation](./readmore-foundation/)
 A library that provides collapsible `BasicText` with 'Read more' text. (for [Jetpack Compose][compose])
 
-### [ReadMoreText-Material](./readmore-material/)
+### [ReadMore-Material](./readmore-material/)
 A library that provides collapsible `Text` with 'Read more' text based on Material Theme. (for [Jetpack Compose][compose])
 
-### [ReadMoreText-Material3](./readmore-material3/)
+### [ReadMore-Material3](./readmore-material3/)
 A library that provides collapsible `Text` with 'Read more' text based on Material3 Theme. (for [Jetpack Compose][compose])
 
----
+
+## Attributes
+
+### `readMoreMaxLines`
+
+| **2 (default)** | <img width="300" src="docs/readMoreMaxLines_default.png" /> |
+| --------------- | ------------------------------------------------------------ |
+| **`"1"`**       | <img width="300" src="docs/readMoreMaxLines_custom.png" /> |
+
+### `readMoreOverflow`
+
+| **Ellipsis (default)** | <img width="300" src="docs/readMoreOverflow_default.png" /> |
+| ---------------------- | ------------------------------------------------------------ |
+| **Clip**               | <img width="300" src="docs/readMoreOverflow_clip.png" /> |
+
+### `readMoreText`
+
+| **"" (default)**  | <img width="300" src="docs/readMoreText_default.png" /> |
+| ----------------- | ------------------------------------------------------------ |
+| **`"Read more"`** | <img width="300" src="docs/readMoreText_custom.png" /> |
+
+### `readMoreTextSize`
+
+| **Same with `textSize` (default)** | <img width="300" src="docs/readMoreTextSize_default.png" /> |
+| ---------------------------------- | ------------------------------------------------------------ |
+| **`"11sp"`**                       | <img width="300" src="docs/readMoreTextSize_custom.png" /> |
+
+### `readMoreTextColor`
+
+| **Same with `textColor` (default)** | <img width="300" src="docs/readMoreTextColor_default.png" /> |
+| ----------------------------------- | ------------------------------------------------------------ |
+| **`"#FF0000"`**                     | <img width="300" src="docs/readMoreTextColor_custom.png" /> |
+
+### `readMoreTextUnderline`
+
+| **false (default)** | <img width="300" src="docs/readMoreTextUnderline_default.png" /> |
+| ------------------- | ------------------------------------------------------------ |
+| **true**            | <img width="300" src="docs/readMoreTextUnderline_true.png" /> |
+
+### `readMoreTextStyle`
+
+| **Normal (default)** | <img width="300" src="docs/readMoreTextStyle_default.png" /> |
+| -------------------- | ------------------------------------------------------------ |
+| **Bold**             | <img width="300" src="docs/readMoreTextStyle_bold.png" /> |
+| **Italic**           | <img width="300" src="docs/readMoreTextStyle_italic.png" /> |
+
 
 ## License
 

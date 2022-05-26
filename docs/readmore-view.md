@@ -1,5 +1,7 @@
 # ReadMoreTextView
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+
 A library that shows 'Read more' text in Android TextView.
 
 | Collapsed                               | Expanded                              |
@@ -35,6 +37,8 @@ A library that shows 'Read more' text in Android TextView.
 ```
 
 ## Download
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
 
 ```groovy
 repositories {

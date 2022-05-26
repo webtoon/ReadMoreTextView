@@ -1,5 +1,7 @@
 # ReadMoreText for Jetpack Compose
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+
 A library that shows 'Read more' text in Jetpack Compose BasicText.
 
 | Collapsed                               | Expanded                              |
@@ -36,6 +38,8 @@ fun BasicReadMoreTextSample() {
 ```
 
 ## Download
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
 
 ```groovy
 repositories {

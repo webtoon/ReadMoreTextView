@@ -9,8 +9,8 @@ android {
         applicationId "com.webtoonscorp.android.readmore.sample"
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
-        versionCode 1_01_00
-        versionName "1.1.0"
+        versionCode 1_01_01
+        versionName "1.1.1"
     }
     signingConfigs {
         // We use a bundled debug keystore, to allow debug builds from CI to be upgradable

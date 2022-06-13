@@ -9,8 +9,28 @@ This library provides collapsible Text widgets with 'Read more' text. (Including
 | ------------- | -------------------------------------------- |
 | **Expanded**  | <img width="300" src="docs/expanded.png" />  |
 
+## Versions
+
+Each [release](https://github.com/webtoon/ReadMoreTextView/releases) outlines the version of the AppCompat or Compose library it depends on.
+
+<table>
+ <tr>
+  <td>AppCompat 1.3 (1.3.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.0"/></td>
+ </tr>
+ <tr>
+  <td>AppCompat 1.4 (1.4.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view"/></td>
+ </tr>
+ <tr>
+  <td>Compose 1.1 (1.1.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.0"/></td>
+ </tr>
+ <tr>
+  <td>Compose 1.2 (1.2.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation"></td>
+ </tr>
+</table>
 
 ## Libraries
+
+We are currently releasing various libraries for AppCompat or Compose.
 
 ### [ReadMore-View](./readmore-view/)
 A library that provides collapsible `TextView` with 'Read more' text. (for Android View System)
@@ -27,49 +47,67 @@ A library that provides collapsible `Text` with 'Read more' text based on Materi
 
 ## Attributes
 
-### `readMoreMaxLines`
+This libraries provide the same attributes as much as possible regardless of View or [Compose][compose].
+
+#### `readMoreMaxLines`
 
 | **2 (default)** | <img width="300" src="docs/readMoreMaxLines_default.png" /> |
 | --------------- | ------------------------------------------------------------ |
 | **`"1"`**       | <img width="300" src="docs/readMoreMaxLines_custom.png" /> |
 
-### `readMoreOverflow`
+#### `readMoreOverflow`
 
 | **Ellipsis (default)** | <img width="300" src="docs/readMoreOverflow_default.png" /> |
 | ---------------------- | ------------------------------------------------------------ |
 | **Clip**               | <img width="300" src="docs/readMoreOverflow_clip.png" /> |
 
-### `readMoreText`
+#### `readMoreText`
 
 | **"" (default)**  | <img width="300" src="docs/readMoreText_default.png" /> |
 | ----------------- | ------------------------------------------------------------ |
 | **`"Read more"`** | <img width="300" src="docs/readMoreText_custom.png" /> |
 
-### `readMoreTextSize`
+#### `readMoreTextSize`
 
 | **Same with `textSize` (default)** | <img width="300" src="docs/readMoreTextSize_default.png" /> |
 | ---------------------------------- | ------------------------------------------------------------ |
 | **`"11sp"`**                       | <img width="300" src="docs/readMoreTextSize_custom.png" /> |
 
-### `readMoreTextColor`
+#### `readMoreTextColor`
 
 | **Same with `textColor` (default)** | <img width="300" src="docs/readMoreTextColor_default.png" /> |
 | ----------------------------------- | ------------------------------------------------------------ |
 | **`"#FF0000"`**                     | <img width="300" src="docs/readMoreTextColor_custom.png" /> |
 
-### `readMoreTextUnderline`
+#### `readMoreTextUnderline`
 
 | **false (default)** | <img width="300" src="docs/readMoreTextUnderline_default.png" /> |
 | ------------------- | ------------------------------------------------------------ |
 | **true**            | <img width="300" src="docs/readMoreTextUnderline_true.png" /> |
 
-### `readMoreTextStyle`
+#### `readMoreTextStyle`
 
 | **Normal (default)** | <img width="300" src="docs/readMoreTextStyle_default.png" /> |
 | -------------------- | ------------------------------------------------------------ |
 | **Bold**             | <img width="300" src="docs/readMoreTextStyle_bold.png" /> |
 | **Italic**           | <img width="300" src="docs/readMoreTextStyle_italic.png" /> |
 
+## Snapshots
+
+If you want to check the version currently in development, you can use the [snapshot versions](https://s01.oss.sonatype.org/content/repositories/snapshots/com/webtoonscorp/android/).
+
+The snapshot versions are updated on every commit to `main` branch.
+
+```groovy
+repositories {
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    // Check the latest SNAPSHOT version from the link above
+    classpath 'com.webtoonscorp.android:readmore-view:XXX-SNAPSHOT'
+}
+```
 
 ## License
 

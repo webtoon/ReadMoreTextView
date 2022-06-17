@@ -1,8 +1,8 @@
 [versions]
 
-gradlePlugin = "7.1.3"
+gradlePlugin = "7.2.1"
 kotlin = "1.6.21"
-compose = "1.2.0-beta03"
+compose = "1.2.0-rc01"
 
 androidxtest = "1.4.0"
 

@@ -2,7 +2,7 @@
 
 gradlePlugin = "7.2.1"
 kotlin = "1.6.21"
-compose = "1.2.0-rc01"
+compose = "1.2.0-rc02"
 
 androidxtest = "1.4.0"
 

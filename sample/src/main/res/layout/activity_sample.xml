@@ -11,48 +11,56 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/item_01"
-            layout="@layout/item_01" />
+            android:id="@+id/item_down_to_earth"
+            layout="@layout/item_down_to_earth" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/item_02"
-            layout="@layout/item_02" />
+            android:id="@+id/item_hyperfocus"
+            layout="@layout/item_hyperfocus" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/item_03"
-            layout="@layout/item_03" />
+            android:id="@+id/item_reunion"
+            layout="@layout/item_reunion" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/item_04"
-            layout="@layout/item_04" />
+            android:id="@+id/item_the_world_after_the_fall"
+            layout="@layout/item_the_world_after_the_fall" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/item_05"
-            layout="@layout/item_05" />
+            android:id="@+id/item_lore_olympus"
+            layout="@layout/item_lore_olympus" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/item_06"
-            layout="@layout/item_06" />
+            android:id="@+id/item_custom_text"
+            layout="@layout/item_custom_text" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/item_emoji"
+            layout="@layout/item_emoji" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

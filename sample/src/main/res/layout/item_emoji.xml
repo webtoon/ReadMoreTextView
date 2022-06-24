@@ -12,7 +12,7 @@
         android:paddingStart="18dp"
         android:paddingTop="16dp"
         android:paddingEnd="18dp"
-        android:text="@string/title_06"
+        android:text="@string/title_emoji"
         android:textColor="?colorOnSurface"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -27,7 +27,7 @@
         android:paddingTop="5dp"
         android:paddingEnd="18dp"
         android:paddingBottom="18dp"
-        android:text="@string/description_06"
+        android:text="@string/description_emoji"
         android:textColor="?colorOnSurface"
         android:textSize="15sp"
         android:textStyle="normal"

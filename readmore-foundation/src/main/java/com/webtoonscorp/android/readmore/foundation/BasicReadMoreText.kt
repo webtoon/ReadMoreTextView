@@ -301,9 +301,9 @@ private class ReadMoreState(
         val lastLineIndex = readMoreMaxLines - 1
         val previous = textLayout
         val old = previous != null &&
-            previous.lineCount <= readMoreMaxLines &&
+            previous.lineCount >= readMoreMaxLines &&
             previous.isLineEllipsized(lastLineIndex)
-        val new = result.lineCount <= readMoreMaxLines &&
+        val new = result.lineCount >= readMoreMaxLines &&
             result.isLineEllipsized(lastLineIndex)
         val changed = previous != result && old != new
         if (changed) {
@@ -345,7 +345,7 @@ private class ReadMoreState(
         if (textLayout != null &&
             overflowTextLayout != null &&
             readMoreTextLayout != null &&
-            textLayout.lineCount <= readMoreMaxLines &&
+            textLayout.lineCount >= readMoreMaxLines &&
             textLayout.isLineEllipsized(lastLineIndex)
         ) {
             val countUntilMaxLine = textLayout.getLineEnd(readMoreMaxLines - 1, visibleEnd = true)

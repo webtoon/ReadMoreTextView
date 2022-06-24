@@ -75,17 +75,19 @@ fun ReadMoreTextDemo() {
                     .fillMaxSize()
                     .verticalScroll(scrollState)
             ) {
-                Item01()
+                Item_DownToEarth()
                 Divider()
-                Item02()
+                Item_Hyperfocus()
                 Divider()
-                Item03()
+                ItemReunion()
                 Divider()
-                Item04()
+                Item_TheWorldAfterTheFall()
                 Divider()
-                Item05()
+                Item_LoreOlympus()
                 Divider()
-                Item06()
+                Item_CustomText()
+                Divider()
+                Item_Emoji()
                 Divider()
             }
         }
@@ -93,11 +95,11 @@ fun ReadMoreTextDemo() {
 }
 
 @Composable
-private fun Item01() {
+private fun Item_DownToEarth() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = stringResource(id = R.string.title_01),
+            text = stringResource(id = R.string.title_down_to_earth),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -106,7 +108,7 @@ private fun Item01() {
             fontWeight = FontWeight.Bold
         )
         ReadMoreText(
-            text = stringResource(id = R.string.description_01),
+            text = stringResource(id = R.string.description_down_to_earth),
             expanded = expanded,
             modifier = Modifier
                 .clickable { onExpandedChange(!expanded) }
@@ -122,11 +124,11 @@ private fun Item01() {
 }
 
 @Composable
-private fun Item02() {
+private fun Item_Hyperfocus() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = stringResource(id = R.string.title_02),
+            text = stringResource(id = R.string.title_hyperfocus),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -135,7 +137,7 @@ private fun Item02() {
             fontWeight = FontWeight.Bold
         )
         ReadMoreText(
-            text = stringResource(id = R.string.description_02),
+            text = stringResource(id = R.string.description_hyperfocus),
             expanded = expanded,
             modifier = Modifier
                 .fillMaxWidth()
@@ -156,13 +158,11 @@ private fun Item02() {
 }
 
 @Composable
-private fun Item03() {
+private fun ItemReunion() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
-    Column(
-        modifier = Modifier.clickable { onExpandedChange(!expanded) }
-    ) {
+    Column {
         Text(
-            text = stringResource(id = R.string.title_03),
+            text = stringResource(id = R.string.title_reunion),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -171,7 +171,43 @@ private fun Item03() {
             fontWeight = FontWeight.Bold
         )
         ReadMoreText(
-            text = stringResource(id = R.string.description_03),
+            text = stringResource(id = R.string.description_reunion),
+            expanded = expanded,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
+                .clickable { onExpandedChange(!expanded) },
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 15.sp,
+            fontStyle = FontStyle.Normal,
+            lineHeight = 22.sp,
+            readMoreMaxLines = 3,
+            readMoreText = stringResource(id = R.string.read_more),
+            readMoreColor = MaterialTheme.colorScheme.primary,
+            readMoreFontSize = 12.sp,
+            readMoreFontWeight = FontWeight.Bold,
+            readMoreTextDecoration = TextDecoration.Underline
+        )
+    }
+}
+
+@Composable
+private fun Item_TheWorldAfterTheFall() {
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.clickable { onExpandedChange(!expanded) }
+    ) {
+        Text(
+            text = stringResource(id = R.string.title_the_world_after_the_fall),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+        ReadMoreText(
+            text = stringResource(id = R.string.description_the_world_after_the_fall),
             expanded = expanded,
             modifier = Modifier
                 .fillMaxWidth()
@@ -196,11 +232,11 @@ private fun Item03() {
 }
 
 @Composable
-private fun Item04() {
+private fun Item_LoreOlympus() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = stringResource(id = R.string.title_04),
+            text = stringResource(id = R.string.title_lore_olympus),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -214,7 +250,7 @@ private fun Item04() {
                 .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
         ) {
             ReadMoreText(
-                text = stringResource(id = R.string.description_04),
+                text = stringResource(id = R.string.description_lore_olympus),
                 expanded = expanded,
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -232,7 +268,7 @@ private fun Item04() {
 }
 
 @Composable
-private fun Item05() {
+private fun Item_CustomText() {
     val annotatedDescription = buildAnnotatedString {
         withStyle(
             SpanStyle(
@@ -256,7 +292,7 @@ private fun Item05() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = stringResource(id = R.string.title_05_compose),
+            text = stringResource(id = R.string.title_custom_text_compose),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -288,11 +324,11 @@ private fun Item05() {
 }
 
 @Composable
-private fun Item06() {
+private fun Item_Emoji() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = stringResource(id = R.string.title_06),
+            text = stringResource(id = R.string.title_emoji),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
@@ -301,7 +337,7 @@ private fun Item06() {
             fontWeight = FontWeight.Bold
         )
         ReadMoreText(
-            text = stringResource(id = R.string.description_06),
+            text = stringResource(id = R.string.description_emoji),
             expanded = expanded,
             modifier = Modifier
                 .clickable { onExpandedChange(!expanded) }

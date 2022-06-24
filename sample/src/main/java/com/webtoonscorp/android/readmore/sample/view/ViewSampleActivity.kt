@@ -41,29 +41,29 @@ class ViewSampleActivity : AppCompatActivity() {
         val binding = ActivitySampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.item01.description.setOnStateChangeListener { expanded ->
-            val title = binding.item01.title.text
+        binding.itemDownToEarth.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemDownToEarth.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
-        binding.item02.description.setOnStateChangeListener { expanded ->
-            val title = binding.item02.title.text
+        binding.itemReunion.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemReunion.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
-        binding.item03.root.setOnClickListener {
-            binding.item03.description.toggle()
+        binding.itemTheWorldAfterTheFall.root.setOnClickListener {
+            binding.itemTheWorldAfterTheFall.description.toggle()
         }
-        binding.item03.description.setOnStateChangeListener { expanded ->
-            val title = binding.item03.title.text
+        binding.itemTheWorldAfterTheFall.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemTheWorldAfterTheFall.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
-        binding.item04.description.setOnClickListener {
-            binding.item04.description.toggle()
+        binding.itemLoreOlympus.description.setOnClickListener {
+            binding.itemLoreOlympus.description.toggle()
         }
-        binding.item04.description.setOnStateChangeListener { expanded ->
-            val title = binding.item04.title.text
+        binding.itemLoreOlympus.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemLoreOlympus.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
@@ -93,14 +93,14 @@ class ViewSampleActivity : AppCompatActivity() {
             }
             append("abcdefghijklmnopqrstuvwxyz.")
         }
-        binding.item05.description.text = description
-        binding.item05.description.setOnStateChangeListener { expanded ->
-            val title = binding.item05.title.text
+        binding.itemCustomText.description.text = description
+        binding.itemCustomText.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemCustomText.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
-        binding.item06.description.setOnStateChangeListener { expanded ->
-            val title = binding.item06.title.text
+        binding.itemEmoji.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemEmoji.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
     }

@@ -266,7 +266,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                         val replaceCount = text
                             .substringOf(layout, line = readMoreMaxLines)
                             .calculateReplaceCountToBeSingleLineWith(maximumTextWidth - readMoreWidth)
-                        append(text.subSequence(0, countUntilMaxLine - replaceCount).trimEnd())
+                        append(text.subSequence(0, countUntilMaxLine - replaceCount))
                         append(overflowText)
                         append(readMoreTextWithStyle)
                     }

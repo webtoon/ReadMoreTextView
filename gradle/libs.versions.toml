@@ -2,9 +2,9 @@
 
 gradlePlugin = "7.2.1"
 kotlin = "1.7.0"
-compose = "1.2.0-rc03"
+compose = "1.2.0"
 composeCompiler = "1.2.0"
-composeMaterial3 = "1.0.0-alpha14"
+composeMaterial3 = "1.0.0-alpha15"
 
 androidxtest = "1.4.0"
 

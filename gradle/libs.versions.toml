@@ -2,7 +2,7 @@
 
 gradlePlugin = "7.2.1"
 kotlin = "1.7.0"
-compose = "1.2.0"
+compose = "1.2.1"
 composeCompiler = "1.2.0"
 composeMaterial3 = "1.0.0-alpha15"
 

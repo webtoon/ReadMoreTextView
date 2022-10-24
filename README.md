@@ -14,18 +14,14 @@ This library provides collapsible Text widgets with 'Read more' text. (Including
 Each [release](https://github.com/webtoon/ReadMoreTextView/releases) outlines the version of the AppCompat or Compose library it depends on.
 
 <table>
- <tr>
-  <td>AppCompat 1.3 (1.3.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.0"/></td>
- </tr>
- <tr>
-  <td>AppCompat 1.4 (1.4.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view"/></td>
- </tr>
- <tr>
-  <td>Compose 1.1 (1.1.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.0"/></td>
- </tr>
- <tr>
-  <td>Compose 1.2 (1.2.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation"></td>
- </tr>
+ <tr><td>AppCompat 1.3 (1.3.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.0"/></td></tr>
+ <tr><td>AppCompat 1.4 (1.4.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.1"/></td></tr>
+ <tr><td>AppCompat 1.5 (1.5.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.2"/></td></tr>
+ <tr><td>AppCompat 1.6 (1.6.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view?versionPrefix=1.3"/></td></tr>
+ <tr><td>Compose 1.1 (1.1.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.0"/></td></tr>
+ <tr><td>Compose 1.2 (1.2.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.1"></td></tr>
+ <tr><td>Compose 1.3 (1.3.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.2"></td></tr>
+ <tr><td>Compose 1.4 (1.4.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.3"></td></tr>
 </table>
 
 ## Libraries

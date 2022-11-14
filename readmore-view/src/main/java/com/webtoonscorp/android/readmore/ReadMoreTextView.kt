@@ -19,7 +19,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
-import android.graphics.Rect
 import android.graphics.Typeface
 import android.text.Layout
 import android.text.TextPaint
@@ -327,13 +326,12 @@ public class ReadMoreTextView @JvmOverloads constructor(
     private fun CharSequence.calculateReplaceCountToBeSingleLineWith(
         maximumTextWidth: Int
     ): Int {
-        val currentTextBounds = Rect()
+        var replacedTextWidth: Float
         var replacedCount = -1
         do {
             replacedCount++
-            val replacedText = substring(0, this.length - replacedCount)
-            paint.getTextBounds(replacedText, 0, replacedText.length, currentTextBounds)
-        } while (replacedCount < this.length && currentTextBounds.width() >= maximumTextWidth)
+            replacedTextWidth = paint.measureText(substring(0, this.length - replacedCount))
+        } while (replacedCount < this.length && replacedTextWidth >= maximumTextWidth)
 
         val lastVisibleChar: Char? = this.getOrNull(this.length - replacedCount - 1)
         val firstOverflowChar: Char? = this.getOrNull(this.length - replacedCount)

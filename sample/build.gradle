@@ -55,6 +55,8 @@ dependencies {
     implementation libs.material.android
 
     implementation libs.androidx.activity.compose
+
+    implementation(platform(libs.compose.bom))
     implementation libs.compose.foundation.foundation
     implementation libs.compose.material
     implementation libs.compose.material3

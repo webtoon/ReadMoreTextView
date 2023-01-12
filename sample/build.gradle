@@ -4,13 +4,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion buildConfig.compileSdk
+    namespace "com.webtoonscorp.android.readmore.sample"
+    compileSdk buildConfig.compileSdk
     defaultConfig {
         applicationId "com.webtoonscorp.android.readmore.sample"
-        minSdkVersion buildConfig.minSdk
-        targetSdkVersion buildConfig.targetSdk
-        versionCode 1_01_02
-        versionName "1.1.2"
+        minSdk buildConfig.minSdk
+        targetSdk buildConfig.targetSdk
+        versionCode 1
+        versionName "1.0.0"
     }
     signingConfigs {
         // We use a bundled debug keystore, to allow debug builds from CI to be upgradable

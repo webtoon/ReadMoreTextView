@@ -6,10 +6,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion buildConfig.compileSdk
+    namespace "com.webtoonscorp.android.readmore.foundation"
+    compileSdk buildConfig.compileSdk
     defaultConfig {
-        minSdkVersion buildConfig.minSdk
-        targetSdkVersion buildConfig.targetSdk
+        minSdk buildConfig.minSdk
+        targetSdk buildConfig.targetSdk
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

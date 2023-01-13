@@ -15,6 +15,7 @@
  */
 package com.webtoonscorp.android.readmore.material3
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
 
@@ -106,6 +108,7 @@ public fun ReadMoreText(
     expanded: Boolean,
     modifier: Modifier = Modifier,
     onExpandedChange: ((Boolean) -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
@@ -166,6 +169,7 @@ public fun ReadMoreText(
         expanded = expanded,
         modifier = modifier,
         onExpandedChange = onExpandedChange,
+        contentPadding = contentPadding,
         style = mergedStyle,
         onTextLayout = onTextLayout,
         softWrap = softWrap,
@@ -247,6 +251,7 @@ public fun ReadMoreText(
     expanded: Boolean,
     modifier: Modifier = Modifier,
     onExpandedChange: ((Boolean) -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
@@ -308,6 +313,7 @@ public fun ReadMoreText(
         expanded = expanded,
         modifier = modifier,
         onExpandedChange = onExpandedChange,
+        contentPadding = contentPadding,
         style = mergedStyle,
         onTextLayout = onTextLayout,
         softWrap = softWrap,

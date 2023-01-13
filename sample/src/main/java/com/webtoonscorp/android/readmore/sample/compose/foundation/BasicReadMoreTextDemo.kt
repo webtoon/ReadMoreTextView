@@ -19,8 +19,8 @@ import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -103,10 +103,9 @@ private fun Item_DownToEarth() {
         BasicReadMoreText(
             text = stringResource(id = R.string.description_down_to_earth),
             expanded = expanded,
-            modifier = Modifier
-                .clickable { onExpandedChange(!expanded) }
-                .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
+            modifier = Modifier.fillMaxWidth(),
+            onExpandedChange = onExpandedChange,
+            contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             style = TextStyle.Default.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,
@@ -249,30 +248,26 @@ private fun Item_LoreOlympus() {
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        Box(
-            modifier = Modifier
-                .clickable { onExpandedChange(!expanded) }
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
-        ) {
-            BasicReadMoreText(
-                text = stringResource(id = R.string.description_lore_olympus),
-                expanded = expanded,
-                modifier = Modifier.fillMaxWidth(),
-                style = TextStyle.Default.copy(
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 15.sp,
-                    fontStyle = FontStyle.Normal,
-                    lineHeight = 22.sp,
-                ),
-                readMoreMaxLines = 3,
-                readMoreText = stringResource(id = R.string.read_more),
-                readMoreStyle = SpanStyle(
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colors.secondary,
-                ),
-                readMoreOverflow = ReadMoreTextOverflow.Clip
-            )
-        }
+        BasicReadMoreText(
+            text = stringResource(id = R.string.description_lore_olympus),
+            expanded = expanded,
+            modifier = Modifier.fillMaxWidth(),
+            onExpandedChange = onExpandedChange,
+            contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
+            readMoreMaxLines = 3,
+            readMoreText = stringResource(id = R.string.read_more),
+            readMoreStyle = SpanStyle(
+                fontSize = 14.sp,
+                color = MaterialTheme.colors.secondary,
+            ),
+            readMoreOverflow = ReadMoreTextOverflow.Clip
+        )
     }
 }
 
@@ -313,10 +308,10 @@ private fun Item_CustomText() {
             text = annotatedDescription,
             expanded = expanded,
             modifier = Modifier
-                .clickable { onExpandedChange(!expanded) }
                 .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
                 .animateContentSize(animationSpec = tween(durationMillis = 100)),
+            onExpandedChange = onExpandedChange,
+            contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             style = TextStyle.Default.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,
@@ -352,10 +347,9 @@ private fun Item_Emoji() {
         BasicReadMoreText(
             text = stringResource(id = R.string.description_emoji),
             expanded = expanded,
-            modifier = Modifier
-                .clickable { onExpandedChange(!expanded) }
-                .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
+            modifier = Modifier.fillMaxWidth(),
+            onExpandedChange = onExpandedChange,
+            contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             style = TextStyle.Default.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,

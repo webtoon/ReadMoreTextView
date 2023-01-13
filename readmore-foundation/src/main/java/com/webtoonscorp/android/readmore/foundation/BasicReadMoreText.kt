@@ -18,6 +18,8 @@ package com.webtoonscorp.android.readmore.foundation
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
@@ -37,6 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
 
 /**
  * Basic element that displays text with read more.
@@ -67,6 +70,7 @@ public fun BasicReadMoreText(
     expanded: Boolean,
     modifier: Modifier = Modifier,
     onExpandedChange: ((Boolean) -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
@@ -124,7 +128,11 @@ public fun BasicReadMoreText(
     } else {
         Modifier
     }
-    Box(modifier = modifier.then(toggleableModifier)) {
+    Box(
+        modifier = modifier
+            .then(toggleableModifier)
+            .padding(contentPadding)
+    ) {
         BasicText(
             text = currentText,
             modifier = Modifier,
@@ -185,6 +193,7 @@ public fun BasicReadMoreText(
     expanded: Boolean,
     modifier: Modifier = Modifier,
     onExpandedChange: ((Boolean) -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
@@ -243,7 +252,11 @@ public fun BasicReadMoreText(
     } else {
         Modifier
     }
-    Box(modifier = modifier.then(toggleableModifier)) {
+    Box(
+        modifier = modifier
+            .then(toggleableModifier)
+            .padding(contentPadding)
+    ) {
         BasicText(
             text = currentText,
             modifier = Modifier,

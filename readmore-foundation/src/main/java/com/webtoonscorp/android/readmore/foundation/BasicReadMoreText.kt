@@ -16,6 +16,7 @@
 package com.webtoonscorp.android.readmore.foundation
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
@@ -65,6 +66,7 @@ public fun BasicReadMoreText(
     text: String,
     expanded: Boolean,
     modifier: Modifier = Modifier,
+    onExpandedChange: ((Boolean) -> Unit)? = null,
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
@@ -115,7 +117,14 @@ public fun BasicReadMoreText(
             append(text)
         }
     }
-    Box(modifier = modifier) {
+    val toggleableModifier = if (onExpandedChange != null) {
+        Modifier.clickable(
+            onClick = { onExpandedChange(!expanded) },
+        )
+    } else {
+        Modifier
+    }
+    Box(modifier = modifier.then(toggleableModifier)) {
         BasicText(
             text = currentText,
             modifier = Modifier,
@@ -175,6 +184,7 @@ public fun BasicReadMoreText(
     text: AnnotatedString,
     expanded: Boolean,
     modifier: Modifier = Modifier,
+    onExpandedChange: ((Boolean) -> Unit)? = null,
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
@@ -226,7 +236,14 @@ public fun BasicReadMoreText(
             append(text)
         }
     }
-    Box(modifier = modifier) {
+    val toggleableModifier = if (onExpandedChange != null) {
+        Modifier.clickable(
+            onClick = { onExpandedChange(!expanded) },
+        )
+    } else {
+        Modifier
+    }
+    Box(modifier = modifier.then(toggleableModifier)) {
         BasicText(
             text = currentText,
             modifier = Modifier,

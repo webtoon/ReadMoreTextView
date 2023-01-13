@@ -131,10 +131,10 @@ private fun Item_Hyperfocus() {
         ReadMoreText(
             text = stringResource(id = R.string.description_hyperfocus),
             expanded = expanded,
+            onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
-                .clickable { onExpandedChange(!expanded) },
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 15.sp,
             fontStyle = FontStyle.Normal,
@@ -165,10 +165,10 @@ private fun ItemReunion() {
         ReadMoreText(
             text = stringResource(id = R.string.description_reunion),
             expanded = expanded,
+            onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
-                .clickable { onExpandedChange(!expanded) },
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 15.sp,
             fontStyle = FontStyle.Normal,

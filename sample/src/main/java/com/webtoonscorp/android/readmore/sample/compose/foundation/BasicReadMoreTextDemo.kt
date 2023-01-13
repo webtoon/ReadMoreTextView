@@ -134,10 +134,10 @@ private fun Item_Hyperfocus() {
         BasicReadMoreText(
             text = stringResource(id = R.string.description_hyperfocus),
             expanded = expanded,
+            onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
-                .clickable { onExpandedChange(!expanded) },
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             style = TextStyle.Default.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,
@@ -172,10 +172,10 @@ private fun ItemReunion() {
         BasicReadMoreText(
             text = stringResource(id = R.string.description_reunion),
             expanded = expanded,
+            onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp)
-                .clickable { onExpandedChange(!expanded) },
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             style = TextStyle.Default.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,

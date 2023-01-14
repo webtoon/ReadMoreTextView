@@ -117,7 +117,8 @@ private fun Item_DownToEarth() {
             fontSize = 15.sp,
             fontStyle = FontStyle.Normal,
             lineHeight = 22.sp,
-            readMoreMaxLines = 2
+            readMoreMaxLines = 2,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -151,7 +152,8 @@ private fun Item_Hyperfocus() {
             readMoreColor = MaterialTheme.colorScheme.primary,
             readMoreFontSize = 12.sp,
             readMoreFontWeight = FontWeight.Bold,
-            readMoreTextDecoration = TextDecoration.Underline
+            readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -185,7 +187,8 @@ private fun ItemReunion() {
             readMoreColor = MaterialTheme.colorScheme.primary,
             readMoreFontSize = 12.sp,
             readMoreFontWeight = FontWeight.Bold,
-            readMoreTextDecoration = TextDecoration.Underline
+            readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -225,7 +228,8 @@ private fun Item_TheWorldAfterTheFall() {
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Black
             ),
-            readMoreTextDecoration = TextDecoration.Underline
+            readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -257,7 +261,8 @@ private fun Item_LoreOlympus() {
             readMoreFontSize = 14.sp,
             readMoreText = stringResource(id = R.string.read_more),
             readMoreColor = MaterialTheme.colorScheme.secondary,
-            readMoreOverflow = ReadMoreTextOverflow.Clip
+            readMoreOverflow = ReadMoreTextOverflow.Clip,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -313,7 +318,8 @@ private fun Item_CustomText() {
             readMoreFontSize = 14.sp,
             readMoreFontWeight = FontWeight.Bold,
             readMoreFontStyle = FontStyle.Italic,
-            readMoreTextDecoration = TextDecoration.Underline
+            readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -345,6 +351,7 @@ private fun Item_Emoji() {
             readMoreText = stringResource(id = R.string.read_more),
             readMoreFontWeight = FontWeight.Bold,
             readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }

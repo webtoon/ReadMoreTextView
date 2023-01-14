@@ -359,7 +359,7 @@ private object NotDrawModifier : DrawModifier {
 // ReadMoreState
 // ////////////////////////////////////
 
-private const val DebugLog = true
+private const val DebugLog = false
 private const val Tag = "ReadMoreState"
 
 @Stable

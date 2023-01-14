@@ -58,7 +58,11 @@ import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
  * [LocalContentColor] will be used.
  *
  * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
  * @param modifier [Modifier] to apply to this layout node.
+ * @param onExpandedChange called when this text is clicked. If `null`, then this text will not be
+ * interactable, unless something else handles its input events and updates its state.
+ * @param contentPadding a padding around the text.
  * @param color [Color] to apply to the text. If [Color.Unspecified], and [style] has no color set,
  * this will be [LocalContentColor].
  * @param fontSize The size of glyphs to use when painting the text. See [TextStyle.fontSize].
@@ -101,6 +105,21 @@ import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
  * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
  * @param readMoreStyle Style configuration for the read more text such as color, font, line height
  * etc.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessColor [Color] to apply to the read less text. If [Color.Unspecified], and [style]
+ * has no color set, this will be [LocalContentColor].
+ * @param readLessFontSize The size of glyphs to use when painting the read less text.
+ * See [TextStyle.fontSize].
+ * @param readLessFontStyle The typeface variant to use when drawing the read less letters
+ * (e.g., italic). See [TextStyle.fontStyle].
+ * @param readLessFontWeight The typeface thickness to use when painting the read less text
+ * (e.g., [FontWeight.Bold]).
+ * @param readLessFontFamily The font family to be used when rendering the read less text.
+ * See [TextStyle.fontFamily].
+ * @param readLessTextDecoration The decorations to paint on the read less text
+ * (e.g., an underline). See [TextStyle.textDecoration].
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
  */
 @Composable
 public fun ReadMoreText(
@@ -130,7 +149,15 @@ public fun ReadMoreText(
     readMoreTextDecoration: TextDecoration? = null,
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle()
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    readLessText: String = "",
+    readLessColor: Color = readMoreColor,
+    readLessFontSize: TextUnit = readMoreFontSize,
+    readLessFontStyle: FontStyle? = readMoreFontStyle,
+    readLessFontWeight: FontWeight? = readMoreFontWeight,
+    readLessFontFamily: FontFamily? = readMoreFontFamily,
+    readLessTextDecoration: TextDecoration? = readMoreTextDecoration,
+    readLessStyle: SpanStyle = readMoreStyle,
 ) {
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
@@ -164,6 +191,18 @@ public fun ReadMoreText(
                 fontStyle = readMoreFontStyle
             )
         )
+    val mergedReadLessStyle = mergedStyle.toSpanStyle()
+        .merge(readLessStyle)
+        .merge(
+            SpanStyle(
+                color = readLessColor,
+                fontSize = readLessFontSize,
+                fontWeight = readLessFontWeight,
+                fontFamily = readLessFontFamily,
+                textDecoration = readLessTextDecoration,
+                fontStyle = readLessFontStyle
+            )
+        )
     BasicReadMoreText(
         text = text,
         expanded = expanded,
@@ -177,6 +216,8 @@ public fun ReadMoreText(
         readMoreMaxLines = readMoreMaxLines,
         readMoreOverflow = readMoreOverflow,
         readMoreStyle = mergedReadMoreStyle,
+        readLessText = readLessText,
+        readLessStyle = mergedReadLessStyle,
     )
 }
 
@@ -199,7 +240,11 @@ public fun ReadMoreText(
  * [LocalContentColor] will be used.
  *
  * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
  * @param modifier [Modifier] to apply to this layout node.
+ * @param onExpandedChange called when this text is clicked. If `null`, then this text will not be
+ * interactable, unless something else handles its input events and updates its state.
+ * @param contentPadding a padding around the text.
  * @param color [Color] to apply to the text. If [Color.Unspecified], and [style] has no color set,
  * this will be [LocalContentColor].
  * @param fontSize The size of glyphs to use when painting the text. See [TextStyle.fontSize].
@@ -241,9 +286,24 @@ public fun ReadMoreText(
  * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
  * necessary. If the text exceeds the given number of lines, it will be truncated according to
  * [readMoreOverflow]. If it is not null, then it must be greater than zero.
+ * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
  * @param readMoreStyle Style configuration for the read more text such as color, font, line height
  * etc.
- * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessColor [Color] to apply to the read less text. If [Color.Unspecified], and [style]
+ * has no color set, this will be [LocalContentColor].
+ * @param readLessFontSize The size of glyphs to use when painting the read less text.
+ * See [TextStyle.fontSize].
+ * @param readLessFontStyle The typeface variant to use when drawing the read less letters
+ * (e.g., italic). See [TextStyle.fontStyle].
+ * @param readLessFontWeight The typeface thickness to use when painting the read less text
+ * (e.g., [FontWeight.Bold]).
+ * @param readLessFontFamily The font family to be used when rendering the read less text.
+ * See [TextStyle.fontFamily].
+ * @param readLessTextDecoration The decorations to paint on the read less text
+ * (e.g., an underline). See [TextStyle.textDecoration].
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
  */
 @Composable
 public fun ReadMoreText(
@@ -274,7 +334,15 @@ public fun ReadMoreText(
     readMoreTextDecoration: TextDecoration? = null,
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle()
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    readLessText: String = "",
+    readLessColor: Color = readMoreColor,
+    readLessFontSize: TextUnit = readMoreFontSize,
+    readLessFontStyle: FontStyle? = readMoreFontStyle,
+    readLessFontWeight: FontWeight? = readMoreFontWeight,
+    readLessFontFamily: FontFamily? = readMoreFontFamily,
+    readLessTextDecoration: TextDecoration? = readMoreTextDecoration,
+    readLessStyle: SpanStyle = readMoreStyle,
 ) {
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
@@ -308,6 +376,18 @@ public fun ReadMoreText(
                 fontStyle = readMoreFontStyle
             )
         )
+    val mergedReadLessStyle = mergedStyle.toSpanStyle()
+        .merge(readLessStyle)
+        .merge(
+            SpanStyle(
+                color = readLessColor,
+                fontSize = readLessFontSize,
+                fontWeight = readLessFontWeight,
+                fontFamily = readLessFontFamily,
+                textDecoration = readLessTextDecoration,
+                fontStyle = readLessFontStyle
+            )
+        )
     BasicReadMoreText(
         text = text,
         expanded = expanded,
@@ -322,5 +402,7 @@ public fun ReadMoreText(
         readMoreMaxLines = readMoreMaxLines,
         readMoreOverflow = readMoreOverflow,
         readMoreStyle = mergedReadMoreStyle,
+        readLessText = readLessText,
+        readLessStyle = mergedReadLessStyle,
     )
 }

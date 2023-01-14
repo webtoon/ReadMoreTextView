@@ -112,7 +112,8 @@ private fun Item_DownToEarth() {
                 fontStyle = FontStyle.Normal,
                 lineHeight = 22.sp,
             ),
-            readMoreMaxLines = 2
+            readMoreMaxLines = 2,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -151,6 +152,7 @@ private fun Item_Hyperfocus() {
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             ),
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -189,6 +191,7 @@ private fun ItemReunion() {
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             ),
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -231,6 +234,7 @@ private fun Item_TheWorldAfterTheFall() {
                 fontWeight = FontWeight.Black,
                 textDecoration = TextDecoration.Underline
             ),
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -266,7 +270,8 @@ private fun Item_LoreOlympus() {
                 fontSize = 14.sp,
                 color = MaterialTheme.colors.secondary,
             ),
-            readMoreOverflow = ReadMoreTextOverflow.Clip
+            readMoreOverflow = ReadMoreTextOverflow.Clip,
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -327,6 +332,7 @@ private fun Item_CustomText() {
                 fontStyle = FontStyle.Italic,
                 textDecoration = TextDecoration.Underline
             ),
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }
@@ -362,6 +368,7 @@ private fun Item_Emoji() {
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             ),
+            readLessText = stringResource(id = R.string.read_less),
         )
     }
 }

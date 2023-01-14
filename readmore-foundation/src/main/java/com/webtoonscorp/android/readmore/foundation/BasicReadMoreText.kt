@@ -43,11 +43,16 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Basic element that displays text with read more.
- * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText], which is
- * a higher level Text element that contains semantics and consumes style information from a theme.
+ * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
+ * which is a higher level Text element that contains semantics and consumes style information from
+ * a theme.
  *
  * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
  * @param modifier [Modifier] to apply to this layout node.
+ * @param onExpandedChange called when this text is clicked. If `null`, then this text will not be
+ * interactable, unless something else handles its input events and updates its state.
+ * @param contentPadding a padding around the text.
  * @param style Style configuration for the text such as color, font, line height etc.
  * @param onTextLayout Callback that is executed when a new text layout is calculated. A
  * [TextLayoutResult] object that callback provides contains paragraph information, size of the
@@ -63,6 +68,9 @@ import androidx.compose.ui.unit.dp
  * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
  * @param readMoreStyle Style configuration for the read more text such as color, font, line height
  * etc.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
  */
 @Composable
 public fun BasicReadMoreText(
@@ -77,7 +85,9 @@ public fun BasicReadMoreText(
     readMoreText: String = "",
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle()
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    readLessText: String = "",
+    readLessStyle: SpanStyle = readMoreStyle,
 ) {
     require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
 
@@ -104,6 +114,15 @@ public fun BasicReadMoreText(
             }
         }
     }
+    val readLessTextWithStyle: AnnotatedString = remember(readLessText, readLessStyle) {
+        buildAnnotatedString {
+            if (readLessText.isNotEmpty()) {
+                withStyle(readLessStyle) {
+                    append(readLessText)
+                }
+            }
+        }
+    }
 
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
@@ -111,18 +130,28 @@ public fun BasicReadMoreText(
             readMoreMaxLines = readMoreMaxLines
         )
     }
-    val collapsedText = state.collapsedText
     val currentText = buildAnnotatedString {
-        if (expanded.not() && collapsedText.isNotEmpty()) {
-            append(collapsedText)
-            append(overflowText)
-            append(readMoreTextWithStyle)
-        } else {
+        if (expanded) {
             append(text)
+            if (readLessTextWithStyle.isNotEmpty()) {
+                append(' ')
+                append(readLessTextWithStyle)
+            }
+        } else {
+            val collapsedText = state.collapsedText
+            if (collapsedText.isNotEmpty()) {
+                append(collapsedText)
+                append(overflowText)
+                append(readMoreTextWithStyle)
+            } else {
+                append(text)
+            }
         }
     }
+
     val toggleableModifier = if (onExpandedChange != null) {
         Modifier.clickable(
+            enabled = state.isCollapsible,
             onClick = { onExpandedChange(!expanded) },
         )
     } else {
@@ -164,11 +193,16 @@ public fun BasicReadMoreText(
 
 /**
  * Basic element that displays text with read more.
- * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText], which is
- * a higher level Text element that contains semantics and consumes style information from a theme.
+ * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
+ * which is a higher level Text element that contains semantics and consumes style information from
+ * a theme.
  *
  * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
  * @param modifier [Modifier] to apply to this layout node.
+ * @param onExpandedChange called when this text is clicked. If `null`, then this text will not be
+ * interactable, unless something else handles its input events and updates its state.
+ * @param contentPadding a padding around the text.
  * @param style Style configuration for the text such as color, font, line height etc.
  * @param onTextLayout Callback that is executed when a new text layout is calculated. A
  * [TextLayoutResult] object that callback provides contains paragraph information, size of the
@@ -186,6 +220,9 @@ public fun BasicReadMoreText(
  * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
  * @param readMoreStyle Style configuration for the read more text such as color, font, line height
  * etc.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
  */
 @Composable
 public fun BasicReadMoreText(
@@ -201,7 +238,9 @@ public fun BasicReadMoreText(
     readMoreText: String = "",
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle()
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    readLessText: String = "",
+    readLessStyle: SpanStyle = readMoreStyle,
 ) {
     require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
 
@@ -228,6 +267,15 @@ public fun BasicReadMoreText(
             }
         }
     }
+    val readLessTextWithStyle: AnnotatedString = remember(readLessText, readLessStyle) {
+        buildAnnotatedString {
+            if (readLessText.isNotEmpty()) {
+                withStyle(readLessStyle) {
+                    append(readLessText)
+                }
+            }
+        }
+    }
 
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
@@ -235,18 +283,27 @@ public fun BasicReadMoreText(
             readMoreMaxLines = readMoreMaxLines
         )
     }
-    val collapsedText = state.collapsedText
     val currentText = buildAnnotatedString {
-        if (expanded.not() && collapsedText.isNotEmpty()) {
-            append(collapsedText)
-            append(overflowText)
-            append(readMoreTextWithStyle)
-        } else {
+        if (expanded) {
             append(text)
+            if (readLessTextWithStyle.isNotEmpty()) {
+                append(' ')
+                append(readLessTextWithStyle)
+            }
+        } else {
+            val collapsedText = state.collapsedText
+            if (collapsedText.isNotEmpty()) {
+                append(collapsedText)
+                append(overflowText)
+                append(readMoreTextWithStyle)
+            } else {
+                append(text)
+            }
         }
     }
     val toggleableModifier = if (onExpandedChange != null) {
         Modifier.clickable(
+            enabled = state.isCollapsible,
             onClick = { onExpandedChange(!expanded) },
         )
     } else {
@@ -326,6 +383,9 @@ private class ReadMoreState(
                 }
             }
         }
+
+    val isCollapsible: Boolean
+        get() = collapsedText.isNotEmpty()
 
     fun onTextLayout(result: TextLayoutResult) {
         val lastLineIndex = readMoreMaxLines - 1

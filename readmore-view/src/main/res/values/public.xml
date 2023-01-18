@@ -12,4 +12,13 @@
     <public name="readMoreTextAppearance" type="attr" />
     <public name="readMoreToggleEnabled" type="attr" />
     <public name="readMoreTextViewStyle" type="attr" />
+    <public name="readLessText" type="attr" />
+    <public name="readLessTextSize" type="attr" />
+    <public name="readLessTextColor" type="attr" />
+    <public name="readLessTextUnderline" type="attr" />
+    <public name="readLessTextStyle" type="attr" />
+    <public name="readLessFontFamily" type="attr" />
+    <public name="readLessTypeface" type="attr" />
+    <public name="readLessTextAppearance" type="attr" />
+    <public name="readLessTextViewStyle" type="attr" />
 </resources>

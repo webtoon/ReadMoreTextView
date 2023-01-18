@@ -31,6 +31,7 @@
         android:textColor="?colorOnSurface"
         android:textSize="15sp"
         android:textStyle="normal"
+        app:readLessText="@string/read_less"
         app:readMoreMaxLines="2"
         app:readMoreText="@string/read_more"
         app:readMoreTextColor="?colorError"

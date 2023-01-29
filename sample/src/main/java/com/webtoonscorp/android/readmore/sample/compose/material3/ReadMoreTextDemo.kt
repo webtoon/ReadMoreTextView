@@ -306,7 +306,6 @@ private fun Item_CustomText() {
             modifier = Modifier
                 .fillMaxWidth()
                 .animateContentSize(animationSpec = tween(durationMillis = 100)),
-            onExpandedChange = onExpandedChange,
             contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 15.sp,
@@ -319,7 +318,13 @@ private fun Item_CustomText() {
             readMoreFontWeight = FontWeight.Bold,
             readMoreFontStyle = FontStyle.Italic,
             readMoreTextDecoration = TextDecoration.Underline,
+            onReadMoreClick = {
+                onExpandedChange(true)
+            },
             readLessText = stringResource(id = R.string.read_less),
+            onReadLessClick = {
+                onExpandedChange(false)
+            },
         )
     }
 }

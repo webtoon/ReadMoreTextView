@@ -142,6 +142,7 @@ public fun BasicReadMoreText(
  * text will not be interactable, unless something else handles its input events and updates its
  * state.
  */
+@ExperimentalReadMoreApi
 @Composable
 public fun BasicReadMoreText(
     text: String,
@@ -280,6 +281,7 @@ public fun BasicReadMoreText(
  * text will not be interactable, unless something else handles its input events and updates its
  * state.
  */
+@ExperimentalReadMoreApi
 @Composable
 public fun BasicReadMoreText(
     text: AnnotatedString,

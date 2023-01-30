@@ -51,6 +51,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.webtoonscorp.android.readmore.foundation.ExperimentalReadMoreApi
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
 import com.webtoonscorp.android.readmore.material3.ReadMoreText
 import com.webtoonscorp.android.readmore.sample.R
@@ -267,6 +268,7 @@ private fun Item_LoreOlympus() {
     }
 }
 
+@OptIn(ExperimentalReadMoreApi::class)
 @Composable
 private fun Item_CustomText() {
     val annotatedDescription = buildAnnotatedString {

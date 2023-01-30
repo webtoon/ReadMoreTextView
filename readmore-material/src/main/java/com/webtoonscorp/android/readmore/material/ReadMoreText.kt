@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
+import com.webtoonscorp.android.readmore.foundation.ExperimentalReadMoreApi
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
 
 /**
@@ -312,6 +313,7 @@ public fun ReadMoreText(
  * text will not be interactable, unless something else handles its input events and updates its
  * state.
  */
+@ExperimentalReadMoreApi
 @Composable
 public fun ReadMoreText(
     text: String,
@@ -686,6 +688,7 @@ public fun ReadMoreText(
  * text will not be interactable, unless something else handles its input events and updates its
  * state.
  */
+@ExperimentalReadMoreApi
 @Composable
 public fun ReadMoreText(
     text: AnnotatedString,

@@ -21,7 +21,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -89,106 +89,94 @@ public fun BasicReadMoreText(
     readLessText: String = "",
     readLessStyle: SpanStyle = readMoreStyle,
 ) {
-    require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
+    CoreReadMoreText(
+        text = AnnotatedString(text),
+        expanded = expanded,
+        modifier = modifier,
+        onExpandedChange = onExpandedChange,
+        contentPadding = contentPadding,
+        style = style,
+        onTextLayout = onTextLayout,
+        softWrap = softWrap,
+        readMoreText = readMoreText,
+        readMoreMaxLines = readMoreMaxLines,
+        readMoreOverflow = readMoreOverflow,
+        readMoreStyle = readMoreStyle,
+        readLessText = readLessText,
+        readLessStyle = readLessStyle,
+    )
+}
 
-    val overflowText: String = remember(readMoreOverflow) {
-        buildString {
-            when (readMoreOverflow) {
-                ReadMoreTextOverflow.Clip -> {
-                }
-                ReadMoreTextOverflow.Ellipsis -> {
-                    append(Typography.ellipsis)
-                }
-            }
-            if (readMoreText.isNotEmpty()) {
-                append(Typography.nbsp)
-            }
-        }
-    }
-    val readMoreTextWithStyle: AnnotatedString = remember(readMoreText, readMoreStyle) {
-        buildAnnotatedString {
-            if (readMoreText.isNotEmpty()) {
-                withStyle(readMoreStyle) {
-                    append(readMoreText.replace(' ', Typography.nbsp))
-                }
-            }
-        }
-    }
-    val readLessTextWithStyle: AnnotatedString = remember(readLessText, readLessStyle) {
-        buildAnnotatedString {
-            if (readLessText.isNotEmpty()) {
-                withStyle(readLessStyle) {
-                    append(readLessText)
-                }
-            }
-        }
-    }
-
-    val state = remember(text, readMoreMaxLines) {
-        ReadMoreState(
-            originalText = AnnotatedString(text),
-            readMoreMaxLines = readMoreMaxLines
-        )
-    }
-    val currentText = buildAnnotatedString {
-        if (expanded) {
-            append(text)
-            if (readLessTextWithStyle.isNotEmpty()) {
-                append(' ')
-                append(readLessTextWithStyle)
-            }
-        } else {
-            val collapsedText = state.collapsedText
-            if (collapsedText.isNotEmpty()) {
-                append(collapsedText)
-                append(overflowText)
-                append(readMoreTextWithStyle)
-            } else {
-                append(text)
-            }
-        }
-    }
-
-    val toggleableModifier = if (onExpandedChange != null) {
-        Modifier.clickable(
-            enabled = state.isCollapsible,
-            onClick = { onExpandedChange(!expanded) },
-        )
-    } else {
-        Modifier
-    }
-    Box(
-        modifier = modifier
-            .then(toggleableModifier)
-            .padding(contentPadding)
-    ) {
-        BasicText(
-            text = currentText,
-            modifier = Modifier,
-            style = style,
-            onTextLayout = {
-                state.onTextLayout(it)
-                onTextLayout(it)
-            },
-            overflow = TextOverflow.Ellipsis,
-            softWrap = softWrap,
-            maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines
-        )
-        if (expanded.not()) {
-            BasicText(
-                text = overflowText,
-                onTextLayout = { state.onOverflowTextLayout(it) },
-                modifier = Modifier.notDraw(),
-                style = style
-            )
-            BasicText(
-                text = readMoreTextWithStyle,
-                onTextLayout = { state.onReadMoreTextLayout(it) },
-                modifier = Modifier.notDraw(),
-                style = style.merge(readMoreStyle)
-            )
-        }
-    }
+/**
+ * Basic element that displays text with read more.
+ * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
+ * which is a higher level Text element that contains semantics and consumes style information from
+ * a theme.
+ *
+ * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
+ * @param modifier [Modifier] to apply to this layout node.
+ * @param contentPadding a padding around the text.
+ * @param style Style configuration for the text such as color, font, line height etc.
+ * @param onTextLayout Callback that is executed when a new text layout is calculated. A
+ * [TextLayoutResult] object that callback provides contains paragraph information, size of the
+ * text, baselines and other details. The callback can be used to add additional decoration or
+ * functionality to the text. For example, to draw selection around the text.
+ * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
+ * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
+ * [readMoreOverflow] and TextAlign may have unexpected effects.
+ * @param readMoreText The read more text to be displayed in the collapsed state.
+ * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
+ * necessary. If the text exceeds the given number of lines, it will be truncated according to
+ * [readMoreOverflow]. If it is not null, then it must be greater than zero.
+ * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
+ * @param readMoreStyle Style configuration for the read more text such as color, font, line height
+ * etc.
+ * @param onReadMoreClick called when the read more text is clicked. If `null`, then the read more
+ * text will not be interactable, unless something else handles its input events and updates its
+ * state.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
+ * @param onReadLessClick called when the read less text is clicked. If `null`, then the read less
+ * text will not be interactable, unless something else handles its input events and updates its
+ * state.
+ */
+@Composable
+public fun BasicReadMoreText(
+    text: String,
+    expanded: Boolean,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    style: TextStyle = TextStyle.Default,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    softWrap: Boolean = true,
+    readMoreText: String = "",
+    readMoreMaxLines: Int = 2,
+    readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    onReadMoreClick: (() -> Unit)? = null,
+    readLessText: String = "",
+    readLessStyle: SpanStyle = readMoreStyle,
+    onReadLessClick: (() -> Unit)? = null,
+) {
+    CoreReadMoreText(
+        text = AnnotatedString(text),
+        expanded = expanded,
+        modifier = modifier,
+        contentPadding = contentPadding,
+        style = style,
+        onTextLayout = onTextLayout,
+        softWrap = softWrap,
+        readMoreText = readMoreText,
+        readMoreMaxLines = readMoreMaxLines,
+        readMoreOverflow = readMoreOverflow,
+        readMoreStyle = readMoreStyle,
+        onReadMoreClick = onReadMoreClick,
+        readLessText = readLessText,
+        readLessStyle = readLessStyle,
+        onReadLessClick = onReadLessClick,
+    )
 }
 
 /**
@@ -211,8 +199,6 @@ public fun BasicReadMoreText(
  * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
  * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
  * [readMoreOverflow] and TextAlign may have unexpected effects.
- * @param inlineContent A map store composables that replaces certain ranges of the text. It's
- * used to insert composables into text layout. Check [InlineTextContent] for more information.
  * @param readMoreText The read more text to be displayed in the collapsed state.
  * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
  * necessary. If the text exceeds the given number of lines, it will be truncated according to
@@ -234,13 +220,128 @@ public fun BasicReadMoreText(
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
-    inlineContent: Map<String, InlineTextContent> = mapOf(),
     readMoreText: String = "",
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
     readMoreStyle: SpanStyle = style.toSpanStyle(),
     readLessText: String = "",
     readLessStyle: SpanStyle = readMoreStyle,
+) {
+    CoreReadMoreText(
+        text = text,
+        expanded = expanded,
+        modifier = modifier,
+        onExpandedChange = onExpandedChange,
+        contentPadding = contentPadding,
+        style = style,
+        onTextLayout = onTextLayout,
+        softWrap = softWrap,
+        readMoreText = readMoreText,
+        readMoreMaxLines = readMoreMaxLines,
+        readMoreOverflow = readMoreOverflow,
+        readMoreStyle = readMoreStyle,
+        readLessText = readLessText,
+        readLessStyle = readLessStyle,
+    )
+}
+
+/**
+ * Basic element that displays text with read more.
+ * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
+ * which is a higher level Text element that contains semantics and consumes style information from
+ * a theme.
+ *
+ * @param text The text to be displayed.
+ * @param expanded whether this text is expanded or collapsed.
+ * @param modifier [Modifier] to apply to this layout node.
+ * @param contentPadding a padding around the text.
+ * @param style Style configuration for the text such as color, font, line height etc.
+ * @param onTextLayout Callback that is executed when a new text layout is calculated. A
+ * [TextLayoutResult] object that callback provides contains paragraph information, size of the
+ * text, baselines and other details. The callback can be used to add additional decoration or
+ * functionality to the text. For example, to draw selection around the text.
+ * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
+ * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
+ * [readMoreOverflow] and TextAlign may have unexpected effects.
+ * @param readMoreText The read more text to be displayed in the collapsed state.
+ * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
+ * necessary. If the text exceeds the given number of lines, it will be truncated according to
+ * [readMoreOverflow]. If it is not null, then it must be greater than zero.
+ * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
+ * @param readMoreStyle Style configuration for the read more text such as color, font, line height
+ * etc.
+ * @param onReadMoreClick called when the read more text is clicked. If `null`, then the read more
+ * text will not be interactable, unless something else handles its input events and updates its
+ * state.
+ * @param readLessText The read less text to be displayed in the expanded state.
+ * @param readLessStyle Style configuration for the read less text such as color, font, line height
+ * etc.
+ * @param onReadLessClick called when the read less text is clicked. If `null`, then the read less
+ * text will not be interactable, unless something else handles its input events and updates its
+ * state.
+ */
+@Composable
+public fun BasicReadMoreText(
+    text: AnnotatedString,
+    expanded: Boolean,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    style: TextStyle = TextStyle.Default,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    softWrap: Boolean = true,
+    readMoreText: String = "",
+    readMoreMaxLines: Int = 2,
+    readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    onReadMoreClick: (() -> Unit)? = null,
+    readLessText: String = "",
+    readLessStyle: SpanStyle = readMoreStyle,
+    onReadLessClick: (() -> Unit)? = null,
+) {
+    CoreReadMoreText(
+        text = text,
+        expanded = expanded,
+        modifier = modifier,
+        contentPadding = contentPadding,
+        style = style,
+        onTextLayout = onTextLayout,
+        softWrap = softWrap,
+        readMoreText = readMoreText,
+        readMoreMaxLines = readMoreMaxLines,
+        readMoreOverflow = readMoreOverflow,
+        readMoreStyle = readMoreStyle,
+        onReadMoreClick = onReadMoreClick,
+        readLessText = readLessText,
+        readLessStyle = readLessStyle,
+        onReadLessClick = onReadLessClick,
+    )
+}
+
+// ////////////////////////////////////
+// CoreReadMoreText
+// ////////////////////////////////////
+
+private const val ReadMoreTag = "read_more"
+private const val ReadLessTag = "read_less"
+
+@Composable
+private fun CoreReadMoreText(
+    text: AnnotatedString,
+    expanded: Boolean,
+    modifier: Modifier = Modifier,
+    onExpandedChange: ((Boolean) -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    style: TextStyle = TextStyle.Default,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    softWrap: Boolean = true,
+    readMoreText: String = "",
+    readMoreMaxLines: Int = 2,
+    readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
+    readMoreStyle: SpanStyle = style.toSpanStyle(),
+    onReadMoreClick: (() -> Unit)? = null,
+    readLessText: String = "",
+    readLessStyle: SpanStyle = readMoreStyle,
+    onReadLessClick: (() -> Unit)? = null,
 ) {
     require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
 
@@ -288,14 +389,19 @@ public fun BasicReadMoreText(
             append(text)
             if (readLessTextWithStyle.isNotEmpty()) {
                 append(' ')
+                pushStringAnnotation(tag = ReadLessTag, annotation = "")
                 append(readLessTextWithStyle)
+                pop()
             }
         } else {
             val collapsedText = state.collapsedText
             if (collapsedText.isNotEmpty()) {
                 append(collapsedText)
                 append(overflowText)
+
+                pushStringAnnotation(tag = ReadMoreTag, annotation = "")
                 append(readMoreTextWithStyle)
+                pop()
             } else {
                 append(text)
             }
@@ -314,19 +420,49 @@ public fun BasicReadMoreText(
             .then(toggleableModifier)
             .padding(contentPadding)
     ) {
-        BasicText(
-            text = currentText,
-            modifier = Modifier,
-            style = style,
-            onTextLayout = {
-                state.onTextLayout(it)
-                onTextLayout(it)
-            },
-            overflow = TextOverflow.Ellipsis,
-            softWrap = softWrap,
-            maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
-            inlineContent = inlineContent
-        )
+        if (onReadMoreClick != null || onReadLessClick != null) {
+            ClickableText(
+                text = currentText,
+                modifier = Modifier,
+                style = style,
+                onTextLayout = {
+                    state.onTextLayout(it)
+                    onTextLayout(it)
+                },
+                overflow = TextOverflow.Ellipsis,
+                softWrap = softWrap,
+                maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
+                onClick = { offset ->
+                    currentText.getStringAnnotations(
+                        tag = ReadMoreTag,
+                        start = offset,
+                        end = offset
+                    ).firstOrNull()?.let {
+                        onReadMoreClick?.invoke()
+                    }
+                    currentText.getStringAnnotations(
+                        tag = ReadLessTag,
+                        start = offset,
+                        end = offset
+                    ).firstOrNull()?.let {
+                        onReadLessClick?.invoke()
+                    }
+                },
+            )
+        } else {
+            BasicText(
+                text = currentText,
+                modifier = Modifier,
+                style = style,
+                onTextLayout = {
+                    state.onTextLayout(it)
+                    onTextLayout(it)
+                },
+                overflow = TextOverflow.Ellipsis,
+                softWrap = softWrap,
+                maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
+            )
+        }
         if (expanded.not()) {
             BasicText(
                 text = overflowText,

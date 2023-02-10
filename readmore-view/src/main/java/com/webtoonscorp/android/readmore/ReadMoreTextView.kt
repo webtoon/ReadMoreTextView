@@ -419,7 +419,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         fontFamily =
             ta.getString(R.styleable.ReadMoreTextView_readMoreFontFamily)
                 ?: ta.getFontFamilyFromTypeface(R.styleable.ReadMoreTextView_readMoreTypeface)
-                        ?: fontFamily
+                ?: fontFamily
         if (ta.hasValue(R.styleable.ReadMoreTextView_readMoreTextUnderline)) {
             textUnderline = ta.getBoolean(
                 R.styleable.ReadMoreTextView_readMoreTextUnderline,
@@ -493,7 +493,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         fontFamily =
             ta.getString(R.styleable.ReadMoreTextView_readLessFontFamily)
                 ?: ta.getFontFamilyFromTypeface(R.styleable.ReadMoreTextView_readLessTypeface)
-                        ?: fontFamily
+                ?: fontFamily
         if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextUnderline)) {
             textUnderline = ta.getBoolean(
                 R.styleable.ReadMoreTextView_readLessTextUnderline,

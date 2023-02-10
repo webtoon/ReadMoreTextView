@@ -32,6 +32,7 @@
         android:textColor="?colorOnSurface"
         android:textSize="15sp"
         android:textStyle="normal"
+        app:readLessText="@string/read_less"
         app:readMoreMaxLines="3"
         app:readMoreText="@string/read_more"
         app:readMoreTextAppearance="@style/TextAppearance.ReadMoreTextView.Item03"

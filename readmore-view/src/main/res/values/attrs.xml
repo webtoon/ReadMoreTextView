@@ -24,7 +24,26 @@
         </attr>
         <attr name="readMoreTextAppearance" format="reference" />
         <attr name="readMoreToggleEnabled" format="boolean" />
+
+        <attr name="readLessText" format="string" />
+        <attr name="readLessTextSize" format="dimension" />
+        <attr name="readLessTextColor" format="reference|color" />
+        <attr name="readLessTextUnderline" format="boolean" />
+        <attr name="readLessTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="readLessFontFamily" format="string" />
+        <attr name="readLessTypeface" format="integer">
+            <enum name="normal" value="0" />
+            <enum name="sans" value="1" />
+            <enum name="serif" value="2" />
+            <enum name="monospace" value="3" />
+        </attr>
+        <attr name="readLessTextAppearance" format="reference" />
     </declare-styleable>
 
     <attr name="readMoreTextViewStyle" format="reference" />
+    <attr name="readLessTextViewStyle" format="reference" />
 </resources>

@@ -37,6 +37,6 @@
         app:readMoreText="@string/read_more"
         app:readMoreTextAppearance="@style/TextAppearance.ReadMoreTextView.Item03"
         app:readMoreTextUnderline="true"
-        app:readMoreToggleEnabled="false" />
+        app:readMoreToggleArea="none" />
 
 </LinearLayout>

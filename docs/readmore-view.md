@@ -31,8 +31,8 @@ A library that shows 'Read more' text in Android TextView.
     // Set textAppearance to 'read more' text.
     app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
 
-    // If you want to use custom OnClickListener, you must be set this attribute to false.
-    app:readMoreToggleEnabled="false"
+    // If you want to use custom OnClickListener, you must be set this attribute to none.
+    app:readMoreToggleArea="none"
     />
 ```
 

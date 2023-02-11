@@ -21,11 +21,15 @@ import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.text.Layout
+import android.text.SpannableStringBuilder
 import android.text.TextPaint
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.text.style.TextAppearanceSpan
 import android.text.style.UnderlineSpan
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.StyleableRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
@@ -51,7 +55,6 @@ public class ReadMoreTextView @JvmOverloads constructor(
     private var readMoreTextStyle: Int = DEFAULT_TEXT_STYLE
     private var readMoreFontFamily: String? = null
     private var readMoreTextUnderline: Boolean = DEFAULT_TEXT_UNDERLINE
-    private var readMoreToggleEnabled: Boolean = true
 
     private var readLessText: String? = null
     private var readLessTextSize: Int = DEFAULT_TEXT_SIZE
@@ -59,6 +62,8 @@ public class ReadMoreTextView @JvmOverloads constructor(
     private var readLessTextStyle: Int = DEFAULT_TEXT_STYLE
     private var readLessFontFamily: String? = null
     private var readLessTextUnderline: Boolean = DEFAULT_TEXT_UNDERLINE
+
+    private var toggleArea: ToggleArea = ToggleArea.View
 
     private var bufferType: BufferType? = null
     private var expanded: Boolean = false
@@ -106,16 +111,25 @@ public class ReadMoreTextView @JvmOverloads constructor(
             readLessFontFamily = readLessAttributes.fontFamily
             readLessTextUnderline = readLessAttributes.textUnderline ?: DEFAULT_TEXT_UNDERLINE
 
-            readMoreToggleEnabled = ta.getBoolean(
-                R.styleable.ReadMoreTextView_readMoreToggleEnabled,
-                readMoreToggleEnabled
+            val readMoreToggleAreaValue = ta.getInt(
+                R.styleable.ReadMoreTextView_readMoreToggleArea,
+                toggleArea.value
             )
+            toggleArea = ToggleArea.values().first { it.value == readMoreToggleAreaValue }
         }
-        if (readMoreToggleEnabled) {
+        if (toggleArea != ToggleArea.None) {
             if (hasOnClickListeners()) {
-                throw IllegalStateException("The app:readMoreToggleEnabled attribute must be set to false to use custom OnClickListener")
+                throw IllegalStateException("The app:readMoreToggleArea attribute must be set to none to use custom OnClickListener")
             }
-            super.setOnClickListener { toggle() }
+        }
+        when (toggleArea) {
+            ToggleArea.None -> {}
+            ToggleArea.View -> {
+                super.setOnClickListener { toggle() }
+            }
+            ToggleArea.Text -> {
+                movementMethod = LinkMovementMethod.getInstance()
+            }
         }
 
         if (originalText != null) {
@@ -170,8 +184,8 @@ public class ReadMoreTextView @JvmOverloads constructor(
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        if (readMoreToggleEnabled) {
-            throw IllegalStateException("The app:readMoreToggleEnabled attribute must be set to false to use custom OnClickListener")
+        if (toggleArea != ToggleArea.None) {
+            throw IllegalStateException("The app:readMoreToggleArea attribute must be set to none to use custom OnClickListener")
         }
         super.setOnClickListener(l)
     }
@@ -217,7 +231,13 @@ public class ReadMoreTextView @JvmOverloads constructor(
                             underlineSpan
                         )
                         val readLessTextWithStyle = buildReadLessText(spans = spans.toTypedArray())
-                        append(readLessTextWithStyle)
+                        if (toggleArea == ToggleArea.Text) {
+                            click(onClick = { setExpanded(false) }) {
+                                append(readLessTextWithStyle)
+                            }
+                        } else {
+                            append(readLessTextWithStyle)
+                        }
                     }
                     this.collapseText = buildSpannedString {
                         val overflowText = buildOverflowText()
@@ -248,7 +268,13 @@ public class ReadMoreTextView @JvmOverloads constructor(
                             .calculateReplaceCountToBeSingleLineWith(maximumTextWidth - readMoreWidth)
                         append(text.subSequence(0, countUntilMaxLine - replaceCount))
                         append(overflowText)
-                        append(readMoreTextWithStyle)
+                        if (toggleArea == ToggleArea.Text) {
+                            click(onClick = { setExpanded(true) }) {
+                                append(readMoreTextWithStyle)
+                            }
+                        } else {
+                            append(readMoreTextWithStyle)
+                        }
                     }
                 }
             }
@@ -531,14 +557,41 @@ public class ReadMoreTextView @JvmOverloads constructor(
         Ellipsis(OVERFLOW_ELLIPSIS),
     }
 
+    private enum class ToggleArea(val value: Int) {
+        None(TOGGLE_MODE_NONE),
+        View(TOGGLE_MODE_VIEW),
+        Text(TOGGLE_MODE_TEXT),
+    }
+
     private companion object {
         private const val NO_LIMIT_LINES = Integer.MAX_VALUE
 
         const val OVERFLOW_CLIP: Int = 1
         const val OVERFLOW_ELLIPSIS: Int = 2
 
+        const val TOGGLE_MODE_NONE: Int = 1
+        const val TOGGLE_MODE_VIEW: Int = 2
+        const val TOGGLE_MODE_TEXT: Int = 3
+
         private const val DEFAULT_TEXT_SIZE = -1
         private const val DEFAULT_TEXT_STYLE = Typeface.NORMAL
         private const val DEFAULT_TEXT_UNDERLINE = false
+
+        private inline fun SpannableStringBuilder.click(
+            crossinline onClick: (View) -> Unit,
+            builderAction: SpannableStringBuilder.() -> Unit,
+        ): SpannableStringBuilder {
+            return inSpans(
+                span = object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        onClick(widget)
+                    }
+
+                    override fun updateDrawState(ds: TextPaint) {
+                    }
+                },
+                builderAction = builderAction
+            )
+        }
     }
 }

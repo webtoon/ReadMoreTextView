@@ -11,6 +11,9 @@ package com.webtoonscorp.android.readmore {
     method public void toggle();
     field public static final int OVERFLOW_CLIP = 1; // 0x1
     field public static final int OVERFLOW_ELLIPSIS = 2; // 0x2
+    field public static final int TOGGLE_MODE_NONE = 1; // 0x1
+    field public static final int TOGGLE_MODE_TEXT = 3; // 0x3
+    field public static final int TOGGLE_MODE_VIEW = 2; // 0x2
   }
 
   public static fun interface ReadMoreTextView.OnStateChangeListener {

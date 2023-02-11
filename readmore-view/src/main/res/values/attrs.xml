@@ -23,7 +23,11 @@
             <enum name="monospace" value="3" />
         </attr>
         <attr name="readMoreTextAppearance" format="reference" />
-        <attr name="readMoreToggleEnabled" format="boolean" />
+        <attr name="readMoreToggleArea">
+            <flag name="none" value="1" />
+            <flag name="view" value="2" />
+            <flag name="text" value="3" />
+        </attr>
 
         <attr name="readLessText" format="string" />
         <attr name="readLessTextSize" format="dimension" />

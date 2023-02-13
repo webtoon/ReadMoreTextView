@@ -12,7 +12,7 @@
         <!-- <item name="readMoreTextUnderline">true</item> -->
         <!-- <item name="readMoreTypeface">normal</item> -->
         <!-- <item name="readMoreTextAppearance">@style/TextAppearance.ReadMoreTextView.Item03</item> -->
-        <!-- <item name="readMoreToggleEnabled">false</item> -->
+        <!-- <item name="readMoreToggleArea">none</item> -->
     </style>
 
     <style name="TextAppearance.ReadMoreTextView.Item03" parent="">

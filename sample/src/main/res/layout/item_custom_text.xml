@@ -22,7 +22,6 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
         android:lineSpacingExtra="4sp"
         android:paddingStart="18dp"
         android:paddingTop="5dp"
@@ -38,6 +37,7 @@
         app:readMoreTextSize="14sp"
         app:readMoreTextStyle="bold|italic"
         app:readMoreTextUnderline="true"
+        app:readMoreToggleArea="more"
         tools:text="abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz." />
 
 </LinearLayout>

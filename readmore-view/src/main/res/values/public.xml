@@ -10,7 +10,7 @@
     <public name="readMoreFontFamily" type="attr" />
     <public name="readMoreTypeface" type="attr" />
     <public name="readMoreTextAppearance" type="attr" />
-    <public name="readMoreToggleEnabled" type="attr" />
+    <public name="readMoreToggleArea" type="attr" />
     <public name="readMoreTextViewStyle" type="attr" />
     <public name="readLessText" type="attr" />
     <public name="readLessTextSize" type="attr" />

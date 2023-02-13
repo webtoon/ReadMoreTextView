@@ -37,6 +37,6 @@
         app:readMoreText="@string/read_more"
         app:readMoreTextColor="?colorSecondary"
         app:readMoreTextSize="14sp"
-        app:readMoreToggleEnabled="false" />
+        app:readMoreToggleArea="none" />
 
 </LinearLayout>

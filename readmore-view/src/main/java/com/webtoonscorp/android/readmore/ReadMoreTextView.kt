@@ -63,7 +63,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
     private var readLessFontFamily: String? = null
     private var readLessTextUnderline: Boolean = DEFAULT_TEXT_UNDERLINE
 
-    private var toggleArea: ToggleArea = ToggleArea.View
+    private var toggleArea: ToggleArea = ToggleArea.All
 
     private var bufferType: BufferType? = null
     private var expanded: Boolean = false
@@ -124,10 +124,10 @@ public class ReadMoreTextView @JvmOverloads constructor(
         }
         when (toggleArea) {
             ToggleArea.None -> {}
-            ToggleArea.View -> {
+            ToggleArea.All -> {
                 super.setOnClickListener { toggle() }
             }
-            ToggleArea.Text -> {
+            ToggleArea.More -> {
                 movementMethod = LinkMovementMethod.getInstance()
             }
         }
@@ -231,7 +231,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                             underlineSpan
                         )
                         val readLessTextWithStyle = buildReadLessText(spans = spans.toTypedArray())
-                        if (toggleArea == ToggleArea.Text) {
+                        if (toggleArea == ToggleArea.More) {
                             click(onClick = { setExpanded(false) }) {
                                 append(readLessTextWithStyle)
                             }
@@ -268,7 +268,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                             .calculateReplaceCountToBeSingleLineWith(maximumTextWidth - readMoreWidth)
                         append(text.subSequence(0, countUntilMaxLine - replaceCount))
                         append(overflowText)
-                        if (toggleArea == ToggleArea.Text) {
+                        if (toggleArea == ToggleArea.More) {
                             click(onClick = { setExpanded(true) }) {
                                 append(readMoreTextWithStyle)
                             }
@@ -558,9 +558,9 @@ public class ReadMoreTextView @JvmOverloads constructor(
     }
 
     private enum class ToggleArea(val value: Int) {
-        None(TOGGLE_MODE_NONE),
-        View(TOGGLE_MODE_VIEW),
-        Text(TOGGLE_MODE_TEXT),
+        None(TOGGLE_AREA_NONE),
+        All(TOGGLE_AREA_ALL),
+        More(TOGGLE_AREA_MORE),
     }
 
     private companion object {
@@ -569,9 +569,9 @@ public class ReadMoreTextView @JvmOverloads constructor(
         const val OVERFLOW_CLIP: Int = 1
         const val OVERFLOW_ELLIPSIS: Int = 2
 
-        const val TOGGLE_MODE_NONE: Int = 1
-        const val TOGGLE_MODE_VIEW: Int = 2
-        const val TOGGLE_MODE_TEXT: Int = 3
+        const val TOGGLE_AREA_NONE: Int = 1
+        const val TOGGLE_AREA_ALL: Int = 2
+        const val TOGGLE_AREA_MORE: Int = 3
 
         private const val DEFAULT_TEXT_SIZE = -1
         private const val DEFAULT_TEXT_STYLE = Typeface.NORMAL

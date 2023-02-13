@@ -37,7 +37,7 @@
         app:readMoreTextSize="14sp"
         app:readMoreTextStyle="bold|italic"
         app:readMoreTextUnderline="true"
-        app:readMoreToggleArea="text"
+        app:readMoreToggleArea="more"
         tools:text="abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz,abcdefghijklmnopqrstuvwxyz." />
 
 </LinearLayout>

@@ -25,8 +25,8 @@
         <attr name="readMoreTextAppearance" format="reference" />
         <attr name="readMoreToggleArea">
             <flag name="none" value="1" />
-            <flag name="view" value="2" />
-            <flag name="text" value="3" />
+            <flag name="all" value="2" />
+            <flag name="more" value="3" />
         </attr>
 
         <attr name="readLessText" format="string" />

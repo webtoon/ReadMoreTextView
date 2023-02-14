@@ -1,8 +1,8 @@
 # ReadMoreText for Jetpack Compose (Material3)
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-material3)
 
-A library that shows 'Read more' text in Jetpack Compose Text.
+A library that show 'Read more' and 'Read less' text in Jetpack Compose Text.
 
 For more information, visit the documentation: https://webtoon.github.io/ReadMoreTextView/readmore-material3
 

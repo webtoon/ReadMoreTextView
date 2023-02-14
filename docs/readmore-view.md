@@ -1,8 +1,8 @@
 # ReadMoreTextView
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-view)
 
-A library that shows 'Read more' text in Android TextView.
+A library that show 'Read more' and 'Read less' text in Android TextView.
 
 | Collapsed                               | Expanded                              |
 | --------------------------------------- | ------------------------------------- |
@@ -31,6 +31,22 @@ A library that shows 'Read more' text in Android TextView.
     // Set textAppearance to 'read more' text.
     app:readMoreTextAppearance="@style/TextAppearance.AppCompat.Small"
 
+    // Set 'read less' text and styles.
+    app:readLessText="@string/read_less"
+    app:readLessTextColor="?colorPrimary"
+    app:readLessTextFontFamily="sans-serif"
+    app:readLessTextSize="12sp"
+    app:readLessTextStyle="bold"
+    app:readLessTextUnderline="true"
+    app:readLessTypeface="normal"
+
+    // Set textAppearance to 'read less' text.
+    app:readLessTextAppearance="@style/TextAppearance.AppCompat.Small"
+
+    // It expands and collapses by default.
+    app:readMoreToggleArea="all"
+    // If you want to allow clicks only on 'more' and 'less' text, you must be set this attribute to more.
+    app:readMoreToggleArea="more"
     // If you want to use custom OnClickListener, you must be set this attribute to none.
     app:readMoreToggleArea="none"
     />
@@ -38,7 +54,7 @@ A library that shows 'Read more' text in Android TextView.
 
 ## Download
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-view)
 
 ```groovy
 repositories {

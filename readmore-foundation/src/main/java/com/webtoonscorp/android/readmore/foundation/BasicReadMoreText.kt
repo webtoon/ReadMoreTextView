@@ -71,6 +71,7 @@ import androidx.compose.ui.unit.dp
  * @param readLessText The read less text to be displayed in the expanded state.
  * @param readLessStyle Style configuration for the read less text such as color, font, line height
  * etc.
+ * @param toggleArea A clickable area of text to toggle.
  */
 @Composable
 public fun BasicReadMoreText(
@@ -88,6 +89,7 @@ public fun BasicReadMoreText(
     readMoreStyle: SpanStyle = style.toSpanStyle(),
     readLessText: String = "",
     readLessStyle: SpanStyle = readMoreStyle,
+    toggleArea: ToggleArea = ToggleArea.All,
 ) {
     CoreReadMoreText(
         text = AnnotatedString(text),
@@ -104,79 +106,7 @@ public fun BasicReadMoreText(
         readMoreStyle = readMoreStyle,
         readLessText = readLessText,
         readLessStyle = readLessStyle,
-    )
-}
-
-/**
- * Basic element that displays text with read more.
- * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
- * which is a higher level Text element that contains semantics and consumes style information from
- * a theme.
- *
- * @param text The text to be displayed.
- * @param expanded whether this text is expanded or collapsed.
- * @param modifier [Modifier] to apply to this layout node.
- * @param contentPadding a padding around the text.
- * @param style Style configuration for the text such as color, font, line height etc.
- * @param onTextLayout Callback that is executed when a new text layout is calculated. A
- * [TextLayoutResult] object that callback provides contains paragraph information, size of the
- * text, baselines and other details. The callback can be used to add additional decoration or
- * functionality to the text. For example, to draw selection around the text.
- * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
- * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
- * [readMoreOverflow] and TextAlign may have unexpected effects.
- * @param readMoreText The read more text to be displayed in the collapsed state.
- * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
- * necessary. If the text exceeds the given number of lines, it will be truncated according to
- * [readMoreOverflow]. If it is not null, then it must be greater than zero.
- * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
- * @param readMoreStyle Style configuration for the read more text such as color, font, line height
- * etc.
- * @param onReadMoreClick called when the read more text is clicked. If `null`, then the read more
- * text will not be interactable, unless something else handles its input events and updates its
- * state.
- * @param readLessText The read less text to be displayed in the expanded state.
- * @param readLessStyle Style configuration for the read less text such as color, font, line height
- * etc.
- * @param onReadLessClick called when the read less text is clicked. If `null`, then the read less
- * text will not be interactable, unless something else handles its input events and updates its
- * state.
- */
-@ExperimentalReadMoreApi
-@Composable
-public fun BasicReadMoreText(
-    text: String,
-    expanded: Boolean,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
-    style: TextStyle = TextStyle.Default,
-    onTextLayout: (TextLayoutResult) -> Unit = {},
-    softWrap: Boolean = true,
-    readMoreText: String = "",
-    readMoreMaxLines: Int = 2,
-    readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle(),
-    onReadMoreClick: (() -> Unit)? = null,
-    readLessText: String = "",
-    readLessStyle: SpanStyle = readMoreStyle,
-    onReadLessClick: (() -> Unit)? = null,
-) {
-    CoreReadMoreText(
-        text = AnnotatedString(text),
-        expanded = expanded,
-        modifier = modifier,
-        contentPadding = contentPadding,
-        style = style,
-        onTextLayout = onTextLayout,
-        softWrap = softWrap,
-        readMoreText = readMoreText,
-        readMoreMaxLines = readMoreMaxLines,
-        readMoreOverflow = readMoreOverflow,
-        readMoreStyle = readMoreStyle,
-        onReadMoreClick = onReadMoreClick,
-        readLessText = readLessText,
-        readLessStyle = readLessStyle,
-        onReadLessClick = onReadLessClick,
+        toggleArea = toggleArea,
     )
 }
 
@@ -210,6 +140,7 @@ public fun BasicReadMoreText(
  * @param readLessText The read less text to be displayed in the expanded state.
  * @param readLessStyle Style configuration for the read less text such as color, font, line height
  * etc.
+ * @param toggleArea A clickable area of text to toggle.
  */
 @Composable
 public fun BasicReadMoreText(
@@ -227,6 +158,7 @@ public fun BasicReadMoreText(
     readMoreStyle: SpanStyle = style.toSpanStyle(),
     readLessText: String = "",
     readLessStyle: SpanStyle = readMoreStyle,
+    toggleArea: ToggleArea = ToggleArea.All,
 ) {
     CoreReadMoreText(
         text = text,
@@ -243,79 +175,7 @@ public fun BasicReadMoreText(
         readMoreStyle = readMoreStyle,
         readLessText = readLessText,
         readLessStyle = readLessStyle,
-    )
-}
-
-/**
- * Basic element that displays text with read more.
- * Typically you will instead want to use [com.webtoonscorp.android.readmore.material.ReadMoreText],
- * which is a higher level Text element that contains semantics and consumes style information from
- * a theme.
- *
- * @param text The text to be displayed.
- * @param expanded whether this text is expanded or collapsed.
- * @param modifier [Modifier] to apply to this layout node.
- * @param contentPadding a padding around the text.
- * @param style Style configuration for the text such as color, font, line height etc.
- * @param onTextLayout Callback that is executed when a new text layout is calculated. A
- * [TextLayoutResult] object that callback provides contains paragraph information, size of the
- * text, baselines and other details. The callback can be used to add additional decoration or
- * functionality to the text. For example, to draw selection around the text.
- * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
- * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
- * [readMoreOverflow] and TextAlign may have unexpected effects.
- * @param readMoreText The read more text to be displayed in the collapsed state.
- * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
- * necessary. If the text exceeds the given number of lines, it will be truncated according to
- * [readMoreOverflow]. If it is not null, then it must be greater than zero.
- * @param readMoreOverflow How visual overflow should be handled in the collapsed state.
- * @param readMoreStyle Style configuration for the read more text such as color, font, line height
- * etc.
- * @param onReadMoreClick called when the read more text is clicked. If `null`, then the read more
- * text will not be interactable, unless something else handles its input events and updates its
- * state.
- * @param readLessText The read less text to be displayed in the expanded state.
- * @param readLessStyle Style configuration for the read less text such as color, font, line height
- * etc.
- * @param onReadLessClick called when the read less text is clicked. If `null`, then the read less
- * text will not be interactable, unless something else handles its input events and updates its
- * state.
- */
-@ExperimentalReadMoreApi
-@Composable
-public fun BasicReadMoreText(
-    text: AnnotatedString,
-    expanded: Boolean,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
-    style: TextStyle = TextStyle.Default,
-    onTextLayout: (TextLayoutResult) -> Unit = {},
-    softWrap: Boolean = true,
-    readMoreText: String = "",
-    readMoreMaxLines: Int = 2,
-    readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
-    readMoreStyle: SpanStyle = style.toSpanStyle(),
-    onReadMoreClick: (() -> Unit)? = null,
-    readLessText: String = "",
-    readLessStyle: SpanStyle = readMoreStyle,
-    onReadLessClick: (() -> Unit)? = null,
-) {
-    CoreReadMoreText(
-        text = text,
-        expanded = expanded,
-        modifier = modifier,
-        contentPadding = contentPadding,
-        style = style,
-        onTextLayout = onTextLayout,
-        softWrap = softWrap,
-        readMoreText = readMoreText,
-        readMoreMaxLines = readMoreMaxLines,
-        readMoreOverflow = readMoreOverflow,
-        readMoreStyle = readMoreStyle,
-        onReadMoreClick = onReadMoreClick,
-        readLessText = readLessText,
-        readLessStyle = readLessStyle,
-        onReadLessClick = onReadLessClick,
+        toggleArea = toggleArea,
     )
 }
 
@@ -340,10 +200,9 @@ private fun CoreReadMoreText(
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
     readMoreStyle: SpanStyle = style.toSpanStyle(),
-    onReadMoreClick: (() -> Unit)? = null,
     readLessText: String = "",
     readLessStyle: SpanStyle = readMoreStyle,
-    onReadLessClick: (() -> Unit)? = null,
+    toggleArea: ToggleArea = ToggleArea.All,
 ) {
     require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
 
@@ -409,7 +268,7 @@ private fun CoreReadMoreText(
             }
         }
     }
-    val toggleableModifier = if (onExpandedChange != null) {
+    val toggleableModifier = if (onExpandedChange != null && toggleArea == ToggleArea.All) {
         Modifier.clickable(
             enabled = state.isCollapsible,
             onClick = { onExpandedChange(!expanded) },
@@ -422,7 +281,7 @@ private fun CoreReadMoreText(
             .then(toggleableModifier)
             .padding(contentPadding)
     ) {
-        if (onReadMoreClick != null || onReadLessClick != null) {
+        if (toggleArea == ToggleArea.More) {
             ClickableText(
                 text = currentText,
                 modifier = Modifier,
@@ -440,14 +299,14 @@ private fun CoreReadMoreText(
                         start = offset,
                         end = offset
                     ).firstOrNull()?.let {
-                        onReadMoreClick?.invoke()
+                        onExpandedChange?.invoke(true)
                     }
                     currentText.getStringAnnotations(
                         tag = ReadLessTag,
                         start = offset,
                         end = offset
                     ).firstOrNull()?.let {
-                        onReadLessClick?.invoke()
+                        onExpandedChange?.invoke(false)
                     }
                 },
             )

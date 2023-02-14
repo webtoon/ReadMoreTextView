@@ -49,8 +49,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
-import com.webtoonscorp.android.readmore.foundation.ExperimentalReadMoreApi
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
+import com.webtoonscorp.android.readmore.foundation.ToggleArea
 import com.webtoonscorp.android.readmore.sample.R
 
 @Composable
@@ -277,7 +277,6 @@ private fun Item_LoreOlympus() {
     }
 }
 
-@OptIn(ExperimentalReadMoreApi::class)
 @Composable
 private fun Item_CustomText() {
     val annotatedDescription = buildAnnotatedString {
@@ -314,6 +313,7 @@ private fun Item_CustomText() {
         BasicReadMoreText(
             text = annotatedDescription,
             expanded = expanded,
+            onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .animateContentSize(animationSpec = tween(durationMillis = 100)),
@@ -333,13 +333,8 @@ private fun Item_CustomText() {
                 fontStyle = FontStyle.Italic,
                 textDecoration = TextDecoration.Underline
             ),
-            onReadMoreClick = {
-                onExpandedChange(true)
-            },
             readLessText = stringResource(id = R.string.read_less),
-            onReadLessClick = {
-                onExpandedChange(false)
-            },
+            toggleArea = ToggleArea.More,
         )
     }
 }

@@ -1,8 +1,8 @@
 # ReadMoreTextView
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-view)
 
-A library that shows 'Read more' text in Android TextView.
+A library that show 'Read more' and 'Read less' text in Android TextView.
 
 For more information, visit the documentation: https://webtoon.github.io/ReadMoreTextView/readmore-view
 

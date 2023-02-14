@@ -1,8 +1,8 @@
 # ReadMoreText for Jetpack Compose
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-foundation)
 
-A library that shows 'Read more' text in Jetpack Compose BasicText.
+A library that show 'Read more' and 'Read less' text in Jetpack Compose BasicText.
 
 | Collapsed                               | Expanded                              |
 | --------------------------------------- | ------------------------------------- |
@@ -17,11 +17,12 @@ A library that shows 'Read more' text in Jetpack Compose BasicText.
 fun BasicReadMoreTextSample() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     BasicReadMoreText(
-        text = description,
+        text = "...",
         expanded = expanded,
-        modifier = Modifier
-            .clickable { onExpandedChange(!expanded) }
-            .fillMaxWidth(),
+        onExpandedChange = onExpandedChange,
+        modifier = Modifier.fillMaxWidth(),
+
+        /* read more */
         readMoreText = "Read more",
         readMoreMaxLines = 2,
         readMoreOverflow = ReadMoreTextOverflow.Ellipsis,
@@ -32,14 +33,30 @@ fun BasicReadMoreTextSample() {
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Default,
             textDecoration = TextDecoration.None
-        )
+        ),
+
+        /* read less */
+        readLessText = "Read more",
+        readLessStyle = SpanStyle(
+            color = Color.Black,
+            fontSize = 15.sp,
+            fontStyle = FontStyle.Normal,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.Default,
+            textDecoration = TextDecoration.None
+        ),
+
+        /* It expands and collapses by default. */
+        toggleArea = ToggleArea.All,
+        // If you want to allow clicks only on 'more' and 'less' text, use this.
+        toggleArea = ToggleArea.More,
     )
 }
 ```
 
 ## Download
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-foundation)
 
 ```groovy
 repositories {

@@ -3,7 +3,7 @@
 <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
 <a href='https://developer.android.com'><img src='http://img.shields.io/badge/platform-android-green.svg'/></a>
 
-This library provides collapsible Text widgets with 'Read more' text. (Including [Jetpack Compose][compose])
+This library provides collapsible Text widgets with 'Read more' and 'Read less' text. (Including [Jetpack Compose][compose])
 
 | **Collapsed** | <img width="300" src="docs/collapsed.png" /> |
 | ------------- | -------------------------------------------- |
@@ -29,21 +29,23 @@ Each [release](https://github.com/webtoon/ReadMoreTextView/releases) outlines th
 We are currently releasing various libraries for AppCompat or Compose.
 
 ### [ReadMore-View](./readmore-view/)
-A library that provides collapsible `TextView` with 'Read more' text. (for Android View System)
+A library that provides collapsible `TextView` with 'Read more' and 'Read less' text. (for Android View System)
 
 ### [ReadMore-Foundation](./readmore-foundation/)
-A library that provides collapsible `BasicText` with 'Read more' text. (for [Jetpack Compose][compose])
+A library that provides collapsible `BasicText` with 'Read more' and 'Read less' text. (for [Jetpack Compose][compose])
 
 ### [ReadMore-Material](./readmore-material/)
-A library that provides collapsible `Text` with 'Read more' text based on Material Theme. (for [Jetpack Compose][compose])
+A library that provides collapsible `Text` with 'Read more' and 'Read less' text based on Material Theme. (for [Jetpack Compose][compose])
 
 ### [ReadMore-Material3](./readmore-material3/)
-A library that provides collapsible `Text` with 'Read more' text based on Material3 Theme. (for [Jetpack Compose][compose])
+A library that provides collapsible `Text` with 'Read more' and 'Read less' text based on Material3 Theme. (for [Jetpack Compose][compose])
 
 
 ## Attributes
 
 This libraries provide the same attributes as much as possible regardless of View or [Compose][compose].
+
+### Attributes for 'Read More'
 
 #### `readMoreMaxLines`
 
@@ -75,18 +77,84 @@ This libraries provide the same attributes as much as possible regardless of Vie
 | ----------------------------------- | ------------------------------------------------------------ |
 | **`"#FF0000"`**                     | <img width="300" src="docs/readMoreTextColor_custom.png" /> |
 
-#### `readMoreTextUnderline`
-
-| **false (default)** | <img width="300" src="docs/readMoreTextUnderline_default.png" /> |
-| ------------------- | ------------------------------------------------------------ |
-| **true**            | <img width="300" src="docs/readMoreTextUnderline_true.png" /> |
-
 #### `readMoreTextStyle`
 
 | **Normal (default)** | <img width="300" src="docs/readMoreTextStyle_default.png" /> |
 | -------------------- | ------------------------------------------------------------ |
 | **Bold**             | <img width="300" src="docs/readMoreTextStyle_bold.png" /> |
 | **Italic**           | <img width="300" src="docs/readMoreTextStyle_italic.png" /> |
+
+#### `readMoreTextUnderline` (View only)
+
+| **false (default)** | <img width="300" src="docs/readMoreTextUnderline_default.png" /> |
+| ------------------- | ------------------------------------------------------------ |
+| **true**            | <img width="300" src="docs/readMoreTextUnderline_true.png" /> |
+
+#### `readMoreTextDecoration` (Compose only)
+
+| **`null` (default)**  | <img width="300" src="docs/readMoreTextUnderline_default.png" /> |
+|-----------------------| ------------------------------------------------------------ |
+| **`TextDecoration.Underline`** | <img width="300" src="docs/readMoreTextUnderline_true.png" /> |
+
+---
+
+### Attributes for 'Read Less'
+
+#### `readLessText`
+
+| **"" (default)**  | <img width="300" src="docs/readLessText_default.png" /> |
+|-------------------| ------------------------------------------------------------ |
+| **`"Read less"`** | <img width="300" src="docs/readLessText_custom.png" /> |
+
+#### `readLessTextSize`
+
+| **Same with `textSize` (default)** | <img width="300" src="docs/readLessTextSize_default.png" /> |
+| ---------------------------------- | ------------------------------------------------------------ |
+| **`"11sp"`**                       | <img width="300" src="docs/readLessTextSize_custom.png" /> |
+
+#### `readLessTextColor`
+
+| **Same with `textColor` (default)** | <img width="300" src="docs/readLessTextColor_default.png" /> |
+| ----------------------------------- | ------------------------------------------------------------ |
+| **`"#FF0000"`**                     | <img width="300" src="docs/readLessTextColor_custom.png" /> |
+
+#### `readLessTextStyle`
+
+| **Normal (default)** | <img width="300" src="docs/readLessTextStyle_default.png" /> |
+| -------------------- | ------------------------------------------------------------ |
+| **Bold**             | <img width="300" src="docs/readLessTextStyle_bold.png" /> |
+| **Italic**           | <img width="300" src="docs/readLessTextStyle_italic.png" /> |
+
+#### `readLessTextUnderline` (View only)
+
+| **false (default)** | <img width="300" src="docs/readLessTextUnderline_default.png" /> |
+| ------------------- | ------------------------------------------------------------ |
+| **true**            | <img width="300" src="docs/readLessTextUnderline_true.png" /> |
+
+#### `readLessTextDecoration` (Compose only)
+
+| **`null` (default)**  | <img width="300" src="docs/readLessTextUnderline_default.png" /> |
+|-----------------------| ------------------------------------------------------------ |
+| **`TextDecoration.Underline`** | <img width="300" src="docs/readLessTextUnderline_true.png" /> |
+
+---
+
+### Attributes for toggle area
+
+The toggle area is the red box in the following image.
+
+#### `readMoreToggleArea` (View only)
+
+| **all (default)** | <img width="300" src="docs/readMoreToggleArea_all.png" />  |
+|-------------------|------------------------------------------------------------|
+| **more**          | <img width="300" src="docs/readMoreToggleArea_more.png" /> |
+| **none**          | <img width="300" src="docs/readMoreToggleArea_none.png" /> |
+
+#### `toggleArea` (Compose only)
+
+| **All (default)** | <img width="300" src="docs/toggleArea_all.png" />  |
+|-------------------|---------------------------------------------------------------|
+| **More**          | <img width="300" src="docs/toggleArea_more.png" /> |
 
 ## Snapshots
 

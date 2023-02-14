@@ -1,8 +1,8 @@
 # ReadMoreText for Jetpack Compose (Material3)
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-material3)
 
-A library that shows 'Read more' text in Jetpack Compose Text.
+A library that show 'Read more' and 'Read less' text in Jetpack Compose Text.
 
 | Collapsed                               | Expanded                              |
 | --------------------------------------- | ------------------------------------- |
@@ -19,9 +19,10 @@ fun ReadMoreTextSample() {
     ReadMoreText(
         text = "...",
         expanded = expanded,
-        modifier = Modifier
-            .clickable { onExpandedChange(!expanded) }
-            .fillMaxWidth(),
+        onExpandedChange = onExpandedChange,
+        modifier = Modifier.fillMaxWidth(),
+
+        /* read more */
         readMoreText = "Read more",
         readMoreColor = Color.Black,
         readMoreFontSize = 15.sp,
@@ -33,14 +34,31 @@ fun ReadMoreTextSample() {
         readMoreOverflow = ReadMoreTextOverflow.Ellipsis,
         readMoreStyle = SpanStyle(
             // ...
-        )
+        ),
+
+        /* read less */
+        readLessText = "Read less",
+        readLessColor = Color.Black,
+        readLessFontSize = 15.sp,
+        readLessFontStyle = FontStyle.Normal,
+        readLessFontWeight = FontWeight.Bold,
+        readLessFontFamily = FontFamily.Default,
+        readLessTextDecoration = TextDecoration.None,
+        readLessStyle = SpanStyle(
+            // ...
+        ),
+
+        /* It expands and collapses by default. */
+        toggleArea = ToggleArea.All,
+        // If you want to allow clicks only on 'more' and 'less' text, use this.
+        toggleArea = ToggleArea.More,
     )
 }
 ```
 
 ## Download
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/search?q=g:com.webtoonscorp.android)
+[![Maven Central](https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material3)](https://search.maven.org/artifact/com.webtoonscorp.android/readmore-material3)
 
 ```groovy
 repositories {

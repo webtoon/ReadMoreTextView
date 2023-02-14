@@ -583,8 +583,8 @@
 
 
 <h1 id="readmoretext-for-jetpack-compose-material">ReadMoreText for Jetpack Compose (Material)<a class="headerlink" href="#readmoretext-for-jetpack-compose-material" title="Permanent link">&para;</a></h1>
-<p><a href="https://search.maven.org/search?q=g:com.webtoonscorp.android"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material" /></a></p>
-<p>A library that shows 'Read more' text in Jetpack Compose Text.</p>
+<p><a href="https://search.maven.org/artifact/com.webtoonscorp.android/readmore-material"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material" /></a></p>
+<p>A library that show 'Read more' and 'Read less' text in Jetpack Compose Text.</p>
 <table>
 <thead>
 <tr>
@@ -601,15 +601,16 @@
 </table>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><code>ReadMoreText</code> is based on material theme like <code>androidx.compose.material.Text</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@Composable</span>
+<p><div class="highlight"><pre><span></span><code><span class="nd">@Composable</span>
 <span class="kd">fun</span><span class="w"> </span><span class="nf">ReadMoreTextSample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="nv">expanded</span><span class="p">,</span><span class="w"> </span><span class="nv">onExpandedChange</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rememberSaveable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="n">ReadMoreText</span><span class="p">(</span>
 <span class="w">        </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">expanded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expanded</span><span class="p">,</span>
-<span class="w">        </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
-<span class="w">            </span><span class="p">.</span><span class="na">clickable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">onExpandedChange</span><span class="p">(</span><span class="o">!</span><span class="n">expanded</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<span class="w">            </span><span class="p">.</span><span class="na">fillMaxWidth</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">onExpandedChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onExpandedChange</span><span class="p">,</span>
+<span class="w">        </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">fillMaxWidth</span><span class="p">(),</span>
+
+<span class="w">        </span><span class="cm">/* read more */</span>
 <span class="w">        </span><span class="n">readMoreText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read more&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">readMoreColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="na">Black</span><span class="p">,</span>
 <span class="w">        </span><span class="n">readMoreFontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.</span><span class="n">sp</span><span class="p">,</span>
@@ -621,12 +622,36 @@
 <span class="w">        </span><span class="n">readMoreOverflow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReadMoreTextOverflow</span><span class="p">.</span><span class="na">Ellipsis</span><span class="p">,</span>
 <span class="w">        </span><span class="n">readMoreStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SpanStyle</span><span class="p">(</span>
 <span class="w">            </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="p">),</span>
+
+<span class="w">        </span><span class="cm">/* read less */</span>
+<span class="w">        </span><span class="n">readLessText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read less&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="na">Black</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessFontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.</span><span class="n">sp</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessFontStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FontStyle</span><span class="p">.</span><span class="na">Normal</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessFontWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FontWeight</span><span class="p">.</span><span class="na">Bold</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessFontFamily</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FontFamily</span><span class="p">.</span><span class="na">Default</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessTextDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TextDecoration</span><span class="p">.</span><span class="na">None</span><span class="p">,</span>
+<span class="w">        </span><span class="n">readLessStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SpanStyle</span><span class="p">(</span>
+<span class="w">            </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">),</span>
+
+<span class="w">        </span><span class="cm">/* It expands and collapses by default. */</span>
+<span class="w">        </span><span class="n">toggleArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ToggleArea</span><span class="p">.</span><span class="na">All</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// If you want to allow clicks only on &#39;more&#39; and &#39;less&#39; text, use this.</span>
+<span class="w">        </span><span class="n">toggleArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ToggleArea</span><span class="p">.</span><span class="na">More</span><span class="p">,</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
+readLessFontSize
+readLessFontStyle
+readLessFontWeight
+readLessFontFamily
+readLessTextDecoration
+readLessStyle
+toggleArea</p>
 <h2 id="download">Download<a class="headerlink" href="#download" title="Permanent link">&para;</a></h2>
-<p><a href="https://search.maven.org/search?q=g:com.webtoonscorp.android"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material" /></a></p>
+<p><a href="https://search.maven.org/artifact/com.webtoonscorp.android/readmore-material"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-material" /></a></p>
 <div class="highlight"><pre><span></span><code><span class="n">repositories</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="n">mavenCentral</span><span class="o">()</span>
 <span class="o">}</span>

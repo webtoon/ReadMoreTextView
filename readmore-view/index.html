@@ -583,8 +583,8 @@
 
 
 <h1 id="readmoretextview">ReadMoreTextView<a class="headerlink" href="#readmoretextview" title="Permanent link">&para;</a></h1>
-<p><a href="https://search.maven.org/search?q=g:com.webtoonscorp.android"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view" /></a></p>
-<p>A library that shows 'Read more' text in Android TextView.</p>
+<p><a href="https://search.maven.org/artifact/com.webtoonscorp.android/readmore-view"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view" /></a></p>
+<p>A library that show 'Read more' and 'Read less' text in Android TextView.</p>
 <table>
 <thead>
 <tr>
@@ -620,12 +620,28 @@
 <span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">Set</span><span class="w"> </span><span class="err">textAppearance</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">&#39;read</span><span class="w"> </span><span class="err">more&#39;</span><span class="w"> </span><span class="err">text.</span>
 <span class="w">    </span><span class="na">app:readMoreTextAppearance=</span><span class="s">&quot;@style/TextAppearance.AppCompat.Small&quot;</span>
 
+<span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">Set</span><span class="w"> </span><span class="err">&#39;read</span><span class="w"> </span><span class="err">less&#39;</span><span class="w"> </span><span class="err">text</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">styles.</span>
+<span class="w">    </span><span class="na">app:readLessText=</span><span class="s">&quot;@string/read_less&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTextColor=</span><span class="s">&quot;?colorPrimary&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTextFontFamily=</span><span class="s">&quot;sans-serif&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTextSize=</span><span class="s">&quot;12sp&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTextStyle=</span><span class="s">&quot;bold&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTextUnderline=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:readLessTypeface=</span><span class="s">&quot;normal&quot;</span>
+
+<span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">Set</span><span class="w"> </span><span class="err">textAppearance</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">&#39;read</span><span class="w"> </span><span class="err">less&#39;</span><span class="w"> </span><span class="err">text.</span>
+<span class="w">    </span><span class="na">app:readLessTextAppearance=</span><span class="s">&quot;@style/TextAppearance.AppCompat.Small&quot;</span>
+
+<span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">It</span><span class="w"> </span><span class="err">expands</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">collapses</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">default.</span>
+<span class="w">    </span><span class="na">app:readMoreToggleArea=</span><span class="s">&quot;all&quot;</span>
+<span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">you</span><span class="w"> </span><span class="err">want</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">allow</span><span class="w"> </span><span class="err">clicks</span><span class="w"> </span><span class="err">only</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">&#39;more&#39;</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">&#39;less&#39;</span><span class="w"> </span><span class="err">text,</span><span class="w"> </span><span class="err">you</span><span class="w"> </span><span class="err">must</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">set</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">attribute</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">more.</span>
+<span class="w">    </span><span class="na">app:readMoreToggleArea=</span><span class="s">&quot;more&quot;</span>
 <span class="w">    </span><span class="err">//</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">you</span><span class="w"> </span><span class="err">want</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">custom</span><span class="w"> </span><span class="err">OnClickListener,</span><span class="w"> </span><span class="err">you</span><span class="w"> </span><span class="err">must</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">set</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">attribute</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">none.</span>
 <span class="w">    </span><span class="na">app:readMoreToggleArea=</span><span class="s">&quot;none&quot;</span>
 <span class="w">    </span><span class="nt">/&gt;</span>
 </code></pre></div>
 <h2 id="download">Download<a class="headerlink" href="#download" title="Permanent link">&para;</a></h2>
-<p><a href="https://search.maven.org/search?q=g:com.webtoonscorp.android"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view" /></a></p>
+<p><a href="https://search.maven.org/artifact/com.webtoonscorp.android/readmore-view"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-view" /></a></p>
 <div class="highlight"><pre><span></span><code><span class="n">repositories</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="n">mavenCentral</span><span class="o">()</span>
 <span class="o">}</span>

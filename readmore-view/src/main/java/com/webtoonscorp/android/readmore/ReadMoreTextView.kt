@@ -501,9 +501,9 @@ public class ReadMoreTextView @JvmOverloads constructor(
                         ?: it.getFontFamilyFromTypeface(AppCompatR.styleable.TextAppearance_android_typeface)
             }
         }
-        if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextUnderline)) {
+        if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextSize)) {
             textSize = ta.getDimensionPixelSize(
-                R.styleable.ReadMoreTextView_readLessTextUnderline,
+                R.styleable.ReadMoreTextView_readLessTextSize,
                 DEFAULT_TEXT_SIZE
             )
         }

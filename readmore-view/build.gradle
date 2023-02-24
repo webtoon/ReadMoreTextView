@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.vanniktech.maven.publish'
     id 'org.jetbrains.dokka'
+    id 'me.tylerbwong.gradle.metalava'
 }
 
 android {
@@ -29,6 +30,12 @@ android {
             includeAndroidResources = true
         }
     }
+}
+
+metalava {
+    sourcePaths.setFrom("src/main")
+    filename.set("api/current.api")
+    reportLintsAsErrors.set(true)
 }
 
 dependencies {

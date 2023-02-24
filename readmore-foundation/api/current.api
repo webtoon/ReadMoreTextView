@@ -6,10 +6,10 @@ package com.webtoonscorp.android.readmore.foundation {
     method @androidx.compose.runtime.Composable public static void BasicReadMoreText(androidx.compose.ui.text.AnnotatedString text, boolean expanded, optional androidx.compose.ui.Modifier modifier, optional kotlin.jvm.functions.Function1<? super java.lang.Boolean,kotlin.Unit>? onExpandedChange, optional androidx.compose.foundation.layout.PaddingValues contentPadding, optional androidx.compose.ui.text.TextStyle style, optional kotlin.jvm.functions.Function1<? super androidx.compose.ui.text.TextLayoutResult,kotlin.Unit> onTextLayout, optional boolean softWrap, optional String readMoreText, optional int readMoreMaxLines, optional int readMoreOverflow, optional androidx.compose.ui.text.SpanStyle readMoreStyle, optional String readLessText, optional androidx.compose.ui.text.SpanStyle readLessStyle, optional int toggleArea);
   }
 
-  @kotlin.RequiresOptIn(message="This API is experimental and is likely to change or to be removed in the future.") @kotlin.annotation.MustBeDocumented @kotlin.annotation.Retention(kotlin.annotation.AnnotationRetention) public @interface ExperimentalReadMoreApi {
+  @kotlin.RequiresOptIn(message="This API is experimental and is likely to change or to be removed in the future.") @kotlin.annotation.MustBeDocumented @kotlin.annotation.Retention(kotlin.annotation.AnnotationRetention.BINARY) public @interface ExperimentalReadMoreApi {
   }
 
-  @kotlin.jvm.JvmInline public final class ReadMoreTextOverflow {
+  @kotlin.jvm.JvmInline public final value class ReadMoreTextOverflow {
     field public static final com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow.Companion Companion;
   }
 
@@ -20,7 +20,7 @@ package com.webtoonscorp.android.readmore.foundation {
     property public final int Ellipsis;
   }
 
-  @kotlin.jvm.JvmInline public final class ToggleArea {
+  @kotlin.jvm.JvmInline public final value class ToggleArea {
     field public static final com.webtoonscorp.android.readmore.foundation.ToggleArea.Companion Companion;
   }
 

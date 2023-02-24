@@ -48,7 +48,7 @@ jobs:
               spotlessCheck \
               assemble \
               assembleAndroidTest \
-              metalavaCheckCompatibility \
+              metalavaCheckCompatibilityRelease \
               lintDebug
       - name: Clean secrets
         if: always()

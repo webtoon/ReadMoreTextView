@@ -1,9 +1,9 @@
 [versions]
 
-gradlePlugin = "7.3.1"
-kotlin = "1.8.0"
+gradlePlugin = "7.4.1"
+kotlin = "1.8.10"
 compose = "1.4.0-beta01"
-composeCompiler = "1.4.1"
+composeCompiler = "1.4.2"
 composeMaterial3 = "1.1.0-alpha06"
 
 androidxtest = "1.4.0"
@@ -12,7 +12,7 @@ androidxtest = "1.4.0"
 
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 mavenPublish-pluginGradle = "com.vanniktech:gradle-maven-publish-plugin:0.17.0"
-metalava-pluginGradle = "me.tylerbwong.gradle:metalava-gradle:0.1.9"
+metalava-pluginGradle = "me.tylerbwong.gradle.metalava:plugin:0.3.3"
 
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }

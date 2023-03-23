@@ -2,7 +2,7 @@
 
 gradlePlugin = "7.4.1"
 kotlin = "1.8.10"
-compose = "1.4.0"
+composeBom = "2023.03.00"
 composeCompiler = "1.4.4"
 composeMaterial3 = "1.1.0-beta01"
 
@@ -25,16 +25,17 @@ androidx-core = "androidx.core:core-ktx:1.7.0"
 
 material-android = "com.google.android.material:material:1.5.0"
 
-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
-compose-foundation-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui-ui = { module = "androidx.compose.ui:ui" }
+compose-ui-util = { module = "androidx.compose.ui:ui-util" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-foundation-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"

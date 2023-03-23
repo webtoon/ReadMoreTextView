@@ -32,7 +32,6 @@
         android:textSize="15sp"
         android:textStyle="normal"
         app:readLessText="@string/read_less"
-        app:readMoreText="@string/read_more"
         app:readMoreMaxLines="2" />
 
 </LinearLayout>

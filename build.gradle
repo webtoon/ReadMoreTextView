@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+
 buildscript {
     ext.buildConfig = [
             'minSdk'    : 21,
@@ -25,7 +27,7 @@ plugins {
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.diffplug.spotless'
 
-tasks.withType(org.jetbrains.dokka.gradle.DokkaMultiModuleTask).configureEach {
+tasks.withType(DokkaMultiModuleTask).configureEach {
     outputDirectory = rootProject.file('docs/api')
     failOnWarning = true
 }
@@ -34,12 +36,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-    }
-
-    plugins.withId("com.vanniktech.maven.publish") {
-        mavenPublish {
-            sonatypeHost = "S01"
-        }
     }
 }
 

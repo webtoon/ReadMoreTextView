@@ -9,7 +9,8 @@ dokka = "1.7.20"
 
 compose = "1.5.0-alpha02"
 composeCompiler = "1.4.4"
-composeMaterial3 = "1.1.0-beta02"
+composeMaterial3 = "1.0.1"
+jetbrains-compose = "1.4.0"
 
 material = "1.5.0"
 
@@ -46,6 +47,8 @@ compose-foundation-foundation = { module = "androidx.compose.foundation:foundati
 compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+
+jetbrains-compose-pluginGradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jetbrains-compose" }
 
 material-android = { module = "com.google.android.material:material", version.ref = "material" }
 

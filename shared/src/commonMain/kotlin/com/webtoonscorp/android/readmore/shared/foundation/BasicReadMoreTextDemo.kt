@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webtoonscorp.android.readmore.sample.compose.material3
+package com.webtoonscorp.android.readmore.shared.foundation
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,21 +25,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -49,22 +45,18 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
 import com.webtoonscorp.android.readmore.foundation.ToggleArea
-import com.webtoonscorp.android.readmore.material3.ReadMoreText
-import com.webtoonscorp.android.readmore.sample.R
+import com.webtoonscorp.android.readmore.shared.String
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReadMoreTextDemo() {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+fun BasicReadMoreTextDemo() {
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
-                title = { Text(text = R.string.compose_material3_title) },
-                scrollBehavior = scrollBehavior
-            )
+            TopAppBar(title = {
+                Text(text = String.compose_foundation_title)
+            })
         },
         content = {
             val scrollState = rememberScrollState()
@@ -98,26 +90,28 @@ private fun Item_DownToEarth() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_down_to_earth,
+            text = String.title_down_to_earth,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_down_to_earth,
+        BasicReadMoreText(
+            text = String.description_down_to_earth,
             expanded = expanded,
             modifier = Modifier.fillMaxWidth(),
             onExpandedChange = onExpandedChange,
             contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 2,
-            readLessText = R.string.read_less,
+            readLessText = String.read_less,
         )
     }
 }
@@ -127,32 +121,36 @@ private fun Item_Hyperfocus() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_hyperfocus,
+            text = String.title_hyperfocus,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_hyperfocus,
+        BasicReadMoreText(
+            text = String.description_hyperfocus,
             expanded = expanded,
             onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 3,
-            readMoreText = R.string.read_more,
-            readMoreColor = MaterialTheme.colorScheme.primary,
-            readMoreFontSize = 12.sp,
-            readMoreFontWeight = FontWeight.Bold,
-            readMoreTextDecoration = TextDecoration.Underline,
-            readLessText = R.string.read_less,
+            readMoreText = String.read_more,
+            readMoreStyle = SpanStyle(
+                color = MaterialTheme.colors.primary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+            readLessText = String.read_less,
         )
     }
 }
@@ -162,32 +160,36 @@ private fun ItemReunion() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_reunion,
+            text = String.title_reunion,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_reunion,
+        BasicReadMoreText(
+            text = String.description_reunion,
             expanded = expanded,
             onExpandedChange = onExpandedChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 3,
-            readMoreText = R.string.read_more,
-            readMoreColor = MaterialTheme.colorScheme.primary,
-            readMoreFontSize = 12.sp,
-            readMoreFontWeight = FontWeight.Bold,
-            readMoreTextDecoration = TextDecoration.Underline,
-            readLessText = R.string.read_less,
+            readMoreText = String.read_more,
+            readMoreStyle = SpanStyle(
+                color = MaterialTheme.colors.primary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+            readLessText = String.read_less,
         )
     }
 }
@@ -199,36 +201,38 @@ private fun Item_TheWorldAfterTheFall() {
         modifier = Modifier.clickable { onExpandedChange(!expanded) }
     ) {
         Text(
-            text = R.string.title_the_world_after_the_fall,
+            text = String.title_the_world_after_the_fall,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_the_world_after_the_fall,
+        BasicReadMoreText(
+            text = String.description_the_world_after_the_fall,
             expanded = expanded,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            fontFamily = FontFamily.SansSerif,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                fontFamily = FontFamily.SansSerif,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 3,
-            readMoreText = R.string.read_more,
+            readMoreText = String.read_more,
             readMoreStyle = SpanStyle(
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colors.onSurface,
                 fontSize = 16.sp,
                 fontStyle = FontStyle.Italic,
                 fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Black
+                fontWeight = FontWeight.Black,
+                textDecoration = TextDecoration.Underline
             ),
-            readMoreTextDecoration = TextDecoration.Underline,
-            readLessText = R.string.read_less,
+            readLessText = String.read_less,
         )
     }
 }
@@ -238,30 +242,34 @@ private fun Item_LoreOlympus() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_lore_olympus,
+            text = String.title_lore_olympus,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_lore_olympus,
+        BasicReadMoreText(
+            text = String.description_lore_olympus,
             expanded = expanded,
             modifier = Modifier.fillMaxWidth(),
             onExpandedChange = onExpandedChange,
             contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 3,
-            readMoreFontSize = 14.sp,
-            readMoreText = R.string.read_more,
-            readMoreColor = MaterialTheme.colorScheme.secondary,
+            readMoreText = String.read_more,
+            readMoreStyle = SpanStyle(
+                fontSize = 14.sp,
+                color = MaterialTheme.colors.secondary,
+            ),
             readMoreOverflow = ReadMoreTextOverflow.Clip,
-            readLessText = R.string.read_less,
+            readLessText = String.read_less,
         )
     }
 }
@@ -271,8 +279,8 @@ private fun Item_CustomText() {
     val annotatedDescription = buildAnnotatedString {
         withStyle(
             SpanStyle(
-                color = MaterialTheme.colorScheme.surface,
-                background = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colors.surface,
+                background = MaterialTheme.colors.onSurface
             )
         ) {
             append("abcdefghijklmnopqrstuvwxyz,")
@@ -291,15 +299,15 @@ private fun Item_CustomText() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_custom_text_compose,
+            text = String.title_custom_text_compose,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
+        BasicReadMoreText(
             text = annotatedDescription,
             expanded = expanded,
             onExpandedChange = onExpandedChange,
@@ -307,18 +315,22 @@ private fun Item_CustomText() {
                 .fillMaxWidth()
                 .animateContentSize(animationSpec = tween(durationMillis = 100)),
             contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 2,
-            readMoreText = R.string.read_more,
-            readMoreColor = MaterialTheme.colorScheme.error,
-            readMoreFontSize = 14.sp,
-            readMoreFontWeight = FontWeight.Bold,
-            readMoreFontStyle = FontStyle.Italic,
-            readMoreTextDecoration = TextDecoration.Underline,
-            readLessText = R.string.read_less,
+            readMoreText = String.read_more,
+            readMoreStyle = SpanStyle(
+                color = MaterialTheme.colors.error,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle.Italic,
+                textDecoration = TextDecoration.Underline
+            ),
+            readLessText = String.read_less,
             toggleArea = ToggleArea.More,
         )
     }
@@ -329,37 +341,33 @@ private fun Item_Emoji() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
-            text = R.string.title_emoji,
+            text = String.title_emoji,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        ReadMoreText(
-            text = R.string.description_emoji,
+        BasicReadMoreText(
+            text = String.description_emoji,
             expanded = expanded,
             modifier = Modifier.fillMaxWidth(),
             onExpandedChange = onExpandedChange,
             contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 15.sp,
-            fontStyle = FontStyle.Normal,
-            lineHeight = 22.sp,
+            style = TextStyle.Default.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+            ),
             readMoreMaxLines = 2,
-            readMoreText = R.string.read_more,
-            readMoreFontWeight = FontWeight.Bold,
-            readMoreTextDecoration = TextDecoration.Underline,
-            readLessText = R.string.read_less,
+            readMoreText = String.read_more,
+            readMoreStyle = SpanStyle(
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+            readLessText = String.read_less,
         )
-    }
-}
-
-@Preview
-@Composable
-private fun Preview() {
-    MaterialTheme {
-        ReadMoreTextDemo()
     }
 }

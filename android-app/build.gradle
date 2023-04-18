@@ -47,9 +47,7 @@ android {
 
 dependencies {
     implementation project(':readmore-view')
-    implementation project(':readmore-foundation')
-    implementation project(':readmore-material')
-    implementation project(':readmore-material3')
+    implementation(project(":shared"))
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.core

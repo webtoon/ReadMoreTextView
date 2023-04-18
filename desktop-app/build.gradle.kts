@@ -11,10 +11,7 @@ kotlin {
         val jvmMain by getting  {
             dependencies {
                 implementation(compose.desktop.currentOs)
-                implementation(compose.material3)
-                implementation(project(":readmore-foundation"))
-                implementation(project(":readmore-material"))
-                implementation(project(":readmore-material3"))
+                implementation(project(":shared"))
             }
         }
     }

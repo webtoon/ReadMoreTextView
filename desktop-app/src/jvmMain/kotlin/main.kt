@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.webtoonscorp.android.readmore.sample.R
-import com.webtoonscorp.android.readmore.sample.compose.foundation.BasicReadMoreTextDemo
+import com.webtoonscorp.android.readmore.shared.String
+import com.webtoonscorp.android.readmore.shared.foundation.BasicReadMoreTextDemo
 
 fun main() = application {
     var isOpen by remember { mutableStateOf(false) }
@@ -28,12 +28,12 @@ fun main() = application {
     var isOpen3 by remember { mutableStateOf(false) }
     Window(
         onCloseRequest = ::exitApplication,
-        title = R.string.app_name,
+        title = String.app_name,
     ) {
         Scaffold(
             topBar = {
                 TopAppBar(title = {
-                    Text(text = R.string.app_name)
+                    Text(text = String.app_name)
                 })
             }
         ) {
@@ -45,14 +45,14 @@ fun main() = application {
                         .padding(start = 18.dp, top = 16.dp, end = 18.dp, bottom = 18.dp)
                 ) {
                     Text(
-                        text = R.string.compose_foundation_title,
+                        text = String.compose_foundation_title,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
-                        text = R.string.compose_foundation_description,
+                        text = String.compose_foundation_description,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 15.sp,
                     )
@@ -65,14 +65,14 @@ fun main() = application {
                         .padding(start = 18.dp, top = 16.dp, end = 18.dp, bottom = 18.dp)
                 ) {
                     Text(
-                        text = R.string.compose_material_title,
+                        text = String.compose_material_title,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
-                        text = R.string.compose_material_description,
+                        text = String.compose_material_description,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 15.sp,
                     )
@@ -85,14 +85,14 @@ fun main() = application {
                         .padding(start = 18.dp, top = 16.dp, end = 18.dp, bottom = 18.dp)
                 ) {
                     Text(
-                        text = R.string.compose_material3_title,
+                        text = String.compose_material3_title,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
-                        text = R.string.compose_material3_description,
+                        text = String.compose_material3_description,
                         color = MaterialTheme.colors.onSurface,
                         fontSize = 15.sp,
                     )
@@ -104,7 +104,7 @@ fun main() = application {
     if (isOpen) {
         Window(
             onCloseRequest = { isOpen = false },
-            title = R.string.compose_foundation_title,
+            title = String.compose_foundation_title,
         ) {
             BasicReadMoreTextDemo()
         }
@@ -112,17 +112,17 @@ fun main() = application {
     if (isOpen2) {
         Window(
             onCloseRequest = { isOpen2 = false },
-            title = R.string.compose_material_title,
+            title = String.compose_material_title,
         ) {
-            com.webtoonscorp.android.readmore.sample.compose.material.ReadMoreTextDemo()
+            com.webtoonscorp.android.readmore.shared.material.ReadMoreTextDemo()
         }
     }
     if (isOpen3) {
         Window(
             onCloseRequest = { isOpen3 = false },
-            title = R.string.compose_material3_title,
+            title = String.compose_material3_title,
         ) {
-            com.webtoonscorp.android.readmore.sample.compose.material3.ReadMoreTextDemo()
+            com.webtoonscorp.android.readmore.shared.material3.ReadMoreTextDemo()
         }
     }
 }

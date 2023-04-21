@@ -22,7 +22,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import com.webtoonscorp.android.readmore.shared.material3.ReadMoreTextDemo
+import com.webtoonscorp.android.readmore.shared.android.material3.ReadMoreTextDemo
 
 class ComposeMaterial3SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

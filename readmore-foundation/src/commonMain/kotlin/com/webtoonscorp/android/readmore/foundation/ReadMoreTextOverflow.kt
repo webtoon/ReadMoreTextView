@@ -17,8 +17,7 @@ package com.webtoonscorp.android.readmore.foundation
 
 import androidx.compose.runtime.Stable
 
-@JvmInline
-public value class ReadMoreTextOverflow private constructor(internal val value: Int) {
+public class ReadMoreTextOverflow private constructor(internal val value: Int) {
 
     override fun toString(): String {
         return when (this) {

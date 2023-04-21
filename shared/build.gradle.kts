@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
 }
@@ -7,27 +8,43 @@ plugins {
 kotlin {
     android()
     jvm("desktop")
+    ios()
+    iosSimulatorArm64()
+
+    cocoapods {
+        version = "1.0.0"
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.compose.foundation.foundation)
-                implementation(libs.compose.material)
-                implementation(libs.compose.material3)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.material3)
                 implementation(project(":readmore-foundation"))
                 implementation(project(":readmore-material"))
                 implementation(project(":readmore-material3"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-            }
-        }
+        val androidMain by getting
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation(compose.material3)
             }
+        }
+        val iosMain by getting {
+            dependsOn(commonMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }

@@ -10,11 +10,14 @@ plugins {
 kotlin {
     android()
     jvm("desktop")
+    ios()
+    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.compose.material3)
+                implementation(libs.kotlin.stdlib)
+                implementation(compose.material3)
                 api(project(":readmore-foundation"))
             }
         }
@@ -23,6 +26,12 @@ kotlin {
                 implementation(compose.desktop.common)
                 implementation(compose.material3)
             }
+        }
+        val iosMain by getting {
+            dependsOn(commonMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }

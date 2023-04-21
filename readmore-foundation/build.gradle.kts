@@ -10,18 +10,27 @@ plugins {
 kotlin {
     android()
     jvm("desktop")
+    ios()
+    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.compose.foundation.foundation)
-                implementation(libs.compose.ui.util)
+                implementation(libs.kotlin.stdlib)
+                implementation(compose.foundation)
+                implementation(compose.ui)
             }
         }
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
             }
+        }
+        val iosMain by getting {
+            dependsOn(commonMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }

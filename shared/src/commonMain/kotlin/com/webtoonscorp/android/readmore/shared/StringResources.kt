@@ -1,6 +1,6 @@
 package com.webtoonscorp.android.readmore.shared
 
-object String {
+object StringResources {
     val app_name = "ReadMoreTextView"
     val compose_foundation_title = "Compose (Foundation)"
     val compose_foundation_description = "BasicReadMoreText"

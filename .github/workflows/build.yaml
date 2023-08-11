@@ -18,29 +18,24 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - name: Setup java
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: temurin
+          java-version: 17
 
       - name: Decrypt secrets
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
-      - name: Generate cache key
-        run: ./checksum.sh checksum.txt
-
-      - uses: actions/cache@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          path: |
-            ~/.gradle/caches/modules-*
-            ~/.gradle/caches/jars-*
-            ~/.gradle/caches/build-cache-*
-          key: gradle-${{ hashFiles('checksum.txt') }}
+          gradle-home-cache-cleanup: true
 
       - name: Build, lint and spotless
         run: |
@@ -50,6 +45,7 @@ jobs:
               assembleAndroidTest \
               metalavaCheckCompatibilityRelease \
               lintDebug
+
       - name: Clean secrets
         if: always()
         run: release/signing-cleanup.sh
@@ -67,29 +63,24 @@ jobs:
         api-level: [ 24, 26, 29 ]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - name: Setup java
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: temurin
+          java-version: 17
 
       - name: Decrypt secrets
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
-      - name: Generate cache key
-        run: ./checksum.sh checksum.txt
-
-      - uses: actions/cache@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          path: |
-            ~/.gradle/caches/modules-*
-            ~/.gradle/caches/jars-*
-            ~/.gradle/caches/build-cache-*
-          key: gradle-${{ hashFiles('checksum.txt') }}
+          gradle-home-cache-cleanup: true
 
       - name: Build tests
         run: ./gradlew assembleDebugAndroidTest --scan
@@ -102,6 +93,7 @@ jobs:
           script: |
             adb logcat > logcat.txt &
             ./gradlew --scan connectedCheck
+
       - name: Clean secrets
         if: always()
         run: release/signing-cleanup.sh
@@ -130,29 +122,24 @@ jobs:
       TERM: dumb
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: set up JDK
-        uses: actions/setup-java@v1
+      - name: Setup java
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: temurin
+          java-version: 17
 
       - name: Decrypt secrets
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
-      - name: Generate cache key
-        run: ./checksum.sh checksum.txt
-
-      - uses: actions/cache@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          path: |
-            ~/.gradle/caches/modules-*
-            ~/.gradle/caches/jars-*
-            ~/.gradle/caches/build-cache-*
-          key: gradle-${{ hashFiles('checksum.txt') }}
+          gradle-home-cache-cleanup: true
 
       - name: Deploy to Sonatype
         run: ./gradlew publish --no-parallel --stacktrace

@@ -4,7 +4,7 @@ buildscript {
     ext.buildConfig = [
             'minSdk'    : 21,
             'targetSdk' : 33,
-            'compileSdk': 33,
+            'compileSdk': 34,
     ]
     repositories {
         google()
@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.diffplug.spotless' version '5.12.4'
+    id "com.diffplug.spotless" version "6.5.2"
 }
 
 apply plugin: 'org.jetbrains.dokka'

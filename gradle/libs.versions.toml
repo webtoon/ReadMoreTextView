@@ -1,15 +1,15 @@
 [versions]
 
-gradlePlugin = "7.4.1"
+gradlePlugin = "8.0.2"
 mavenPublish = "0.25.1"
 metalava = "0.3.3"
 
-kotlin = "1.8.10"
-dokka = "1.7.20"
+kotlin = "1.8.22"
+dokka = "1.8.10"
 
-compose = "1.5.0-alpha02"
-composeCompiler = "1.4.4"
-composeMaterial3 = "1.1.0-beta02"
+compose = "1.5.0"
+composeCompiler = "1.4.8"
+composeMaterial3 = "1.1.1"
 
 material = "1.5.0"
 

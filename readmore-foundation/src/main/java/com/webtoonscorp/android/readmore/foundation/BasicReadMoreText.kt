@@ -40,6 +40,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import kotlin.math.max
 
 /**
  * Basic element that displays text with read more.
@@ -437,7 +438,7 @@ private class ReadMoreState(
         ) {
             val countUntilMaxLine = textLayout.getLineEnd(readMoreMaxLines - 1, visibleEnd = true)
             val readMoreWidth = overflowTextLayout.size.width + readMoreTextLayout.size.width
-            val maximumWidth = textLayout.size.width - readMoreWidth
+            val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
             var replacedEndIndex = countUntilMaxLine + 1
             var currentTextBounds: Rect
             do {

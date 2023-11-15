@@ -437,9 +437,18 @@ private class ReadMoreState(
             textLayout.isLineEllipsized(lastLineIndex)
         ) {
             val countUntilMaxLine = textLayout.getLineEnd(readMoreMaxLines - 1, visibleEnd = true)
+            val countUntilMaxLineExceptNewline: Int =
+                if (originalText.getOrNull(countUntilMaxLine) == '\n') {
+                    // Workaround:
+                    // If the last character of the sentence is a newline char('\n'),
+                    // calculates excluding the last newline char('\n').
+                    countUntilMaxLine - 1
+                } else {
+                    countUntilMaxLine
+                }
             val readMoreWidth = overflowTextLayout.size.width + readMoreTextLayout.size.width
             val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
-            var replacedEndIndex = countUntilMaxLine + 1
+            var replacedEndIndex = countUntilMaxLineExceptNewline + 1
             var currentTextBounds: Rect
             do {
                 replacedEndIndex -= 1

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - version-1.5
     paths-ignore:
       - '**.md'
       - 'docs/**'

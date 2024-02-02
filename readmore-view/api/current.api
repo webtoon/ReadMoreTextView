@@ -5,6 +5,7 @@ package com.webtoonscorp.android.readmore {
     ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs, optional int defStyleAttr);
     ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs);
     ctor public ReadMoreTextView(android.content.Context context);
+    method public boolean isExpandable();
     method public boolean isExpanded();
     method public void setExpanded(boolean expanded);
     method public void setOnStateChangeListener(com.webtoonscorp.android.readmore.ReadMoreTextView.OnStateChangeListener listener);

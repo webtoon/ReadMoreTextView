@@ -46,6 +46,19 @@ class ViewSampleActivity : AppCompatActivity() {
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
+        binding.itemHyperfocus.description.setOnClickListener {
+            if (binding.itemHyperfocus.description.isExpandable()) {
+                binding.itemHyperfocus.description.toggle()
+
+                val title = binding.itemHyperfocus.title.text
+                val expanded = binding.itemHyperfocus.description.isExpanded()
+                binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
+            } else {
+                val title = binding.itemHyperfocus.title.text
+                binding.root.showSnackBar("'$title' is NOT expandable")
+            }
+        }
+
         binding.itemReunion.description.setOnStateChangeListener { expanded ->
             val title = binding.itemReunion.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")

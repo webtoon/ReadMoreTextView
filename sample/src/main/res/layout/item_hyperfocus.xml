@@ -37,6 +37,7 @@
         app:readMoreTextColor="?colorPrimary"
         app:readMoreTextSize="12sp"
         app:readMoreTextStyle="bold"
-        app:readMoreTextUnderline="true" />
+        app:readMoreTextUnderline="true"
+        app:readMoreToggleArea="none" />
 
 </LinearLayout>

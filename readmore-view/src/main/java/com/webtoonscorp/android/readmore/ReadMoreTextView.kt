@@ -166,6 +166,10 @@ public class ReadMoreTextView @JvmOverloads constructor(
         setExpanded(!expanded)
     }
 
+    public fun isExpandable(): Boolean {
+        return expandedText != collapseText
+    }
+
     public fun isExpanded(): Boolean {
         return this.expanded
     }

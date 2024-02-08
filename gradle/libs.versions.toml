@@ -7,9 +7,9 @@ metalava = "0.3.3"
 kotlin = "1.8.22"
 dokka = "1.8.10"
 
-compose = "1.6.0"
+compose = "1.6.1"
 composeCompiler = "1.4.8"
-composeMaterial3 = "1.2.0-rc01"
+composeMaterial3 = "1.2.0"
 
 material = "1.5.0"
 

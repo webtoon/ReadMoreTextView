@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    id("readmore.android.library")
+    id("readmore.android.compose")
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.jetbrains.dokka)
     alias(libs.plugins.metalava)
@@ -8,23 +8,6 @@ plugins {
 
 android {
     namespace "com.webtoonscorp.android.readmore.material"
-    compileSdk buildConfig.compileSdk
-    defaultConfig {
-        minSdk buildConfig.minSdk
-        targetSdk buildConfig.targetSdk
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
-        compose true
-        buildConfig false
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
-    }
     kotlinOptions {
         freeCompilerArgs += '-Xexplicit-api=warning'
     }

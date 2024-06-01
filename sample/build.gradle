@@ -1,15 +1,12 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("readmore.android.application")
+    id("readmore.android.compose")
 }
 
 android {
     namespace "com.webtoonscorp.android.readmore.sample"
-    compileSdk buildConfig.compileSdk
     defaultConfig {
         applicationId "com.webtoonscorp.android.readmore.sample"
-        minSdk buildConfig.minSdk
-        targetSdk buildConfig.targetSdk
         versionCode 1
         versionName "1.0.0"
     }
@@ -34,14 +31,6 @@ android {
     }
     buildFeatures {
         viewBinding true
-        compose true
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
     }
 }
 

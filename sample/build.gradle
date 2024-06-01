@@ -35,10 +35,10 @@ android {
 }
 
 dependencies {
-    implementation project(':readmore-view')
-    implementation project(':readmore-foundation')
-    implementation project(':readmore-material')
-    implementation project(':readmore-material3')
+    implementation projects.readmoreView
+    implementation projects.readmoreFoundation
+    implementation projects.readmoreMaterial
+    implementation projects.readmoreMaterial3
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.core

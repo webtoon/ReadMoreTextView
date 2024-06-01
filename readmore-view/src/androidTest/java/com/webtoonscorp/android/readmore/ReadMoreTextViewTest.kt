@@ -110,7 +110,7 @@ internal class ReadMoreTextViewTest {
     private fun inflate(
         @LayoutRes resource: Int,
         root: ViewGroup? = null,
-        attachToRoot: Boolean = false
+        attachToRoot: Boolean = false,
     ) {
         LayoutInflater.from(activity).inflate(resource, root, attachToRoot)
     }

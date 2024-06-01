@@ -178,8 +178,8 @@ public fun ReadMoreText(
             fontFamily = fontFamily,
             textDecoration = textDecoration,
             fontStyle = fontStyle,
-            letterSpacing = letterSpacing
-        )
+            letterSpacing = letterSpacing,
+        ),
     )
     val mergedReadMoreStyle = mergedStyle.toSpanStyle()
         .merge(readMoreStyle)
@@ -190,8 +190,8 @@ public fun ReadMoreText(
                 fontWeight = readMoreFontWeight,
                 fontFamily = readMoreFontFamily,
                 textDecoration = readMoreTextDecoration,
-                fontStyle = readMoreFontStyle
-            )
+                fontStyle = readMoreFontStyle,
+            ),
         )
     val mergedReadLessStyle = mergedStyle.toSpanStyle()
         .merge(readLessStyle)
@@ -202,8 +202,8 @@ public fun ReadMoreText(
                 fontWeight = readLessFontWeight,
                 fontFamily = readLessFontFamily,
                 textDecoration = readLessTextDecoration,
-                fontStyle = readLessFontStyle
-            )
+                fontStyle = readLessFontStyle,
+            ),
         )
     BasicReadMoreText(
         text = text,
@@ -363,8 +363,8 @@ public fun ReadMoreText(
             fontFamily = fontFamily,
             textDecoration = textDecoration,
             fontStyle = fontStyle,
-            letterSpacing = letterSpacing
-        )
+            letterSpacing = letterSpacing,
+        ),
     )
     val mergedReadMoreStyle = mergedStyle.toSpanStyle()
         .merge(readMoreStyle)
@@ -375,8 +375,8 @@ public fun ReadMoreText(
                 fontWeight = readMoreFontWeight,
                 fontFamily = readMoreFontFamily,
                 textDecoration = readMoreTextDecoration,
-                fontStyle = readMoreFontStyle
-            )
+                fontStyle = readMoreFontStyle,
+            ),
         )
     val mergedReadLessStyle = mergedStyle.toSpanStyle()
         .merge(readLessStyle)
@@ -387,8 +387,8 @@ public fun ReadMoreText(
                 fontWeight = readLessFontWeight,
                 fontFamily = readLessFontFamily,
                 textDecoration = readLessTextDecoration,
-                fontStyle = readLessFontStyle
-            )
+                fontStyle = readLessFontStyle,
+            ),
         )
     BasicReadMoreText(
         text = text,

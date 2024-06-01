@@ -30,7 +30,7 @@ internal class StaticLayoutCompat {
         private val start: Int,
         private val end: Int,
         private val paint: TextPaint,
-        private val width: Int
+        private val width: Int,
     ) {
         constructor(text: CharSequence, paint: TextPaint, width: Int) :
             this(text, 0, text.length, paint, width)
@@ -50,7 +50,7 @@ internal class StaticLayoutCompat {
 
         fun setLineSpacing(
             spacingAdd: Float,
-            @FloatRange(from = 0.0) spacingMult: Float
+            @FloatRange(from = 0.0) spacingMult: Float,
         ): Builder {
             this.spacingAdd = spacingAdd
             this.spacingMult = spacingMult
@@ -95,7 +95,7 @@ internal class StaticLayoutCompat {
                     alignment,
                     spacingMult, spacingAdd,
                     includePad,
-                    ellipsize, ellipsizedWidth
+                    ellipsize, ellipsizedWidth,
                 )
                 return if (layout.lineCount <= maxLines) {
                     layout
@@ -108,7 +108,7 @@ internal class StaticLayoutCompat {
                             alignment,
                             spacingMult, spacingAdd,
                             includePad,
-                            ellipsize, ellipsizedWidth
+                            ellipsize, ellipsizedWidth,
                         )
                     } else {
                         val maxLineStartOffset = layout.getLineStart(maxLines - 1)
@@ -119,8 +119,8 @@ internal class StaticLayoutCompat {
                                     text.subSequence(maxLineStartOffset, text.length),
                                     paint,
                                     width.toFloat(),
-                                    ellipsize
-                                )
+                                    ellipsize,
+                                ),
                             )
                         }
                         StaticLayout(
@@ -128,7 +128,7 @@ internal class StaticLayoutCompat {
                             alignment,
                             spacingMult, spacingAdd,
                             includePad,
-                            ellipsize, ellipsizedWidth
+                            ellipsize, ellipsizedWidth,
                         )
                     }
                 }

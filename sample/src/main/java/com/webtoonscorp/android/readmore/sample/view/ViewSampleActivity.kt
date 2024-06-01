@@ -82,16 +82,16 @@ class ViewSampleActivity : AppCompatActivity() {
 
         val description = buildSpannedString {
             val color = getColorFromAttribute(
-                com.google.android.material.R.attr.colorSurface
+                com.google.android.material.R.attr.colorSurface,
             )
             val backgroundColor = getColorFromAttribute(
-                com.google.android.material.R.attr.colorOnSurface
+                com.google.android.material.R.attr.colorOnSurface,
             )
             inSpans(
                 spans = arrayOf(
                     ForegroundColorSpan(color),
-                    BackgroundColorSpan(backgroundColor)
-                )
+                    BackgroundColorSpan(backgroundColor),
+                ),
             ) {
                 append("abcdefghijklmnopqrstuvwxyz,")
             }

@@ -66,7 +66,7 @@ fun ReadMoreTextDemo() {
                 modifier = Modifier
                     .padding(it)
                     .fillMaxSize()
-                    .verticalScroll(scrollState)
+                    .verticalScroll(scrollState),
             ) {
                 Item_DownToEarth()
                 Divider()
@@ -83,7 +83,7 @@ fun ReadMoreTextDemo() {
                 Item_Emoji()
                 Divider()
             }
-        }
+        },
     )
 }
 
@@ -98,7 +98,7 @@ private fun Item_DownToEarth() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_down_to_earth),
@@ -127,7 +127,7 @@ private fun Item_Hyperfocus() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_hyperfocus),
@@ -162,7 +162,7 @@ private fun ItemReunion() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_reunion),
@@ -190,7 +190,7 @@ private fun ItemReunion() {
 private fun Item_TheWorldAfterTheFall() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column(
-        modifier = Modifier.clickable { onExpandedChange(!expanded) }
+        modifier = Modifier.clickable { onExpandedChange(!expanded) },
     ) {
         Text(
             text = stringResource(id = R.string.title_the_world_after_the_fall),
@@ -199,7 +199,7 @@ private fun Item_TheWorldAfterTheFall() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_the_world_after_the_fall),
@@ -219,7 +219,7 @@ private fun Item_TheWorldAfterTheFall() {
                 fontSize = 16.sp,
                 fontStyle = FontStyle.Italic,
                 fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Black
+                fontWeight = FontWeight.Black,
             ),
             readMoreTextDecoration = TextDecoration.Underline,
             readLessText = stringResource(id = R.string.read_less),
@@ -238,7 +238,7 @@ private fun Item_LoreOlympus() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_lore_olympus),
@@ -266,8 +266,8 @@ private fun Item_CustomText() {
         withStyle(
             SpanStyle(
                 color = MaterialTheme.colors.surface,
-                background = MaterialTheme.colors.onSurface
-            )
+                background = MaterialTheme.colors.onSurface,
+            ),
         ) {
             append("abcdefghijklmnopqrstuvwxyz,")
         }
@@ -291,7 +291,7 @@ private fun Item_CustomText() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = annotatedDescription,
@@ -329,7 +329,7 @@ private fun Item_Emoji() {
                 .padding(start = 18.dp, end = 18.dp, top = 16.dp),
             color = MaterialTheme.colors.onSurface,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         ReadMoreText(
             text = stringResource(id = R.string.description_emoji),

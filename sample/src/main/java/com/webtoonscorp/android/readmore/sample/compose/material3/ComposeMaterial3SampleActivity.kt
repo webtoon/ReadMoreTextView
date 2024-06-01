@@ -32,7 +32,7 @@ class ComposeMaterial3SampleActivity : ComponentActivity() {
                     darkColorScheme()
                 } else {
                     lightColorScheme()
-                }
+                },
             ) {
                 ReadMoreTextDemo()
             }

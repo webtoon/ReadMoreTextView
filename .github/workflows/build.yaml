@@ -26,7 +26,7 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'zulu'
           java-version: 17
 
       - name: Decrypt secrets
@@ -37,14 +37,17 @@ jobs:
         with:
           gradle-home-cache-cleanup: true
 
-      - name: Build, lint and spotless
-        run: |
-          ./gradlew --scan --stacktrace \
-              spotlessCheck \
-              assemble \
-              assembleAndroidTest \
-              metalavaCheckCompatibilityRelease \
-              lintDebug
+      - name: Check spotless
+        run: ./gradlew spotlessCheck --stacktrace
+
+      - name: Check metalava
+        run: ./gradlew metalavaCheckCompatibilityRelease --stacktrace
+
+      - name: Check lint
+        run: ./gradlew lintDebug --stacktrace
+
+      - name: Build all build type and flavor permutations
+        run: ./gradlew assemble --stacktrace
 
       - name: Clean secrets
         if: always()
@@ -61,6 +64,24 @@ jobs:
         api-level: [ 24, 26, 29 ]
 
     steps:
+      - name: Delete unnecessary tools 🔧
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          android: false # Don't remove Android tools
+          tool-cache: true # Remove image tool cache - rm -rf "$AGENT_TOOLSDIRECTORY"
+          dotnet: true # rm -rf /usr/share/dotnet
+          haskell: true # rm -rf /opt/ghc...
+          swap-storage: true # rm -f /mnt/swapfile (4GiB)
+          docker-images: false # Takes 16s, enable if needed in the future
+          large-packages: false # includes google-cloud-sdk and it's slow
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
       - uses: actions/checkout@v4
 
       - name: Copy CI gradle.properties
@@ -69,7 +90,7 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'zulu'
           java-version: 17
 
       - name: Decrypt secrets
@@ -87,10 +108,11 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
-          profile: Nexus 5X
-          script: |
-            adb logcat > logcat.txt &
-            ./gradlew --scan connectedCheck
+          arch: x86_64
+          disable-animations: true
+          disk-size: 6000M
+          heap-size: 600M
+          script: ./gradlew connectedDebugAndroidTest --daemon
 
       - name: Clean secrets
         if: always()
@@ -108,7 +130,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.api-level }}
-          path: "**/build/outputs/*/connected/*.xml"
+          path: |
+            **/build/reports/*
+            **/build/outputs/*/connected/*
 
   deploy:
     if: github.event_name == 'push' # only deploy for pushed commits (not PRs)
@@ -128,7 +152,7 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'zulu'
           java-version: 17
 
       - name: Decrypt secrets

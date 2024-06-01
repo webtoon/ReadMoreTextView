@@ -17,6 +17,8 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+rootProject.name = "ReadMoreTextView"
+
 include ':readmore-view'
 include ':readmore-foundation'
 include ':readmore-material'

@@ -1,6 +1,6 @@
 [versions]
 
-gradlePlugin = "8.3.2"
+agp = "8.4.1"
 mavenPublish = "0.25.1"
 metalava = "0.3.3"
 
@@ -26,15 +26,8 @@ truth = "1.1.2"
 
 [libraries]
 
-android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
-mavenPublish-pluginGradle = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPublish" }
-metalava-pluginGradle = { module = "me.tylerbwong.gradle.metalava:plugin", version.ref = "metalava" }
-
-kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-
-dokka-pluginGradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
 compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
@@ -62,3 +55,11 @@ androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core",
 
 junit = { module = "junit:junit", version.ref = "junit" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+metalava = { id = "me.tylerbwong.gradle.metalava", version.ref = "metalava" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

@@ -44,7 +44,7 @@ import androidx.appcompat.R as AppCompatR
 public class ReadMoreTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = R.attr.readMoreTextViewStyle
+    defStyleAttr: Int = R.attr.readMoreTextViewStyle,
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     private var readMoreMaxLines: Int = 2
@@ -79,15 +79,18 @@ public class ReadMoreTextView @JvmOverloads constructor(
 
     init {
         context.obtainStyledAttributes(
-            attrs, R.styleable.ReadMoreTextView, defStyleAttr, 0
+            attrs,
+            R.styleable.ReadMoreTextView,
+            defStyleAttr,
+            0,
         ).use { ta ->
             readMoreMaxLines = ta.getInt(
                 R.styleable.ReadMoreTextView_readMoreMaxLines,
-                readMoreMaxLines
+                readMoreMaxLines,
             )
             val readMoreOverflowValue = ta.getInt(
                 R.styleable.ReadMoreTextView_readMoreOverflow,
-                readMoreOverflow.value
+                readMoreOverflow.value,
             )
             readMoreOverflow = Overflow.values().first { it.value == readMoreOverflowValue }
             readMoreText = ta.getString(R.styleable.ReadMoreTextView_readMoreText)
@@ -103,7 +106,8 @@ public class ReadMoreTextView @JvmOverloads constructor(
             readLessText = ta.getString(R.styleable.ReadMoreTextView_readLessText)
 
             val readLessAttributes = readAttributesFromReadLessTextAppearance(
-                ta, defaultAttributes = readMoreAttributes
+                ta,
+                defaultAttributes = readMoreAttributes,
             )
             readLessTextSize = readLessAttributes.textSize ?: DEFAULT_TEXT_SIZE
             readLessTextColor = readLessAttributes.textColor
@@ -113,7 +117,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
 
             val readMoreToggleAreaValue = ta.getInt(
                 R.styleable.ReadMoreTextView_readMoreToggleArea,
-                toggleArea.value
+                toggleArea.value,
             )
             toggleArea = ToggleArea.values().first { it.value == readMoreToggleAreaValue }
         }
@@ -142,7 +146,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
             "The android:singleLine attribute and android:lines attribute" +
                 " and setLines(int lines) function are not supported." +
                 " If you want to change maximum lines in the collapsed state," +
-                " please use the app:readMoreMaxLines attribute."
+                " please use the app:readMoreMaxLines attribute.",
         )
     }
 
@@ -150,7 +154,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         throw IllegalStateException(
             "The android:maxLines attribute and setMaxLines(int maxLines) function are not" +
                 " supported. If you want to change maximum lines in the collapsed state," +
-                " please use the app:readMoreMaxLines attribute."
+                " please use the app:readMoreMaxLines attribute.",
         )
     }
 
@@ -158,7 +162,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         throw IllegalStateException(
             "The android:ellipsize attribute and setEllipsize(TextUtils.TruncateAt where) function" +
                 " are not supported. If you want to change ellipsize in the collapsed state," +
-                " please use the app:readMoreOverflow attribute."
+                " please use the app:readMoreOverflow attribute.",
         )
     }
 
@@ -232,7 +236,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                         val underlineSpan = if (readLessTextUnderline) UnderlineSpan() else null
                         val spans = listOfNotNull(
                             textAppearanceSpan,
-                            underlineSpan
+                            underlineSpan,
                         )
                         val readLessTextWithStyle = buildReadLessText(spans = spans.toTypedArray())
                         if (toggleArea == ToggleArea.More) {
@@ -254,7 +258,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                         val underlineSpan = if (readMoreTextUnderline) UnderlineSpan() else null
                         val spans = listOfNotNull(
                             textAppearanceSpan,
-                            underlineSpan
+                            underlineSpan,
                         )
                         val readMoreTextWithStyle = buildReadMoreText(spans = spans.toTypedArray())
                         val readMorePaint = TextPaint().apply {
@@ -293,7 +297,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         textSize: Int = readMoreTextSize.coerceAtMost(getTextSize().toInt()),
         textColors: ColorStateList? = readMoreTextColor,
         textStyle: Int = readMoreTextStyle,
-        fontFamily: String? = readMoreFontFamily
+        fontFamily: String? = readMoreFontFamily,
     ): TextAppearanceSpan {
         return TextAppearanceSpan(fontFamily, textStyle, textSize, textColors, null)
     }
@@ -318,7 +322,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
 
     private fun buildReadMoreText(
         text: String? = readMoreText,
-        vararg spans: Any
+        vararg spans: Any,
     ): CharSequence {
         return buildSpannedString {
             if (text.isNullOrEmpty().not()) {
@@ -333,14 +337,14 @@ public class ReadMoreTextView @JvmOverloads constructor(
         textSize: Int = readLessTextSize.coerceAtMost(getTextSize().toInt()),
         textColors: ColorStateList? = readLessTextColor,
         textStyle: Int = readLessTextStyle,
-        fontFamily: String? = readLessFontFamily
+        fontFamily: String? = readLessFontFamily,
     ): TextAppearanceSpan {
         return TextAppearanceSpan(fontFamily, textStyle, textSize, textColors, null)
     }
 
     private fun buildReadLessText(
         text: String? = readLessText,
-        vararg spans: Any
+        vararg spans: Any,
     ): CharSequence {
         return buildSpannedString {
             if (text.isNullOrEmpty().not()) {
@@ -361,7 +365,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
     }
 
     private fun CharSequence.calculateReplaceCountToBeSingleLineWith(
-        maximumTextWidth: Int
+        maximumTextWidth: Int,
     ): Int {
         var replacedTextWidth: Float
         var replacedCount = -1
@@ -404,26 +408,26 @@ public class ReadMoreTextView @JvmOverloads constructor(
 
         val readMoreTextAppearance = ta.getResourceId(
             R.styleable.ReadMoreTextView_readMoreTextAppearance,
-            ResourcesCompat.ID_NULL
+            ResourcesCompat.ID_NULL,
         )
         if (readMoreTextAppearance != ResourcesCompat.ID_NULL) {
             context.obtainStyledAttributes(
                 readMoreTextAppearance,
-                AppCompatR.styleable.TextAppearance
+                AppCompatR.styleable.TextAppearance,
             ).use {
                 if (it.hasValue(AppCompatR.styleable.TextAppearance_android_textSize)) {
                     textSize = it.getDimensionPixelSize(
                         AppCompatR.styleable.TextAppearance_android_textSize,
-                        DEFAULT_TEXT_SIZE
+                        DEFAULT_TEXT_SIZE,
                     )
                 }
                 textColor = it.getColorStateList(
-                    AppCompatR.styleable.TextAppearance_android_textColor
+                    AppCompatR.styleable.TextAppearance_android_textColor,
                 )
                 if (it.hasValue(AppCompatR.styleable.TextAppearance_android_textStyle)) {
                     textStyle = it.getInt(
                         AppCompatR.styleable.TextAppearance_android_textStyle,
-                        DEFAULT_TEXT_STYLE
+                        DEFAULT_TEXT_STYLE,
                     )
                 }
                 fontFamily =
@@ -434,16 +438,16 @@ public class ReadMoreTextView @JvmOverloads constructor(
         if (ta.hasValue(R.styleable.ReadMoreTextView_readMoreTextSize)) {
             textSize = ta.getDimensionPixelSize(
                 R.styleable.ReadMoreTextView_readMoreTextSize,
-                DEFAULT_TEXT_SIZE
+                DEFAULT_TEXT_SIZE,
             )
         }
         textColor = ta.getColorStateList(
-            R.styleable.ReadMoreTextView_readMoreTextColor
+            R.styleable.ReadMoreTextView_readMoreTextColor,
         ) ?: textColor
         if (ta.hasValue(R.styleable.ReadMoreTextView_readMoreTextStyle)) {
             textStyle = ta.getInt(
                 R.styleable.ReadMoreTextView_readMoreTextStyle,
-                DEFAULT_TEXT_STYLE
+                DEFAULT_TEXT_STYLE,
             )
         }
         fontFamily =
@@ -453,7 +457,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         if (ta.hasValue(R.styleable.ReadMoreTextView_readMoreTextUnderline)) {
             textUnderline = ta.getBoolean(
                 R.styleable.ReadMoreTextView_readMoreTextUnderline,
-                DEFAULT_TEXT_UNDERLINE
+                DEFAULT_TEXT_UNDERLINE,
             )
         }
         return Attributes(
@@ -478,26 +482,26 @@ public class ReadMoreTextView @JvmOverloads constructor(
 
         val readLessTextAppearance = ta.getResourceId(
             R.styleable.ReadMoreTextView_readLessTextAppearance,
-            ResourcesCompat.ID_NULL
+            ResourcesCompat.ID_NULL,
         )
         if (readLessTextAppearance != ResourcesCompat.ID_NULL) {
             context.obtainStyledAttributes(
                 readLessTextAppearance,
-                AppCompatR.styleable.TextAppearance
+                AppCompatR.styleable.TextAppearance,
             ).use {
                 if (it.hasValue(AppCompatR.styleable.TextAppearance_android_textSize)) {
                     textSize = it.getDimensionPixelSize(
                         AppCompatR.styleable.TextAppearance_android_textSize,
-                        DEFAULT_TEXT_SIZE
+                        DEFAULT_TEXT_SIZE,
                     )
                 }
                 textColor = it.getColorStateList(
-                    AppCompatR.styleable.TextAppearance_android_textColor
+                    AppCompatR.styleable.TextAppearance_android_textColor,
                 )
                 if (it.hasValue(AppCompatR.styleable.TextAppearance_android_textStyle)) {
                     textStyle = it.getInt(
                         AppCompatR.styleable.TextAppearance_android_textStyle,
-                        DEFAULT_TEXT_STYLE
+                        DEFAULT_TEXT_STYLE,
                     )
                 }
                 fontFamily =
@@ -508,16 +512,16 @@ public class ReadMoreTextView @JvmOverloads constructor(
         if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextSize)) {
             textSize = ta.getDimensionPixelSize(
                 R.styleable.ReadMoreTextView_readLessTextSize,
-                DEFAULT_TEXT_SIZE
+                DEFAULT_TEXT_SIZE,
             )
         }
         textColor = ta.getColorStateList(
-            R.styleable.ReadMoreTextView_readLessTextColor
+            R.styleable.ReadMoreTextView_readLessTextColor,
         ) ?: textColor
         if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextStyle)) {
             textStyle = ta.getInt(
                 R.styleable.ReadMoreTextView_readLessTextStyle,
-                DEFAULT_TEXT_STYLE
+                DEFAULT_TEXT_STYLE,
             )
         }
         fontFamily =
@@ -527,7 +531,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         if (ta.hasValue(R.styleable.ReadMoreTextView_readLessTextUnderline)) {
             textUnderline = ta.getBoolean(
                 R.styleable.ReadMoreTextView_readLessTextUnderline,
-                DEFAULT_TEXT_UNDERLINE
+                DEFAULT_TEXT_UNDERLINE,
             )
         }
         return Attributes(
@@ -594,7 +598,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
                     override fun updateDrawState(ds: TextPaint) {
                     }
                 },
-                builderAction = builderAction
+                builderAction = builderAction,
             )
         }
     }

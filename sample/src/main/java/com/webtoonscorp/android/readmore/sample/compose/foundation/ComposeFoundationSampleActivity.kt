@@ -32,7 +32,7 @@ class ComposeFoundationSampleActivity : ComponentActivity() {
                     darkColors()
                 } else {
                     lightColors()
-                }
+                },
             ) {
                 BasicReadMoreTextDemo()
             }

@@ -243,7 +243,7 @@ private fun CoreReadMoreText(
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
             originalText = text,
-            readMoreMaxLines = readMoreMaxLines
+            readMoreMaxLines = readMoreMaxLines,
         )
     }
     val currentText = buildAnnotatedString {
@@ -280,7 +280,7 @@ private fun CoreReadMoreText(
     Box(
         modifier = modifier
             .then(toggleableModifier)
-            .padding(contentPadding)
+            .padding(contentPadding),
     ) {
         if (toggleArea == ToggleArea.More) {
             ClickableText(
@@ -298,14 +298,14 @@ private fun CoreReadMoreText(
                     currentText.getStringAnnotations(
                         tag = ReadMoreTag,
                         start = offset,
-                        end = offset
+                        end = offset,
                     ).firstOrNull()?.let {
                         onExpandedChange?.invoke(true)
                     }
                     currentText.getStringAnnotations(
                         tag = ReadLessTag,
                         start = offset,
-                        end = offset
+                        end = offset,
                     ).firstOrNull()?.let {
                         onExpandedChange?.invoke(false)
                     }
@@ -330,13 +330,13 @@ private fun CoreReadMoreText(
                 text = overflowText,
                 onTextLayout = { state.onOverflowTextLayout(it) },
                 modifier = Modifier.notDraw(),
-                style = style
+                style = style,
             )
             BasicText(
                 text = readMoreTextWithStyle,
                 onTextLayout = { state.onReadMoreTextLayout(it) },
                 modifier = Modifier.notDraw(),
-                style = style.merge(readMoreStyle)
+                style = style.merge(readMoreStyle),
             )
         }
     }
@@ -363,7 +363,7 @@ private const val Tag = "ReadMoreState"
 @Stable
 private class ReadMoreState(
     private val originalText: AnnotatedString,
-    private val readMoreMaxLines: Int
+    private val readMoreMaxLines: Int,
 ) {
     private var textLayout: TextLayoutResult? = null
     private var overflowTextLayout: TextLayoutResult? = null

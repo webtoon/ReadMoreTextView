@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -33,11 +32,13 @@ import androidx.compose.ui.draw.DrawModifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
@@ -251,9 +252,13 @@ private fun CoreReadMoreText(
             append(text)
             if (readLessTextWithStyle.isNotEmpty()) {
                 append(' ')
-                pushStringAnnotation(tag = ReadLessTag, annotation = "")
-                append(readLessTextWithStyle)
-                pop()
+                withLink(
+                    LinkAnnotation.Clickable(tag = ReadLessTag) {
+                        onExpandedChange?.invoke(false)
+                    },
+                ) {
+                    append(readLessTextWithStyle)
+                }
             }
         } else {
             val collapsedText = state.collapsedText
@@ -261,9 +266,13 @@ private fun CoreReadMoreText(
                 append(collapsedText)
                 append(overflowText)
 
-                pushStringAnnotation(tag = ReadMoreTag, annotation = "")
-                append(readMoreTextWithStyle)
-                pop()
+                withLink(
+                    LinkAnnotation.Clickable(tag = ReadMoreTag) {
+                        onExpandedChange?.invoke(true)
+                    },
+                ) {
+                    append(readMoreTextWithStyle)
+                }
             } else {
                 append(text)
             }
@@ -283,7 +292,7 @@ private fun CoreReadMoreText(
             .padding(contentPadding),
     ) {
         if (toggleArea == ToggleArea.More) {
-            ClickableText(
+            BasicText(
                 text = currentText,
                 modifier = Modifier,
                 style = style,
@@ -294,22 +303,6 @@ private fun CoreReadMoreText(
                 overflow = TextOverflow.Ellipsis,
                 softWrap = softWrap,
                 maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
-                onClick = { offset ->
-                    currentText.getStringAnnotations(
-                        tag = ReadMoreTag,
-                        start = offset,
-                        end = offset,
-                    ).firstOrNull()?.let {
-                        onExpandedChange?.invoke(true)
-                    }
-                    currentText.getStringAnnotations(
-                        tag = ReadLessTag,
-                        start = offset,
-                        end = offset,
-                    ).firstOrNull()?.let {
-                        onExpandedChange?.invoke(false)
-                    }
-                },
             )
         } else {
             BasicText(

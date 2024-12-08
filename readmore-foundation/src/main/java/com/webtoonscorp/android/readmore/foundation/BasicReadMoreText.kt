@@ -37,6 +37,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.ResolvedTextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
@@ -440,14 +441,28 @@ private class ReadMoreState(
                     countUntilMaxLine
                 }
             val readMoreWidth = overflowTextLayout.size.width + readMoreTextLayout.size.width
-            val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
-            var replacedEndIndex = countUntilMaxLineExceptNewline + 1
-            var currentTextBounds: Rect
-            do {
-                replacedEndIndex -= 1
-                currentTextBounds = textLayout.getCursorRect(replacedEndIndex)
-            } while (currentTextBounds.left > maximumWidth)
-            collapsedText = originalText.subSequence(startIndex = 0, endIndex = replacedEndIndex)
+
+            val firstCharOffsetOfLastLine = textLayout.getLineStart(readMoreMaxLines - 1)
+            val isRtl = textLayout.getParagraphDirection(firstCharOffsetOfLastLine) == ResolvedTextDirection.Rtl
+            if (isRtl) {
+                val minimumWidth = readMoreWidth
+                var replacedEndIndex = countUntilMaxLineExceptNewline + 1
+                var currentTextBounds: Rect
+                do {
+                    replacedEndIndex -= 1
+                    currentTextBounds = textLayout.getCursorRect(replacedEndIndex)
+                } while (currentTextBounds.right < minimumWidth)
+                collapsedText = originalText.subSequence(startIndex = 0, endIndex = replacedEndIndex)
+            } else {
+                val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
+                var replacedEndIndex = countUntilMaxLineExceptNewline + 1
+                var currentTextBounds: Rect
+                do {
+                    replacedEndIndex -= 1
+                    currentTextBounds = textLayout.getCursorRect(replacedEndIndex)
+                } while (currentTextBounds.left > maximumWidth)
+                collapsedText = originalText.subSequence(startIndex = 0, endIndex = replacedEndIndex)
+            }
             if (DebugLog) {
                 Log.d(Tag, "updateCollapsedText: collapsedText=$collapsedText")
             }

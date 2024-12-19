@@ -291,33 +291,18 @@ private fun CoreReadMoreText(
             .then(toggleableModifier)
             .padding(contentPadding),
     ) {
-        if (toggleArea == ToggleArea.More) {
-            BasicText(
-                text = currentText,
-                modifier = Modifier,
-                style = style,
-                onTextLayout = {
-                    state.onTextLayout(it)
-                    onTextLayout(it)
-                },
-                overflow = TextOverflow.Ellipsis,
-                softWrap = softWrap,
-                maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
-            )
-        } else {
-            BasicText(
-                text = currentText,
-                modifier = Modifier,
-                style = style,
-                onTextLayout = {
-                    state.onTextLayout(it)
-                    onTextLayout(it)
-                },
-                overflow = TextOverflow.Ellipsis,
-                softWrap = softWrap,
-                maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
-            )
-        }
+        BasicText(
+            text = currentText,
+            modifier = Modifier,
+            style = style,
+            onTextLayout = {
+                state.onTextLayout(it)
+                onTextLayout(it)
+            },
+            overflow = TextOverflow.Ellipsis,
+            softWrap = softWrap,
+            maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
+        )
         if (expanded.not()) {
             BasicText(
                 text = overflowText,

@@ -28,15 +28,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.DrawModifier
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
@@ -241,11 +240,27 @@ private fun CoreReadMoreText(
         }
     }
 
+    val textMeasurer = rememberTextMeasurer()
+    val overflowTextLayout = remember(overflowText, style) {
+        textMeasurer.measure(
+            text = overflowText,
+            style = style,
+        )
+    }
+    val readMoreTextLayout = remember(readMoreTextWithStyle, style, readMoreStyle) {
+        textMeasurer.measure(
+            text = readMoreTextWithStyle,
+            style = style.merge(readMoreStyle),
+        )
+    }
+
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
             originalText = text,
             readMoreMaxLines = readMoreMaxLines,
-        )
+        ).apply {
+            onDecorationTextLayout(overflowTextLayout, readMoreTextLayout)
+        }
     }
     val currentText = buildAnnotatedString {
         if (expanded) {
@@ -303,31 +318,6 @@ private fun CoreReadMoreText(
             softWrap = softWrap,
             maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
         )
-        if (expanded.not()) {
-            BasicText(
-                text = overflowText,
-                onTextLayout = { state.onOverflowTextLayout(it) },
-                modifier = Modifier.notDraw(),
-                style = style,
-            )
-            BasicText(
-                text = readMoreTextWithStyle,
-                onTextLayout = { state.onReadMoreTextLayout(it) },
-                modifier = Modifier.notDraw(),
-                style = style.merge(readMoreStyle),
-            )
-        }
-    }
-}
-
-private fun Modifier.notDraw(): Modifier {
-    return then(NotDrawModifier)
-}
-
-private object NotDrawModifier : DrawModifier {
-
-    override fun ContentDrawScope.draw() {
-        // not draws content.
     }
 }
 
@@ -381,24 +371,25 @@ private class ReadMoreState(
         }
     }
 
-    fun onOverflowTextLayout(result: TextLayoutResult) {
-        val changed = overflowTextLayout?.size?.width != result.size.width
-        if (changed) {
+    fun onDecorationTextLayout(
+        overflow: TextLayoutResult,
+        readMore: TextLayoutResult,
+    ) {
+        val isOverflowChanged = overflowTextLayout != overflow
+        if (isOverflowChanged) {
             if (DebugLog) {
-                Log.d(Tag, "onOverflowTextLayout:")
+                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $overflowTextLayout\n\t(after)  $overflow")
             }
-            overflowTextLayout = result
-            updateCollapsedText()
+            overflowTextLayout = overflow
         }
-    }
-
-    fun onReadMoreTextLayout(result: TextLayoutResult) {
-        val changed = readMoreTextLayout?.size?.width != result.size.width
-        if (changed) {
+        val isReadMoreChanged = readMoreTextLayout != readMore
+        if (isReadMoreChanged) {
             if (DebugLog) {
-                Log.d(Tag, "onReadMoreTextLayout:")
+                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $readMoreTextLayout\n\t(after)  $readMore")
             }
-            readMoreTextLayout = result
+            readMoreTextLayout = readMore
+        }
+        if (isOverflowChanged || isReadMoreChanged) {
             updateCollapsedText()
         }
     }

@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -241,27 +242,37 @@ private fun CoreReadMoreText(
     }
 
     val textMeasurer = rememberTextMeasurer()
-    val overflowTextLayout = remember(overflowText, style) {
-        textMeasurer.measure(
-            text = overflowText,
-            style = style,
-        )
-    }
-    val readMoreTextLayout = remember(readMoreTextWithStyle, style, readMoreStyle) {
-        textMeasurer.measure(
-            text = readMoreTextWithStyle,
-            style = style.merge(readMoreStyle),
-        )
-    }
 
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
             originalText = text,
             readMoreMaxLines = readMoreMaxLines,
-        ).apply {
-            onDecorationTextLayout(overflowTextLayout, readMoreTextLayout)
-        }
+        )
     }
+
+    val decorationTextWidth by produceState<Int?>(initialValue = null, textMeasurer, overflowText, readMoreTextWithStyle, style, readMoreStyle) {
+        val overflowTextWidth = if (overflowText.isNotEmpty()) {
+            textMeasurer.measure(
+                text = overflowText,
+                style = style,
+            ).size.width
+        } else {
+            0
+        }
+        val readMoreTextWidth = if (readMoreTextWithStyle.isNotEmpty()) {
+            textMeasurer.measure(
+                text = readMoreTextWithStyle,
+                style = style.merge(readMoreStyle),
+            ).size.width
+        } else {
+            0
+        }
+        value = overflowTextWidth + readMoreTextWidth
+    }
+    decorationTextWidth?.let {
+        state.onDecorationTextLayout(it)
+    }
+
     val currentText = buildAnnotatedString {
         if (expanded) {
             append(text)
@@ -334,8 +345,7 @@ private class ReadMoreState(
     private val readMoreMaxLines: Int,
 ) {
     private var textLayout: TextLayoutResult? = null
-    private var overflowTextLayout: TextLayoutResult? = null
-    private var readMoreTextLayout: TextLayoutResult? = null
+    private var decorationTextWidth: Int? = null
 
     private var _collapsedText: AnnotatedString by mutableStateOf(AnnotatedString(""))
 
@@ -371,25 +381,13 @@ private class ReadMoreState(
         }
     }
 
-    fun onDecorationTextLayout(
-        overflow: TextLayoutResult,
-        readMore: TextLayoutResult,
-    ) {
-        val isOverflowChanged = overflowTextLayout != overflow
-        if (isOverflowChanged) {
+    fun onDecorationTextLayout(textWidth: Int) {
+        val changed = decorationTextWidth != textWidth
+        if (changed) {
             if (DebugLog) {
-                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $overflowTextLayout\n\t(after)  $overflow")
+                Log.d(Tag, "onDecorationTextLayout: $decorationTextWidth -> $textWidth")
             }
-            overflowTextLayout = overflow
-        }
-        val isReadMoreChanged = readMoreTextLayout != readMore
-        if (isReadMoreChanged) {
-            if (DebugLog) {
-                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $readMoreTextLayout\n\t(after)  $readMore")
-            }
-            readMoreTextLayout = readMore
-        }
-        if (isOverflowChanged || isReadMoreChanged) {
+            decorationTextWidth = textWidth
             updateCollapsedText()
         }
     }
@@ -397,11 +395,9 @@ private class ReadMoreState(
     private fun updateCollapsedText() {
         val lastLineIndex = readMoreMaxLines - 1
         val textLayout = textLayout
-        val overflowTextLayout = overflowTextLayout
-        val readMoreTextLayout = readMoreTextLayout
+        val decorationTextWidth = decorationTextWidth
         if (textLayout != null &&
-            overflowTextLayout != null &&
-            readMoreTextLayout != null &&
+            decorationTextWidth != null &&
             textLayout.lineCount >= readMoreMaxLines &&
             textLayout.isLineEllipsized(lastLineIndex)
         ) {
@@ -415,7 +411,7 @@ private class ReadMoreState(
                 } else {
                     countUntilMaxLine
                 }
-            val readMoreWidth = overflowTextLayout.size.width + readMoreTextLayout.size.width
+            val readMoreWidth = decorationTextWidth
             val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
             var replacedEndIndex = countUntilMaxLineExceptNewline + 1
             var currentTextBounds: Rect

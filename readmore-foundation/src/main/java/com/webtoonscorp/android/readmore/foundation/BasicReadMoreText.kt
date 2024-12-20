@@ -17,11 +17,12 @@ package com.webtoonscorp.android.readmore.foundation
 
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
 
@@ -241,27 +243,14 @@ private fun CoreReadMoreText(
     }
 
     val textMeasurer = rememberTextMeasurer()
-    val overflowTextLayout = remember(overflowText, style) {
-        textMeasurer.measure(
-            text = overflowText,
-            style = style,
-        )
-    }
-    val readMoreTextLayout = remember(readMoreTextWithStyle, style, readMoreStyle) {
-        textMeasurer.measure(
-            text = readMoreTextWithStyle,
-            style = style.merge(readMoreStyle),
-        )
-    }
 
     val state = remember(text, readMoreMaxLines) {
         ReadMoreState(
             originalText = text,
             readMoreMaxLines = readMoreMaxLines,
-        ).apply {
-            onDecorationTextLayout(overflowTextLayout, readMoreTextLayout)
-        }
+        )
     }
+
     val currentText = buildAnnotatedString {
         if (expanded) {
             append(text)
@@ -301,7 +290,7 @@ private fun CoreReadMoreText(
     } else {
         Modifier
     }
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .then(toggleableModifier)
             .padding(contentPadding),
@@ -310,14 +299,54 @@ private fun CoreReadMoreText(
             text = currentText,
             modifier = Modifier,
             style = style,
-            onTextLayout = {
-                state.onTextLayout(it)
-                onTextLayout(it)
-            },
+            onTextLayout = onTextLayout,
             overflow = TextOverflow.Ellipsis,
             softWrap = softWrap,
             maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
         )
+
+        val constraints = Constraints(maxWidth = constraints.maxWidth)
+        LaunchedEffect(
+            textMeasurer,
+            constraints,
+            overflowText,
+            readMoreTextWithStyle,
+            style,
+            readMoreStyle,
+            text,
+            readMoreMaxLines,
+            softWrap,
+        ) {
+            Log.d(Tag, "LaunchedEffect: $text")
+            val overflowTextWidth = if (overflowText.isNotEmpty()) {
+                textMeasurer.measure(
+                    text = overflowText,
+                    style = style,
+                ).size.width
+            } else {
+                0
+            }
+            val readMoreTextWidth = if (readMoreTextWithStyle.isNotEmpty()) {
+                textMeasurer.measure(
+                    text = readMoreTextWithStyle,
+                    style = style.merge(readMoreStyle),
+                ).size.width
+            } else {
+                0
+            }
+            val textLayout = textMeasurer.measure(
+                text = text,
+                style = style,
+                maxLines = readMoreMaxLines,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = softWrap,
+                constraints = constraints,
+            )
+            state.onTextLayout(
+                result = textLayout,
+                decorationWidth = overflowTextWidth + readMoreTextWidth,
+            )
+        }
     }
 }
 
@@ -333,9 +362,8 @@ private class ReadMoreState(
     private val originalText: AnnotatedString,
     private val readMoreMaxLines: Int,
 ) {
-    private var textLayout: TextLayoutResult? = null
-    private var overflowTextLayout: TextLayoutResult? = null
-    private var readMoreTextLayout: TextLayoutResult? = null
+    private var lastTextLayout: TextLayoutResult? = null
+    private var lastDecorationWidth: Int? = null
 
     private var _collapsedText: AnnotatedString by mutableStateOf(AnnotatedString(""))
 
@@ -353,56 +381,44 @@ private class ReadMoreState(
     val isCollapsible: Boolean
         get() = collapsedText.isNotEmpty()
 
-    fun onTextLayout(result: TextLayoutResult) {
+    fun onTextLayout(result: TextLayoutResult, decorationWidth: Int) {
+        val decorationChanged = this.lastDecorationWidth != decorationWidth
+        if (decorationChanged) {
+            if (DebugLog) {
+                Log.d(Tag, "onTextLayout: decorationTextWidth ${this.lastDecorationWidth} -> $decorationWidth")
+            }
+            this.lastDecorationWidth = decorationWidth
+        }
+
         val lastLineIndex = readMoreMaxLines - 1
-        val previous = textLayout
+        val previous = lastTextLayout
         val old = previous != null &&
             previous.lineCount >= readMoreMaxLines &&
             previous.isLineEllipsized(lastLineIndex)
         val new = result.lineCount >= readMoreMaxLines &&
             result.isLineEllipsized(lastLineIndex)
-        val changed = previous != result && old != new
-        if (changed) {
+        val textChanged = previous != result && old != new
+        if (textChanged) {
             if (DebugLog) {
                 Log.d(Tag, "onTextLayout:")
             }
-            textLayout = result
-            updateCollapsedText()
+            lastTextLayout = result
+        }
+
+        if (decorationChanged || textChanged) {
+            updateCollapsedText(
+                textLayout = result,
+                decorationWidth = decorationWidth,
+            )
         }
     }
 
-    fun onDecorationTextLayout(
-        overflow: TextLayoutResult,
-        readMore: TextLayoutResult,
+    private fun updateCollapsedText(
+        textLayout: TextLayoutResult,
+        decorationWidth: Int,
     ) {
-        val isOverflowChanged = overflowTextLayout != overflow
-        if (isOverflowChanged) {
-            if (DebugLog) {
-                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $overflowTextLayout\n\t(after)  $overflow")
-            }
-            overflowTextLayout = overflow
-        }
-        val isReadMoreChanged = readMoreTextLayout != readMore
-        if (isReadMoreChanged) {
-            if (DebugLog) {
-                Log.d(Tag, "onDecorationTextLayout:\n\t(before) $readMoreTextLayout\n\t(after)  $readMore")
-            }
-            readMoreTextLayout = readMore
-        }
-        if (isOverflowChanged || isReadMoreChanged) {
-            updateCollapsedText()
-        }
-    }
-
-    private fun updateCollapsedText() {
         val lastLineIndex = readMoreMaxLines - 1
-        val textLayout = textLayout
-        val overflowTextLayout = overflowTextLayout
-        val readMoreTextLayout = readMoreTextLayout
-        if (textLayout != null &&
-            overflowTextLayout != null &&
-            readMoreTextLayout != null &&
-            textLayout.lineCount >= readMoreMaxLines &&
+        if (textLayout.lineCount >= readMoreMaxLines &&
             textLayout.isLineEllipsized(lastLineIndex)
         ) {
             val countUntilMaxLine = textLayout.getLineEnd(readMoreMaxLines - 1, visibleEnd = true)
@@ -415,8 +431,7 @@ private class ReadMoreState(
                 } else {
                     countUntilMaxLine
                 }
-            val readMoreWidth = overflowTextLayout.size.width + readMoreTextLayout.size.width
-            val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - readMoreWidth)
+            val maximumWidth = max(0, textLayout.layoutInput.constraints.maxWidth - decorationWidth)
             var replacedEndIndex = countUntilMaxLineExceptNewline + 1
             var currentTextBounds: Rect
             do {

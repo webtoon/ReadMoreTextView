@@ -34,11 +34,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -48,6 +50,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
@@ -86,6 +89,8 @@ fun ReadMoreTextDemo() {
                 Item_LoreOlympus()
                 HorizontalDivider()
                 Item_CustomText()
+                HorizontalDivider()
+                Item_RTL()
                 HorizontalDivider()
                 Item_Emoji()
                 HorizontalDivider()
@@ -322,6 +327,47 @@ private fun Item_CustomText() {
             readLessText = stringResource(id = R.string.read_less),
             toggleArea = ToggleArea.More,
         )
+    }
+}
+
+@Composable
+private fun Item_RTL() {
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        Column {
+            Text(
+                text = stringResource(id = R.string.title_rtl),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            ReadMoreText(
+                text = stringResource(id = R.string.description_rtl),
+                expanded = expanded,
+                modifier = Modifier.fillMaxWidth(),
+                onExpandedChange = onExpandedChange,
+                contentPadding = PaddingValues(
+                    start = 18.dp,
+                    top = 5.dp,
+                    end = 18.dp,
+                    bottom = 18.dp,
+                ),
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+                readMoreText = stringResource(id = R.string.read_more_rtl),
+                readMoreMaxLines = 2,
+                readMoreColor = MaterialTheme.colorScheme.primary,
+                readMoreFontSize = 13.sp,
+                readMoreFontWeight = FontWeight.Bold,
+                readMoreTextDecoration = TextDecoration.Underline,
+                readLessText = stringResource(id = R.string.read_less_rtl),
+            )
+        }
     }
 }
 

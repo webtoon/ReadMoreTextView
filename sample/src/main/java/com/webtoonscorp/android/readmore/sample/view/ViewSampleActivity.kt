@@ -112,6 +112,11 @@ class ViewSampleActivity : AppCompatActivity() {
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
         }
 
+        binding.itemRtl.description.setOnStateChangeListener { expanded ->
+            val title = binding.itemRtl.title.text
+            binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
+        }
+
         binding.itemEmoji.description.setOnStateChangeListener { expanded ->
             val title = binding.itemEmoji.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")

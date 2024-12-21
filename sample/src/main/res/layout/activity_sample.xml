@@ -59,6 +59,14 @@
             android:layout_height="wrap_content" />
 
         <include
+            android:id="@+id/item_rtl"
+            layout="@layout/item_rtl" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
             android:id="@+id/item_emoji"
             layout="@layout/item_emoji" />
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 NAVER Webtoon
+ * Copyright 2024 NAVER Webtoon
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,23 @@
  */
 package com.webtoonscorp.android.readmore.sample.compose.material
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
+import androidx.compose.runtime.Composable
 
-class ComposeMaterialSampleActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CustomTheme {
-                ReadMoreTextDemo()
-            }
-        }
-    }
+@Composable
+fun CustomTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    MaterialTheme(
+        colors = if (darkTheme) {
+            darkColors()
+        } else {
+            lightColors()
+        },
+        content = content,
+    )
 }

@@ -1,5 +1,6 @@
 plugins {
     id("readmore.android.library")
+    id("readmore.kotlin.android")
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.jetbrains.dokka)
     alias(libs.plugins.metalava)

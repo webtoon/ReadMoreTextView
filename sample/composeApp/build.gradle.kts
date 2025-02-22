@@ -68,7 +68,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 //            implementation(libs.jetbrains.compose.ui.text)
 
-//            implementation(projects.readmoreFoundation)
+            implementation(projects.readmoreFoundation)
 //            implementation(projects.readmoreMaterial)
 //            implementation(projects.readmoreMaterial3)
         }

@@ -16,10 +16,8 @@
 package com.webtoonscorp.android.readmore.foundation
 
 import androidx.compose.runtime.Stable
-import kotlin.jvm.JvmInline
 
-@JvmInline
-public value class ToggleArea private constructor(internal val value: Int) {
+public class ToggleArea private constructor(internal val value: Int) {
 
     override fun toString(): String {
         return when (this) {

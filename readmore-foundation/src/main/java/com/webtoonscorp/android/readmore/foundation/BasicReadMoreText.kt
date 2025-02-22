@@ -249,11 +249,15 @@ private fun CoreReadMoreText(
             append(text)
             if (readLessTextWithStyle.isNotEmpty()) {
                 append(' ')
-                withLink(
-                    LinkAnnotation.Clickable(tag = ReadLessTag) {
-                        onExpandedChange?.invoke(false)
-                    },
-                ) {
+                if (toggleArea == ToggleArea.More) {
+                    withLink(
+                        LinkAnnotation.Clickable(tag = ReadLessTag) {
+                            onExpandedChange?.invoke(false)
+                        },
+                    ) {
+                        append(readLessTextWithStyle)
+                    }
+                } else {
                     append(readLessTextWithStyle)
                 }
             }
@@ -263,11 +267,15 @@ private fun CoreReadMoreText(
                 append(collapsedText)
                 append(overflowText)
 
-                withLink(
-                    LinkAnnotation.Clickable(tag = ReadMoreTag) {
-                        onExpandedChange?.invoke(true)
-                    },
-                ) {
+                if (toggleArea == ToggleArea.More) {
+                    withLink(
+                        LinkAnnotation.Clickable(tag = ReadMoreTag) {
+                            onExpandedChange?.invoke(true)
+                        },
+                    ) {
+                        append(readMoreTextWithStyle)
+                    }
+                } else {
                     append(readMoreTextWithStyle)
                 }
             } else {

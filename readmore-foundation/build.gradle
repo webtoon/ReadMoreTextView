@@ -1,40 +1,29 @@
 plugins {
     id("readmore.android.library")
-    id("readmore.android.compose")
+    id("readmore.kotlin.multiplatform")
+    id("readmore.compose")
+    id("readmore.metalava")
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.jetbrains.dokka)
-    alias(libs.plugins.metalava)
 }
 
-android {
-    namespace "com.webtoonscorp.android.readmore.foundation"
-    kotlinOptions {
-        freeCompilerArgs += '-Xexplicit-api=warning'
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+kotlin {
+    explicitApiWarning()
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.foundation)
+            implementation(libs.jetbrains.compose.ui.text)
+        }
+        androidInstrumentedTest.dependencies {
+            implementation(libs.junit)
+            implementation(libs.androidx.test.core)
+            implementation(libs.androidx.test.runner)
+            implementation(libs.compose.ui.test.junit4)
+            implementation(libs.compose.ui.test.manifest)
         }
     }
 }
 
-metalava {
-    sourcePaths.setFrom("src/main")
-    filename.set("api/current.api")
-    reportLintsAsErrors.set(true)
-}
-
-dependencies {
-    implementation libs.compose.foundation.foundation
-    implementation libs.compose.ui.util
-
-    // ======================
-    // Test dependencies
-    // ======================
-
-    androidTestImplementation libs.junit
-    androidTestImplementation libs.androidx.test.core
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.compose.ui.test.junit4
-    debugImplementation libs.compose.ui.test.manifest
+android {
+    namespace = "com.webtoonscorp.android.readmore.foundation"
 }

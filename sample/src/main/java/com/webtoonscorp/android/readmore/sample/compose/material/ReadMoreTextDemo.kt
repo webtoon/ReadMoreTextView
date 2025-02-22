@@ -15,7 +15,6 @@
  */
 package com.webtoonscorp.android.readmore.sample.compose.material
 
-import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -32,10 +31,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -44,7 +45,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
@@ -79,6 +81,8 @@ fun ReadMoreTextDemo() {
                 Item_LoreOlympus()
                 Divider()
                 Item_CustomText()
+                Divider()
+                Item_RTL()
                 Divider()
                 Item_Emoji()
                 Divider()
@@ -319,6 +323,47 @@ private fun Item_CustomText() {
 }
 
 @Composable
+private fun Item_RTL() {
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        Column {
+            Text(
+                text = stringResource(id = R.string.title_rtl),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            ReadMoreText(
+                text = stringResource(id = R.string.description_rtl),
+                expanded = expanded,
+                modifier = Modifier.fillMaxWidth(),
+                onExpandedChange = onExpandedChange,
+                contentPadding = PaddingValues(
+                    start = 18.dp,
+                    top = 5.dp,
+                    end = 18.dp,
+                    bottom = 18.dp,
+                ),
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Normal,
+                lineHeight = 22.sp,
+                readMoreText = stringResource(id = R.string.read_more_rtl),
+                readMoreMaxLines = 2,
+                readMoreColor = MaterialTheme.colors.primary,
+                readMoreFontSize = 13.sp,
+                readMoreFontWeight = FontWeight.Bold,
+                readMoreTextDecoration = TextDecoration.Underline,
+                readLessText = stringResource(id = R.string.read_less_rtl),
+            )
+        }
+    }
+}
+
+@Composable
 private fun Item_Emoji() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
@@ -350,11 +395,10 @@ private fun Item_Emoji() {
     }
 }
 
-@Preview(name = "Light", showBackground = true)
-@Preview(name = "Dark", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@PreviewLightDark
 @Composable
 private fun Preview() {
-    MaterialTheme {
+    CustomTheme {
         ReadMoreTextDemo()
     }
 }

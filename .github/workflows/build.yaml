@@ -34,9 +34,7 @@ jobs:
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-home-cache-cleanup: true
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Check spotless
         run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --stacktrace
@@ -98,9 +96,7 @@ jobs:
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-home-cache-cleanup: true
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Build tests
         run: ./gradlew assembleDebugAndroidTest --scan
@@ -160,9 +156,7 @@ jobs:
         run: release/signing-setup.sh ${{ secrets.ENCRYPT_KEY }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-home-cache-cleanup: true
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Deploy to Sonatype
         run: ./gradlew publish --no-parallel --stacktrace

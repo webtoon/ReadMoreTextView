@@ -1,6 +1,7 @@
 plugins {
     id("readmore.android.application")
     id("readmore.android.compose")
+    alias(libs.plugins.dependency.guard)
 }
 
 android {
@@ -51,4 +52,13 @@ dependencies {
     implementation libs.compose.ui.ui
     implementation libs.compose.ui.preview
     debugImplementation libs.compose.ui.tooling
+}
+
+dependencyGuard {
+    // All dependencies included in Production Release APK
+    configuration("releaseRuntimeClasspath")
+}
+
+task applyDependencyBaseline {
+    dependsOn "dependencyGuardBaseline"
 }

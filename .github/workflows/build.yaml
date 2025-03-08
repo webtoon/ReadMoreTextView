@@ -35,6 +35,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Check dependencyGuard
+        run: ./gradlew dependencyGuard
+
       - name: Check spotless
         run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --stacktrace
 

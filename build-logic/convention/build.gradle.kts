@@ -20,6 +20,7 @@ kotlin {
 dependencies {
     implementation(libs.android.pluginGradle)
     implementation(libs.kotlin.pluginGradle)
+    implementation(libs.compose.compiler.pluginGradle)
 }
 
 gradlePlugin {

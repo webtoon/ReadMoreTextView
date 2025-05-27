@@ -4,12 +4,11 @@ agp = "8.7.1"
 mavenPublish = "0.25.1"
 metalava = "0.3.3"
 
-kotlin = "1.8.22"
+kotlin = "2.0.21"
 dokka = "1.8.10"
 
-compose = "1.8.0-beta02"
-compose-compiler = "1.4.8"
-compose-material3 = "1.4.0-alpha08"
+compose = "1.8.1"
+compose-material3 = "1.4.0-alpha15"
 
 material = "1.5.0"
 
@@ -56,11 +55,13 @@ junit = { module = "junit:junit", version.ref = "junit" }
 # Dependencies of the included build-logic
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-compiler-pluginGradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 metalava = { id = "me.tylerbwong.gradle.metalava", version.ref = "metalava" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

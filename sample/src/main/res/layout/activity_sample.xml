@@ -74,5 +74,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <include
+            android:id="@+id/item_hyperlink"
+            layout="@layout/item_hyperlink" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </ScrollView>

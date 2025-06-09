@@ -18,8 +18,11 @@ package com.webtoonscorp.android.readmore.sample.view
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.BackgroundColorSpan
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
 import android.view.View
@@ -120,6 +123,33 @@ class ViewSampleActivity : AppCompatActivity() {
         binding.itemEmoji.description.setOnStateChangeListener { expanded ->
             val title = binding.itemEmoji.title.text
             binding.root.showSnackBar("'$title' " + if (expanded) "expanded!" else "collapsed!")
+        }
+
+        binding.itemHyperlink.description.text = buildSpannedString {
+            repeat(30) { index ->
+                inSpans(
+                    object : ClickableSpan() {
+                        override fun onClick(widget: View) {
+                            binding.root.showSnackBar("#TAG$index Clicked!")
+                        }
+
+                        override fun updateDrawState(ds: TextPaint) {
+                            ds.setColor(Color.BLUE)
+                        }
+                    },
+                ) {
+                    append("#TAG$index")
+                }
+                append(' ')
+            }
+            append("END")
+        }
+        binding.itemHyperlink.description.movementMethod = LinkMovementMethod.getInstance()
+        binding.itemHyperlink.description.setOnClickListener {
+            val textView = binding.itemHyperlink.description
+            if (textView.selectionStart == -1 && textView.selectionEnd == -1) {
+                textView.toggle()
+            }
         }
     }
 

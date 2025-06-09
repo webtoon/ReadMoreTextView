@@ -30,20 +30,25 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.LayoutDirection
@@ -53,10 +58,14 @@ import com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow
 import com.webtoonscorp.android.readmore.foundation.ToggleArea
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import com.webtoonscorp.android.readmore.sample.R
+import kotlinx.coroutines.launch
 
 @Composable
 fun ReadMoreTextDemo() {
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(title = {
                 Text(text = stringResource(id = R.string.compose_material_title))
@@ -74,7 +83,7 @@ fun ReadMoreTextDemo() {
                 Divider()
                 Item_Hyperfocus()
                 Divider()
-                ItemReunion()
+                Item_Reunion()
                 Divider()
                 Item_TheWorldAfterTheFall()
                 Divider()
@@ -85,6 +94,12 @@ fun ReadMoreTextDemo() {
                 Item_RTL()
                 Divider()
                 Item_Emoji()
+                Divider()
+                Item_Hyperlink { message ->
+                    coroutineScope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(message = message)
+                    }
+                }
                 Divider()
             }
         },
@@ -156,7 +171,7 @@ private fun Item_Hyperfocus() {
 }
 
 @Composable
-private fun ItemReunion() {
+private fun Item_Reunion() {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     Column {
         Text(
@@ -389,6 +404,53 @@ private fun Item_Emoji() {
             readMoreMaxLines = 2,
             readMoreText = stringResource(id = R.string.read_more),
             readMoreFontWeight = FontWeight.Bold,
+            readMoreTextDecoration = TextDecoration.Underline,
+            readLessText = stringResource(id = R.string.read_less),
+        )
+    }
+}
+
+@Composable
+private fun Item_Hyperlink(showMessage: (String) -> Unit) {
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
+    Column {
+        Text(
+            text = stringResource(id = R.string.title_hyperlink),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+            color = MaterialTheme.colors.onSurface,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        ReadMoreText(
+            text = buildAnnotatedString {
+                repeat(30) { index ->
+                    withLink(
+                        LinkAnnotation.Clickable(
+                            tag = "TAG$index",
+                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                        ) {
+                            showMessage("#TAG$index Clicked!")
+                        },
+                    ) {
+                        append("#TAG$index")
+                    }
+                    append(' ')
+                }
+                append("END")
+            },
+            expanded = expanded,
+            onExpandedChange = onExpandedChange,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
+            color = MaterialTheme.colors.onSurface,
+            fontSize = 15.sp,
+            fontStyle = FontStyle.Normal,
+            lineHeight = 22.sp,
+            readMoreMaxLines = 3,
+            readMoreText = stringResource(id = R.string.read_more),
             readMoreTextDecoration = TextDecoration.Underline,
             readLessText = stringResource(id = R.string.read_less),
         )

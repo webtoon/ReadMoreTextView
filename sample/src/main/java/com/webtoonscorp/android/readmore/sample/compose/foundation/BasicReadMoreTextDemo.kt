@@ -69,9 +69,11 @@ fun BasicReadMoreTextDemo() {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(title = {
-                Text(text = stringResource(id = R.string.compose_foundation_title))
-            })
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(id = R.string.compose_foundation_title))
+                },
+            )
         },
         content = {
             val scrollState = rememberScrollState()
@@ -460,7 +462,7 @@ private fun Item_Hyperlink(showMessage: (String) -> Unit) {
                     withLink(
                         LinkAnnotation.Clickable(
                             tag = "TAG$index",
-                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue)),
                         ) {
                             showMessage("#TAG$index Clicked!")
                         },

@@ -15,7 +15,6 @@
  */
 package com.webtoonscorp.android.readmore.sample.compose.material3
 
-import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -449,7 +448,7 @@ private fun Item_Hyperlink(showMessage: (String) -> Unit) {
                     withLink(
                         LinkAnnotation.Clickable(
                             tag = "TAG$index",
-                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue)),
                         ) {
                             showMessage("#TAG$index Clicked!")
                         },

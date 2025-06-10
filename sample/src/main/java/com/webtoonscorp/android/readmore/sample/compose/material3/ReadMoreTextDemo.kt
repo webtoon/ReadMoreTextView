@@ -448,7 +448,9 @@ private fun Item_Hyperlink(showMessage: (String) -> Unit) {
                     withLink(
                         LinkAnnotation.Clickable(
                             tag = "TAG$index",
-                            styles = TextLinkStyles(style = SpanStyle(color = Color.Blue)),
+                            styles = TextLinkStyles(
+                                style = SpanStyle(color = Color.Blue),
+                            ),
                         ) {
                             showMessage("#TAG$index Clicked!")
                         },

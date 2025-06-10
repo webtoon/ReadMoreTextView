@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextMeasurer
@@ -185,8 +186,9 @@ public fun BasicReadMoreText(
 // CoreReadMoreText
 // ////////////////////////////////////
 
-private const val ReadMoreTag = "read_more"
-private const val ReadLessTag = "read_less"
+private const val ReadMoreTag = "readmore:read_more"
+private const val ReadLessTag = "readmore:read_less"
+private const val ContentsTag = "readmore:contents"
 
 @Composable
 private fun CoreReadMoreText(
@@ -245,41 +247,27 @@ private fun CoreReadMoreText(
     val state = remember { ReadMoreState() }
 
     val currentText = buildAnnotatedString {
-        if (expanded) {
-            append(text)
-            if (readLessTextWithStyle.isNotEmpty()) {
-                append(' ')
-                if (toggleArea == ToggleArea.More) {
-                    withLink(
-                        LinkAnnotation.Clickable(tag = ReadLessTag) {
-                            onExpandedChange?.invoke(false)
-                        },
-                    ) {
-                        append(readLessTextWithStyle)
-                    }
-                } else {
-                    append(readLessTextWithStyle)
-                }
-            }
-        } else {
-            val collapsedText = state.collapsedText
-            if (collapsedText.isNotEmpty()) {
-                append(collapsedText)
-                append(overflowText)
-
-                if (toggleArea == ToggleArea.More) {
-                    withLink(
-                        LinkAnnotation.Clickable(tag = ReadMoreTag) {
-                            onExpandedChange?.invoke(true)
-                        },
-                    ) {
-                        append(readMoreTextWithStyle)
-                    }
-                } else {
-                    append(readMoreTextWithStyle)
-                }
+        withContentsLink(
+            hasLink = onExpandedChange != null && toggleArea == ToggleArea.All
+                    && text.hasLinks() && state.isCollapsible,
+            linkInteractionListener = { onExpandedChange?.invoke(!expanded) },
+        ) {
+            if (expanded) {
+                appendExpandedText(
+                    text = text,
+                    onExpandedChange = onExpandedChange,
+                    readLessTextWithStyle = readLessTextWithStyle,
+                    toggleArea = toggleArea,
+                )
             } else {
-                append(text)
+                appendCollapsedText(
+                    text = text,
+                    collapsedText = state.collapsedText,
+                    overflowText = overflowText,
+                    onExpandedChange = onExpandedChange,
+                    readMoreTextWithStyle = readMoreTextWithStyle,
+                    toggleArea = toggleArea,
+                )
             }
         }
     }
@@ -332,6 +320,77 @@ private fun CoreReadMoreText(
         }
     }
 }
+
+private fun AnnotatedString.Builder.appendCollapsedText(
+    text: AnnotatedString,
+    collapsedText: AnnotatedString,
+    overflowText: String,
+    onExpandedChange: ((Boolean) -> Unit)?,
+    readMoreTextWithStyle: AnnotatedString,
+    toggleArea: ToggleArea,
+) {
+    if (collapsedText.isNotEmpty()) {
+        append(collapsedText)
+        append(overflowText)
+
+        if (toggleArea == ToggleArea.More) {
+            withLink(
+                LinkAnnotation.Clickable(tag = ReadMoreTag) {
+                    onExpandedChange?.invoke(true)
+                },
+            ) {
+                append(readMoreTextWithStyle)
+            }
+        } else {
+            append(readMoreTextWithStyle)
+        }
+    } else {
+        append(text)
+    }
+}
+
+private fun AnnotatedString.Builder.appendExpandedText(
+    text: AnnotatedString,
+    onExpandedChange: ((Boolean) -> Unit)?,
+    readLessTextWithStyle: AnnotatedString,
+    toggleArea: ToggleArea,
+) {
+    append(text)
+    if (readLessTextWithStyle.isNotEmpty()) {
+        append(' ')
+        if (toggleArea == ToggleArea.More) {
+            withLink(
+                LinkAnnotation.Clickable(tag = ReadLessTag) {
+                    onExpandedChange?.invoke(false)
+                },
+            ) {
+                append(readLessTextWithStyle)
+            }
+        } else {
+            append(readLessTextWithStyle)
+        }
+    }
+}
+
+private inline fun <R : Any> AnnotatedString.Builder.withContentsLink(
+    hasLink: Boolean,
+    linkInteractionListener: LinkInteractionListener?,
+    block: AnnotatedString.Builder.() -> R,
+): R {
+    return if (hasLink) {
+        withLink(
+            LinkAnnotation.Clickable(
+                tag = ContentsTag,
+                linkInteractionListener = linkInteractionListener,
+            ),
+            block = block,
+        )
+    } else {
+        block()
+    }
+}
+
+private fun AnnotatedString.hasLinks() = hasLinkAnnotations(0, length)
 
 // ////////////////////////////////////
 // ReadMoreState

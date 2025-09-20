@@ -9,6 +9,7 @@ package com.webtoonscorp.android.readmore {
     method public boolean isExpanded();
     method public void setExpanded(boolean expanded);
     method public void setOnStateChangeListener(com.webtoonscorp.android.readmore.ReadMoreTextView.OnStateChangeListener listener);
+    method public void setReadMoreMaxLines(int maxLines);
     method public void toggle();
     field public static final int OVERFLOW_CLIP = 1; // 0x1
     field public static final int OVERFLOW_ELLIPSIS = 2; // 0x2

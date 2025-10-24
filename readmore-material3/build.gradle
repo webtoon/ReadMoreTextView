@@ -47,6 +47,8 @@ dependencies {
     testImplementation libs.roborazzi.junit.rule
     testImplementation libs.robolectric
     testImplementation libs.junit
+    testImplementation libs.compose.ui.test.junit4
+    testImplementation libs.androidx.test.ext.junit
 
     androidTestImplementation libs.junit
     androidTestImplementation libs.androidx.test.core

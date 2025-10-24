@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.jetbrains.dokka)
     alias(libs.plugins.metalava)
+    alias(libs.plugins.compose.stability.analyzer)
 }
 
 android {

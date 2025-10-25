@@ -30,11 +30,6 @@
 ./gradlew lintDebug
 ```
 
-- stability
-```bash
-./gradlew stabilityCheck
-```
-
 ## Update baselines
 
 - dependencyGuard
@@ -50,9 +45,4 @@
 - metalava
 ```bash
 ./gradlew metalavaGenerateSignatureRelease
-```
-
-- stability
-```bash
-./gradlew stabilityDump
 ```

@@ -51,6 +51,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Wait for base unit-test to succeed before downloading base branch screenshot artifact
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ steps.get_base_branch_head.outputs.sha }}
+          check-name: 'unit-test'
+          repo-token: ${{ github.token }}
+          wait-interval: 10
+
       - name: Download screenshot artifact from base branch for comparison
         uses: dawidd6/action-download-artifact@v11
         continue-on-error: true

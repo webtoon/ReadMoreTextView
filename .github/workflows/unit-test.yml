@@ -14,7 +14,6 @@ on:
 
 jobs:
   unit-test:
-    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 30
 

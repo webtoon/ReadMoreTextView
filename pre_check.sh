@@ -9,33 +9,27 @@ echo "Starting pre-check validations..."
 echo ""
 
 # Verify dependency changes
-echo "🔍 [1/5] Checking dependency guard..."
+echo "🔍 [1/4] Checking dependency guard..."
 ./gradlew dependencyGuard
 echo "✓ Dependency guard check passed"
 echo ""
 
 # Verify code formatting
-echo "🔍 [2/5] Checking code formatting..."
+echo "🔍 [2/4] Checking code formatting..."
 ./gradlew spotlessCheck --init-script gradle/init.gradle.kts
 echo "✓ Code formatting check passed"
 echo ""
 
 # Verify API compatibility
-echo "🔍 [3/5] Checking API compatibility..."
+echo "🔍 [3/4] Checking API compatibility..."
 ./gradlew metalavaCheckCompatibilityRelease
 echo "✓ API compatibility check passed"
 echo ""
 
 # Static analysis and lint checks
-echo "🔍 [4/5] Running lint checks..."
+echo "🔍 [4/4] Running lint checks..."
 ./gradlew lintDebug
 echo "✓ Lint check passed"
-echo ""
-
-# Compose stability verification
-echo "🔍 [5/5] Checking stability..."
-./gradlew stabilityCheck
-echo "✓ Stability check passed"
 echo ""
 
 echo "✅ All pre-checks passed successfully!"

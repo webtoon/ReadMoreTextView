@@ -1,6 +1,7 @@
 plugins {
     id("readmore.android.library")
     id("readmore.android.compose")
+    alias(libs.plugins.roborazzi)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.jetbrains.dokka)
     alias(libs.plugins.metalava)
@@ -14,6 +15,14 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all {
+                it.systemProperties["robolectric.pixelCopyRenderMode"] = "hardware"
+            }
         }
     }
 }
@@ -31,6 +40,13 @@ dependencies {
     // ======================
     // Test dependencies
     // ======================
+
+    // Roborazzi for screenshot testing
+    testImplementation libs.roborazzi
+    testImplementation libs.roborazzi.compose
+    testImplementation libs.roborazzi.junit.rule
+    testImplementation libs.robolectric
+    testImplementation libs.junit
 
     androidTestImplementation libs.junit
     androidTestImplementation libs.androidx.test.core

@@ -131,7 +131,7 @@ internal class ReadMoreTextScreenshotTest(
                     outputDirectory,
                     "${description.testClass.simpleName}.${testCase.name}.$methodName.$fileExtension",
                 )
-            }
+            },
         ),
     )
 
@@ -320,7 +320,7 @@ internal data class StringScreenshotTestCase(
     override val readMoreText: String,
     override val readLessText: String,
     override val isRtl: Boolean = false,
-): ScreenshotTestCase {
+) : ScreenshotTestCase {
     override fun toString(): String = name
 }
 
@@ -330,6 +330,6 @@ internal data class AnnotatedStringScreenshotTestCase(
     override val readMoreText: String,
     override val readLessText: String,
     override val isRtl: Boolean = false,
-): ScreenshotTestCase {
+) : ScreenshotTestCase {
     override fun toString(): String = name
 }

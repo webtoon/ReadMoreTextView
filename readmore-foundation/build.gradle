@@ -33,6 +33,10 @@ metalava {
     reportLintsAsErrors.set(true)
 }
 
+roborazzi {
+    outputDir.set(file("screenshots"))
+}
+
 dependencies {
     implementation libs.compose.foundation.foundation
     implementation libs.compose.ui.util

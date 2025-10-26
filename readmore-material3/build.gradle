@@ -27,6 +27,10 @@ android {
     }
 }
 
+roborazzi {
+    outputDir.set(file("screenshots"))
+}
+
 metalava {
     sourcePaths.setFrom("src/main")
     filename.set("api/current.api")

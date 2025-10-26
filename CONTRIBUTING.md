@@ -30,6 +30,14 @@
 ./gradlew lintDebug
 ```
 
+- roborazzi
+```bash
+./gradlew verifyRoborazziDebug
+```
+```bash
+./gradlew compareRoborazziDebug
+```
+
 ## Update baselines
 
 - dependencyGuard
@@ -45,4 +53,9 @@
 - metalava
 ```bash
 ./gradlew metalavaGenerateSignatureRelease
+```
+
+- roborazzi
+```bash
+./gradlew recordRoborazziDebug
 ```

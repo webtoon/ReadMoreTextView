@@ -15,12 +15,14 @@
  */
 package com.webtoonscorp.android.readmore.foundation
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -31,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextMeasurer
@@ -132,6 +135,8 @@ public fun BasicReadMoreText(
  * @param softWrap Whether the text should break at soft line breaks. If false, the glyphs in the
  * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
  * [readMoreOverflow] and TextAlign may have unexpected effects.
+ * @param inlineContent A map store composables that replaces certain ranges of the text. It's used
+ * to insert composables into text layout. Check [InlineTextContent] for more information.
  * @param readMoreText The read more text to be displayed in the collapsed state.
  * @param readMoreMaxLines An optional maximum number of lines for the text to span, wrapping if
  * necessary. If the text exceeds the given number of lines, it will be truncated according to
@@ -154,6 +159,7 @@ public fun BasicReadMoreText(
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
+    inlineContent: Map<String, InlineTextContent> = mapOf(),
     readMoreText: String = "",
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
@@ -171,6 +177,7 @@ public fun BasicReadMoreText(
         style = style,
         onTextLayout = onTextLayout,
         softWrap = softWrap,
+        inlineContent = inlineContent,
         readMoreText = readMoreText,
         readMoreMaxLines = readMoreMaxLines,
         readMoreOverflow = readMoreOverflow,
@@ -188,6 +195,7 @@ public fun BasicReadMoreText(
 private const val ReadMoreTag = "read_more"
 private const val ReadLessTag = "read_less"
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 private fun CoreReadMoreText(
     text: AnnotatedString,
@@ -198,6 +206,7 @@ private fun CoreReadMoreText(
     style: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     softWrap: Boolean = true,
+    inlineContent: Map<String, InlineTextContent> = mapOf(),
     readMoreText: String = "",
     readMoreMaxLines: Int = 2,
     readMoreOverflow: ReadMoreTextOverflow = ReadMoreTextOverflow.Ellipsis,
@@ -304,6 +313,7 @@ private fun CoreReadMoreText(
             overflow = TextOverflow.Ellipsis,
             softWrap = softWrap,
             maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
+            inlineContent = inlineContent,
         )
 
         val constraints = Constraints(maxWidth = constraints.maxWidth)
@@ -317,6 +327,7 @@ private fun CoreReadMoreText(
             text,
             readMoreMaxLines,
             softWrap,
+            inlineContent,
         ) {
             state.applyCollapsedText(
                 textMeasurer = textMeasurer,
@@ -328,6 +339,7 @@ private fun CoreReadMoreText(
                 text = text,
                 readMoreMaxLines = readMoreMaxLines,
                 softWrap = softWrap,
+                inlineContent = inlineContent,
             )
         }
     }
@@ -346,7 +358,7 @@ private class ReadMoreState {
 
     var collapsedText: AnnotatedString
         get() = _collapsedText
-        internal set(value) {
+        private set(value) {
             if (value != _collapsedText) {
                 _collapsedText = value
                 if (DebugLog) {
@@ -368,6 +380,7 @@ private class ReadMoreState {
         text: AnnotatedString,
         readMoreMaxLines: Int,
         softWrap: Boolean,
+        inlineContent: Map<String, InlineTextContent>,
     ) {
         val overflowTextWidth = if (overflowText.isNotEmpty()) {
             textMeasurer.measure(
@@ -392,6 +405,7 @@ private class ReadMoreState {
             overflow = TextOverflow.Clip,
             softWrap = softWrap,
             constraints = constraints,
+            placeholders = extractPlaceholders(text, inlineContent),
         )
 
         val clipTextCount = textLayout.getLineEnd(lineIndex = textLayout.lineCount - 1)
@@ -410,6 +424,7 @@ private class ReadMoreState {
                             text = subText,
                             style = style,
                             softWrap = softWrap,
+                            placeholders = extractPlaceholders(subText, inlineContent),
                         ).size.width
                     },
                 )
@@ -450,6 +465,40 @@ private class ReadMoreState {
             }
         }
         return replacedCount
+    }
+
+    /**
+     * Converts AnnotatedString and inlineContent map to placeholders for use with TextMeasurer.
+     *
+     * @param text The annotated string containing inline content annotations
+     * @param inlineContent Map of inline content IDs to their corresponding InlineTextContent
+     * @return List of Range<Placeholder> objects representing the inline content positions
+     */
+    private fun extractPlaceholders(
+        text: AnnotatedString,
+        inlineContent: Map<String, InlineTextContent>,
+    ): List<AnnotatedString.Range<Placeholder>> {
+        if (inlineContent.isEmpty()) {
+            return emptyList()
+        }
+
+        // Get all string annotations with the "androidx.compose.foundation.text.inlineContent" tag
+        val inlineContentAnnotations = text.getStringAnnotations(
+            tag = "androidx.compose.foundation.text.inlineContent",
+            start = 0,
+            end = text.length,
+        )
+
+        // Map each annotation to a Range<Placeholder> if it exists in the inlineContent map
+        return inlineContentAnnotations.mapNotNull { annotation ->
+            inlineContent[annotation.item]?.let { content ->
+                AnnotatedString.Range(
+                    item = content.placeholder,
+                    start = annotation.start,
+                    end = annotation.end,
+                )
+            }
+        }
     }
 
     override fun toString(): String {

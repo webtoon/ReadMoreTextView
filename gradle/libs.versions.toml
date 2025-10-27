@@ -7,14 +7,14 @@ metalava = "0.3.5"
 kotlin = "2.0.21"
 dokka = "1.8.10"
 
-compose = "1.8.2"
-compose-material3 = "1.4.0-alpha15"
+compose = "1.9.0"
+compose-material3 = "1.4.0"
 
 material = "1.5.0"
 
-activity = "1.5.1"
+activity = "1.8.2"
 appcompat = "1.7.0"
-core = "1.7.0"
+core = "1.15.0"
 
 dependency-guard = "0.5.0"
 

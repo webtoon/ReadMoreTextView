@@ -166,7 +166,7 @@ public class ReadMoreTextView @JvmOverloads constructor(
         )
     }
 
-    fun setReadMoreMaxLines(maxLines: Int) {
+    public fun setReadMoreMaxLines(maxLines: Int) {
         if (this.readMoreMaxLines != maxLines) {
             this.readMoreMaxLines = maxLines
 

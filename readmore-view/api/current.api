@@ -2,9 +2,9 @@
 package com.webtoonscorp.android.readmore {
 
   public final class ReadMoreTextView extends androidx.appcompat.widget.AppCompatTextView {
-    ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs, optional int defStyleAttr);
-    ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs);
     ctor public ReadMoreTextView(android.content.Context context);
+    ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs);
+    ctor public ReadMoreTextView(android.content.Context context, optional android.util.AttributeSet? attrs, optional int defStyleAttr);
     method public boolean isExpandable();
     method public boolean isExpanded();
     method public void setExpanded(boolean expanded);

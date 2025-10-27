@@ -30,6 +30,11 @@
 ./gradlew lintDebug
 ```
 
+- stability
+```bash
+./gradlew stabilityCheck
+```
+
 - roborazzi
 ```bash
 ./gradlew verifyRoborazziDebug
@@ -53,6 +58,11 @@
 - metalava
 ```bash
 ./gradlew metalavaGenerateSignatureRelease
+```
+
+- stability
+```bash
+./gradlew stabilityDump
 ```
 
 - roborazzi

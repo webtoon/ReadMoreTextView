@@ -32,6 +32,7 @@ Each [release](https://github.com/webtoon/ReadMoreTextView/releases) outlines th
  <tr><td>Compose 1.6 (1.6.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.5"></td></tr>
  <tr><td>Compose 1.7 (1.7.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.6"></td></tr>
  <tr><td>Compose 1.8 (1.8.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.7"></td></tr>
+ <tr><td>Compose 1.9 (1.9.x)</td><td><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.webtoonscorp.android/readmore-foundation?versionPrefix=1.9"></td></tr>
 </table>
 
 ## Libraries

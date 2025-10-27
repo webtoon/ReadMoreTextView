@@ -5,100 +5,162 @@
 //   ./gradlew :readmore-material:stabilityDump
 
 @Composable
-public fun com.webtoonscorp.android.readmore.material.ReadMoreText(text: kotlin.String, expanded: kotlin.Boolean, modifier: androidx.compose.ui.Modifier?, onExpandedChange: kotlin.Function1<kotlin.Boolean, kotlin.Unit>?, contentPadding: androidx.compose.foundation.layout.PaddingValues?, color: androidx.compose.ui.graphics.Color, fontSize: androidx.compose.ui.unit.TextUnit, fontStyle: androidx.compose.ui.text.font.FontStyle?, fontWeight: androidx.compose.ui.text.font.FontWeight?, fontFamily: androidx.compose.ui.text.font.FontFamily?, letterSpacing: androidx.compose.ui.unit.TextUnit, textDecoration: androidx.compose.ui.text.style.TextDecoration?, textAlign: androidx.compose.ui.text.style.TextAlign, lineHeight: androidx.compose.ui.unit.TextUnit, softWrap: kotlin.Boolean, onTextLayout: kotlin.Function1<androidx.compose.ui.text.TextLayoutResult, kotlin.Unit>?, style: androidx.compose.ui.text.TextStyle?, readMoreText: kotlin.String?, readMoreColor: androidx.compose.ui.graphics.Color, readMoreFontSize: androidx.compose.ui.unit.TextUnit, readMoreFontStyle: androidx.compose.ui.text.font.FontStyle?, readMoreFontWeight: androidx.compose.ui.text.font.FontWeight?, readMoreFontFamily: androidx.compose.ui.text.font.FontFamily?, readMoreTextDecoration: androidx.compose.ui.text.style.TextDecoration?, readMoreMaxLines: kotlin.Int, readMoreOverflow: com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow, readMoreStyle: androidx.compose.ui.text.SpanStyle?, readLessText: kotlin.String?, readLessColor: androidx.compose.ui.graphics.Color, readLessFontSize: androidx.compose.ui.unit.TextUnit, readLessFontStyle: androidx.compose.ui.text.font.FontStyle?, readLessFontWeight: androidx.compose.ui.text.font.FontWeight?, readLessFontFamily: androidx.compose.ui.text.font.FontFamily?, readLessTextDecoration: androidx.compose.ui.text.style.TextDecoration?, readLessStyle: androidx.compose.ui.text.SpanStyle?, toggleArea: com.webtoonscorp.android.readmore.foundation.ToggleArea, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int, $changed1: kotlin.Int, $changed2: kotlin.Int, $changed3: kotlin.Int, $default: kotlin.Int, $default1: kotlin.Int): kotlin.Unit
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-1.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
   skippable: false
   restartable: true
   params:
-    - text: STABLE (String is immutable)
-    - expanded: STABLE (primitive type)
-    - modifier: STABLE (marked @Stable or @Immutable)
-    - onExpandedChange: STABLE (function type)
-    - contentPadding: STABLE (marked @Stable or @Immutable)
-    - color: STABLE (marked @Stable or @Immutable)
-    - fontSize: STABLE (marked @Stable or @Immutable)
-    - fontStyle: STABLE (known stable type)
-    - fontWeight: STABLE (marked @Stable or @Immutable)
-    - fontFamily: STABLE (marked @Stable or @Immutable)
-    - letterSpacing: STABLE (marked @Stable or @Immutable)
-    - textDecoration: STABLE (marked @Stable or @Immutable)
-    - textAlign: STABLE (known stable type)
-    - lineHeight: STABLE (marked @Stable or @Immutable)
-    - softWrap: STABLE (primitive type)
-    - onTextLayout: STABLE (function type)
-    - style: STABLE (marked @Stable or @Immutable)
-    - readMoreText: STABLE
-    - readMoreColor: STABLE (marked @Stable or @Immutable)
-    - readMoreFontSize: STABLE (marked @Stable or @Immutable)
-    - readMoreFontStyle: STABLE (known stable type)
-    - readMoreFontWeight: STABLE (marked @Stable or @Immutable)
-    - readMoreFontFamily: STABLE (marked @Stable or @Immutable)
-    - readMoreTextDecoration: STABLE (marked @Stable or @Immutable)
-    - readMoreMaxLines: STABLE (primitive type)
-    - readMoreOverflow: STABLE
-    - readMoreStyle: STABLE (marked @Stable or @Immutable)
-    - readLessText: STABLE
-    - readLessColor: STABLE (marked @Stable or @Immutable)
-    - readLessFontSize: STABLE (marked @Stable or @Immutable)
-    - readLessFontStyle: STABLE (known stable type)
-    - readLessFontWeight: STABLE (marked @Stable or @Immutable)
-    - readLessFontFamily: STABLE (marked @Stable or @Immutable)
-    - readLessTextDecoration: STABLE (marked @Stable or @Immutable)
-    - readLessStyle: STABLE (marked @Stable or @Immutable)
-    - toggleArea: STABLE
     - $composer: RUNTIME (requires runtime check)
     - $changed: STABLE (primitive type)
-    - $changed1: STABLE (primitive type)
-    - $changed2: STABLE (primitive type)
-    - $changed3: STABLE (primitive type)
-    - $default: STABLE (primitive type)
-    - $default1: STABLE (primitive type)
 
 @Composable
-public fun com.webtoonscorp.android.readmore.material.ReadMoreText(text: androidx.compose.ui.text.AnnotatedString, expanded: kotlin.Boolean, modifier: androidx.compose.ui.Modifier?, onExpandedChange: kotlin.Function1<kotlin.Boolean, kotlin.Unit>?, contentPadding: androidx.compose.foundation.layout.PaddingValues?, color: androidx.compose.ui.graphics.Color, fontSize: androidx.compose.ui.unit.TextUnit, fontStyle: androidx.compose.ui.text.font.FontStyle?, fontWeight: androidx.compose.ui.text.font.FontWeight?, fontFamily: androidx.compose.ui.text.font.FontFamily?, letterSpacing: androidx.compose.ui.unit.TextUnit, textDecoration: androidx.compose.ui.text.style.TextDecoration?, textAlign: androidx.compose.ui.text.style.TextAlign, lineHeight: androidx.compose.ui.unit.TextUnit, softWrap: kotlin.Boolean, onTextLayout: kotlin.Function1<androidx.compose.ui.text.TextLayoutResult, kotlin.Unit>?, style: androidx.compose.ui.text.TextStyle?, readMoreText: kotlin.String?, readMoreColor: androidx.compose.ui.graphics.Color, readMoreFontSize: androidx.compose.ui.unit.TextUnit, readMoreFontStyle: androidx.compose.ui.text.font.FontStyle?, readMoreFontWeight: androidx.compose.ui.text.font.FontWeight?, readMoreFontFamily: androidx.compose.ui.text.font.FontFamily?, readMoreTextDecoration: androidx.compose.ui.text.style.TextDecoration?, readMoreMaxLines: kotlin.Int, readMoreOverflow: com.webtoonscorp.android.readmore.foundation.ReadMoreTextOverflow, readMoreStyle: androidx.compose.ui.text.SpanStyle?, readLessText: kotlin.String?, readLessColor: androidx.compose.ui.graphics.Color, readLessFontSize: androidx.compose.ui.unit.TextUnit, readLessFontStyle: androidx.compose.ui.text.font.FontStyle?, readLessFontWeight: androidx.compose.ui.text.font.FontWeight?, readLessFontFamily: androidx.compose.ui.text.font.FontFamily?, readLessTextDecoration: androidx.compose.ui.text.style.TextDecoration?, readLessStyle: androidx.compose.ui.text.SpanStyle?, toggleArea: com.webtoonscorp.android.readmore.foundation.ToggleArea, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int, $changed1: kotlin.Int, $changed2: kotlin.Int, $changed3: kotlin.Int, $default: kotlin.Int, $default1: kotlin.Int): kotlin.Unit
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-1.<anonymous>.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
   skippable: false
   restartable: true
   params:
-    - text: STABLE (marked @Stable or @Immutable)
-    - expanded: STABLE (primitive type)
-    - modifier: STABLE (marked @Stable or @Immutable)
-    - onExpandedChange: STABLE (function type)
-    - contentPadding: STABLE (marked @Stable or @Immutable)
-    - color: STABLE (marked @Stable or @Immutable)
-    - fontSize: STABLE (marked @Stable or @Immutable)
-    - fontStyle: STABLE (known stable type)
-    - fontWeight: STABLE (marked @Stable or @Immutable)
-    - fontFamily: STABLE (marked @Stable or @Immutable)
-    - letterSpacing: STABLE (marked @Stable or @Immutable)
-    - textDecoration: STABLE (marked @Stable or @Immutable)
-    - textAlign: STABLE (known stable type)
-    - lineHeight: STABLE (marked @Stable or @Immutable)
-    - softWrap: STABLE (primitive type)
-    - onTextLayout: STABLE (function type)
-    - style: STABLE (marked @Stable or @Immutable)
-    - readMoreText: STABLE
-    - readMoreColor: STABLE (marked @Stable or @Immutable)
-    - readMoreFontSize: STABLE (marked @Stable or @Immutable)
-    - readMoreFontStyle: STABLE (known stable type)
-    - readMoreFontWeight: STABLE (marked @Stable or @Immutable)
-    - readMoreFontFamily: STABLE (marked @Stable or @Immutable)
-    - readMoreTextDecoration: STABLE (marked @Stable or @Immutable)
-    - readMoreMaxLines: STABLE (primitive type)
-    - readMoreOverflow: STABLE
-    - readMoreStyle: STABLE (marked @Stable or @Immutable)
-    - readLessText: STABLE
-    - readLessColor: STABLE (marked @Stable or @Immutable)
-    - readLessFontSize: STABLE (marked @Stable or @Immutable)
-    - readLessFontStyle: STABLE (known stable type)
-    - readLessFontWeight: STABLE (marked @Stable or @Immutable)
-    - readLessFontFamily: STABLE (marked @Stable or @Immutable)
-    - readLessTextDecoration: STABLE (marked @Stable or @Immutable)
-    - readLessStyle: STABLE (marked @Stable or @Immutable)
-    - toggleArea: STABLE
     - $composer: RUNTIME (requires runtime check)
     - $changed: STABLE (primitive type)
-    - $changed1: STABLE (primitive type)
-    - $changed2: STABLE (primitive type)
-    - $changed3: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-2.<anonymous>(it: kotlin.String, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - it: STABLE (String is immutable)
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-3.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-3.<anonymous>.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-4.<anonymous>(it: kotlin.String, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - it: STABLE (String is immutable)
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-5.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-5.<anonymous>.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ComposableSingletons$ReadMoreTextScreenshotTestKt.lambda-6.<anonymous>(it: kotlin.String, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - it: STABLE (String is immutable)
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+private fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.Screenshot(testCase: com.webtoonscorp.android.readmore.material.ScreenshotTestCase, expanded: kotlin.Boolean, readMoreText: kotlin.String?, readLessText: kotlin.String?, $composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int, $default: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - testCase: STABLE (marked @Stable or @Immutable)
+    - expanded: STABLE (primitive type)
+    - readMoreText: STABLE
+    - readLessText: STABLE
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
     - $default: STABLE (primitive type)
-    - $default1: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.Screenshot.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.all_collapsed.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.all_expanded.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.default_none.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.expanded_none.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.readLessText_collapsed.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.readLessText_expanded.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.readMoreText_collapsed.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
+
+@Composable
+public fun com.webtoonscorp.android.readmore.material.ReadMoreTextScreenshotTest.readMoreText_expanded.<anonymous>($composer: androidx.compose.runtime.Composer?, $changed: kotlin.Int): kotlin.Unit
+  skippable: false
+  restartable: true
+  params:
+    - $composer: RUNTIME (requires runtime check)
+    - $changed: STABLE (primitive type)
 

@@ -247,7 +247,7 @@ private fun CoreReadMoreText(
     val currentText = buildAnnotatedString {
         if (expanded) {
             append(text)
-            if (readLessTextWithStyle.isNotEmpty()) {
+            if (state.isCollapsible && readLessTextWithStyle.isNotEmpty()) {
                 append(' ')
                 if (toggleArea == ToggleArea.More) {
                     withLink(

@@ -15,14 +15,27 @@
  */
 package com.webtoonscorp.android.readmore.foundation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -31,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.takahirom.roborazzi.RoborazziRule
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -114,6 +128,102 @@ internal class BasicReadMoreTextScreenshotTest(
                         }
                         append("abcdefghijklmnopqrstuvwxyz.")
                     },
+                    readMoreText = "Read more",
+                    readLessText = "Read less",
+                ),
+                AnnotatedStringScreenshotTestCase(
+                    name = "InlineTextContent",
+                    text = buildAnnotatedString {
+                        appendInlineContent("start")
+                        append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                        appendInlineContent("middle")
+                        append("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                        appendInlineContent("end")
+                    },
+                    inlineContent = mapOf(
+                        "start" to InlineTextContent(
+                            Placeholder(
+                                width = 55.sp,
+                                height = 15.sp,
+                                placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                            ),
+                        ) {
+                            val shape = RoundedCornerShape(4.dp)
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .padding(end = 5.dp)
+                                    .fillMaxSize()
+                                    .background(color = Color.Red, shape = shape)
+                                    .clip(shape = shape),
+                            ) {
+                                BasicText(
+                                    text = "START",
+                                    style = TextStyle.Default.copy(
+                                        color = Color.White,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        lineHeight = 14.sp,
+                                    ),
+                                )
+                            }
+                        },
+                        "middle" to InlineTextContent(
+                            Placeholder(
+                                width = 70.sp,
+                                height = 15.sp,
+                                placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                            ),
+                        ) {
+                            val shape = RoundedCornerShape(4.dp)
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .padding(horizontal = 5.dp)
+                                    .fillMaxSize()
+                                    .background(color = Color.Blue, shape = shape)
+                                    .clip(shape = shape),
+                            ) {
+                                BasicText(
+                                    text = "MIDDLE",
+                                    style = TextStyle.Default.copy(
+                                        color = Color.White,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        lineHeight = 14.sp,
+                                    ),
+                                )
+                            }
+                        },
+                        "end" to InlineTextContent(
+                            Placeholder(
+                                width = 35.sp,
+                                height = 15.sp,
+                                placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                            ),
+                        ) {
+                            val shape = RoundedCornerShape(4.dp)
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .padding(start = 5.dp)
+                                    .fillMaxSize()
+                                    .background(color = Color.Green, shape = shape)
+                                    .clip(shape = shape),
+                            ) {
+                                BasicText(
+                                    text = "END",
+                                    style = TextStyle.Default.copy(
+                                        color = Color.White,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        lineHeight = 14.sp,
+                                    ),
+                                )
+                            }
+                        },
+                    ),
+                    maxLines = 4,
                     readMoreText = "Read more",
                     readLessText = "Read less",
                 ),
@@ -292,12 +402,14 @@ internal class BasicReadMoreTextScreenshotTest(
                 is AnnotatedStringScreenshotTestCase -> {
                     BasicReadMoreText(
                         text = testCase.text,
+                        inlineContent = testCase.inlineContent,
                         expanded = expanded,
                         style = TextStyle.Default.copy(
                             fontSize = 15.sp,
                             fontStyle = FontStyle.Normal,
                             lineHeight = 22.sp,
                         ),
+                        readMoreMaxLines = testCase.maxLines,
                         readMoreText = readMoreText,
                         readMoreStyle = SpanStyle(
                             color = Color.Blue,
@@ -340,6 +452,8 @@ internal data class StringScreenshotTestCase(
 internal data class AnnotatedStringScreenshotTestCase(
     override val name: String,
     val text: AnnotatedString,
+    val inlineContent: Map<String, InlineTextContent> = mapOf(),
+    val maxLines: Int = 2,
     override val readMoreText: String,
     override val readLessText: String,
     override val isRtl: Boolean = false,

@@ -18,12 +18,16 @@ package com.webtoonscorp.android.readmore.sample.compose.material3
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -32,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -42,13 +47,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
@@ -108,6 +118,8 @@ fun ReadMoreTextDemo() {
                 Item_LoreOlympus()
                 HorizontalDivider()
                 Item_CustomText()
+                HorizontalDivider()
+                Item_InlineTextContent()
                 HorizontalDivider()
                 Item_RTL()
                 HorizontalDivider()
@@ -352,6 +364,119 @@ private fun Item_CustomText() {
             readLessText = stringResource(id = R.string.read_less),
             toggleArea = ToggleArea.More,
         )
+    }
+}
+
+@Composable
+private fun Item_InlineTextContent() {
+    val start = "start"
+    val middle = "middle"
+    val end = "end"
+    val annotatedDescription = buildAnnotatedString {
+        appendInlineContent(start)
+        append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+        appendInlineContent(middle)
+        append("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+        appendInlineContent(end)
+    }
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
+    Column {
+        Text(
+            text = stringResource(id = R.string.title_inline_content_text_compose),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        val density = LocalDensity.current
+        ReadMoreText(
+            text = annotatedDescription,
+            expanded = expanded,
+            onExpandedChange = onExpandedChange,
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(start = 18.dp, top = 5.dp, end = 18.dp, bottom = 18.dp),
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 15.sp,
+            fontStyle = FontStyle.Normal,
+            lineHeight = 22.sp,
+            inlineContent = mapOf(
+                start to InlineTextContent(
+                    Placeholder(
+                        width = with(density) { 55.dp.toSp() },
+                        height = 15.sp,
+                        placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                    ),
+                ) {
+                    Badge(
+                        text = "START",
+                        color = Color.Red,
+                        modifier = Modifier.padding(end = 5.dp),
+                    )
+                },
+                middle to InlineTextContent(
+                    Placeholder(
+                        width = with(density) { 70.dp.toSp() },
+                        height = 15.sp,
+                        placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                    ),
+                ) {
+                    Badge(
+                        text = "MIDDLE",
+                        color = Color.Blue,
+                        modifier = Modifier.padding(horizontal = 5.dp),
+                    )
+                },
+                end to InlineTextContent(
+                    Placeholder(
+                        width = with(density) { 35.dp.toSp() },
+                        height = 15.sp,
+                        placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
+                    ),
+                ) {
+                    Badge(
+                        text = "END",
+                        color = Color.Green,
+                        modifier = Modifier.padding(start = 5.dp),
+                    )
+                },
+            ),
+            readMoreMaxLines = 3,
+            readMoreText = stringResource(id = R.string.read_more),
+            readMoreColor = MaterialTheme.colorScheme.secondary,
+            readMoreFontSize = 14.sp,
+            readMoreFontWeight = FontWeight.Bold,
+            readLessText = stringResource(id = R.string.read_less),
+        )
+    }
+}
+
+@Composable
+private fun Badge(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier,
+    contentColor: Color = Color.White,
+    shape: Shape = RoundedCornerShape(4.dp),
+) {
+    Surface(
+        shape = shape,
+        color = color,
+        contentColor = contentColor,
+        modifier = modifier.fillMaxSize(),
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            Text(
+                text = text,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                lineHeight = 14.sp,
+            )
+        }
     }
 }
 

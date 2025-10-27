@@ -16,6 +16,7 @@
 package com.webtoonscorp.android.readmore.material3
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -270,6 +271,8 @@ public fun ReadMoreText(
  * [TextLayoutResult] object that callback provides contains paragraph information, size of the
  * text, baselines and other details. The callback can be used to add additional decoration or
  * functionality to the text. For example, to draw selection around the text.
+ * @param inlineContent A map store composables that replaces certain ranges of the text. It's used
+ * to insert composables into text layout. Check [InlineTextContent] for more information.
  * @param style Style configuration for the text such as color, font, line height etc.
  * @param readMoreText The read more text to be displayed in the collapsed state.
  * @param readMoreColor [Color] to apply to the read more text. If [Color.Unspecified], and [style]
@@ -325,6 +328,7 @@ public fun ReadMoreText(
     lineHeight: TextUnit = TextUnit.Unspecified,
     softWrap: Boolean = true,
     onTextLayout: (TextLayoutResult) -> Unit = {},
+    inlineContent: Map<String, InlineTextContent> = mapOf(),
     style: TextStyle = LocalTextStyle.current,
     readMoreText: String = "",
     readMoreColor: Color = Color.Unspecified,
@@ -399,6 +403,7 @@ public fun ReadMoreText(
         style = mergedStyle,
         onTextLayout = onTextLayout,
         softWrap = softWrap,
+        inlineContent = inlineContent,
         readMoreText = readMoreText,
         readMoreMaxLines = readMoreMaxLines,
         readMoreOverflow = readMoreOverflow,

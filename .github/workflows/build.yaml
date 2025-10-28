@@ -47,6 +47,9 @@ jobs:
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
 
+      - name: Check stability
+        run: ./gradlew stabilityCheck --stacktrace
+
       - name: Build all build type and flavor permutations
         run: ./gradlew assemble --stacktrace
 

@@ -17,7 +17,7 @@ appcompat = "1.7.0"
 core = "1.15.0"
 
 dependency-guard = "0.5.0"
-manifest-shield = "0.1.8"
+manifest-shield = "0.1.9"
 
 androidxtest = "1.4.0"
 androidxtest-junit = "1.1.3"

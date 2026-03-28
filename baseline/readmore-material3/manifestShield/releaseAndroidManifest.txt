@@ -1,0 +1,13 @@
+uses-permission:
+  com.webtoonscorp.android.readmore.material3.baseline.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+
+receiver:
+  androidx.profileinstaller.ProfileInstallReceiver (exported)
+    permission: android.permission.DUMP
+
+provider:
+
+androidx.startup:
+  androidx.emoji2.text.EmojiCompatInitializer
+  androidx.lifecycle.ProcessLifecycleInitializer
+  androidx.profileinstaller.ProfileInstallerInitializer

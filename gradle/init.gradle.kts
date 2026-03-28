@@ -1,4 +1,4 @@
-val ktlintVersion = "0.49.0"
+val ktlintVersion = "0.49.1"
 
 initscript {
     val spotlessVersion = "6.22.0"

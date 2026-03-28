@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.metalava) apply false
     alias(libs.plugins.maven.publish) apply false
     alias(libs.plugins.dependency.guard) apply false
+    alias(libs.plugins.manifest.shield) apply false
     alias(libs.plugins.jetbrains.dokka)
 }
 

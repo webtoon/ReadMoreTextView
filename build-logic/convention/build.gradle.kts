@@ -21,6 +21,8 @@ dependencies {
     implementation(libs.android.pluginGradle)
     implementation(libs.kotlin.pluginGradle)
     implementation(libs.compose.compiler.pluginGradle)
+    implementation(libs.dependency.guard.pluginGradle)
+    implementation(libs.manifest.shield.pluginGradle)
 }
 
 gradlePlugin {
@@ -36,6 +38,10 @@ gradlePlugin {
         register("androidCompose") {
             id = "readmore.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
+        }
+        register("androidBaseline") {
+            id = "readmore.android.baseline"
+            implementationClass = "AndroidBaselineConventionPlugin"
         }
     }
 }

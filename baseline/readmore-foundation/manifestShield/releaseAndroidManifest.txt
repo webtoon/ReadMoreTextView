@@ -1,0 +1,2 @@
+uses-permission:
+  com.webtoonscorp.android.readmore.foundation.baseline.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION

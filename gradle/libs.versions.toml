@@ -17,6 +17,7 @@ appcompat = "1.7.0"
 core = "1.15.0"
 
 dependency-guard = "0.5.0"
+manifest-shield = "0.1.8"
 
 androidxtest = "1.4.0"
 androidxtest-junit = "1.1.3"
@@ -66,6 +67,8 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-compiler-pluginGradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+dependency-guard-pluginGradle = { module = "com.dropbox.dependency-guard:dependency-guard", version.ref = "dependency-guard" }
+manifest-shield-pluginGradle = { module = "io.github.fornewid.manifest-shield:manifest-shield", version.ref = "manifest-shield" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -77,3 +80,4 @@ jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 metalava = { id = "me.tylerbwong.gradle.metalava", version.ref = "metalava" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 dependency-guard = { id = "com.dropbox.dependency-guard", version.ref = "dependency-guard" }
+manifest-shield = { id = "io.github.fornewid.manifest-shield", version.ref = "manifest-shield" }

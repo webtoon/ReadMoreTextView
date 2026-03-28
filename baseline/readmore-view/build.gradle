@@ -1,0 +1,22 @@
+plugins {
+    id("readmore.android.baseline")
+}
+
+android {
+    namespace "com.webtoonscorp.android.readmore.baseline"
+    defaultConfig {
+        applicationId "com.webtoonscorp.android.readmore.baseline"
+    }
+}
+
+dependencies {
+    implementation projects.readmoreView
+}
+
+dependencyGuard {
+    configuration("releaseRuntimeClasspath")
+}
+
+manifestShield {
+    configuration("release")
+}

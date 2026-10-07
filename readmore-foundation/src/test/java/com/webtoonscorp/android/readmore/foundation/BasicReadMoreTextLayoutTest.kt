@@ -137,6 +137,27 @@ internal class BasicReadMoreTextLayoutTest {
         assertNotEquals(collapsedTexts[1], collapsedTexts[2])
     }
 
+    @Test
+    fun separatesOverflowAndReadMoreText_whenReadMoreTextChanges() {
+        var readMoreText by mutableStateOf("")
+        composeTestRule.setContent {
+            BasicReadMoreText(
+                text = LongText,
+                expanded = false,
+                modifier = Modifier.width(300.dp),
+                onTextLayout = onTextLayout,
+                readMoreText = readMoreText,
+                readMoreMaxLines = 3,
+            )
+        }
+
+        readMoreText = ReadMoreText
+        composeTestRule.waitForIdle()
+
+        val text = assertCollapsed(maxLines = 3).layoutInput.text.text
+        assertTrue(text.endsWith("${Typography.ellipsis}${Typography.nbsp}$ReadMoreText"))
+    }
+
     private fun assertLayoutSettled() {
         repeat(10) { composeTestRule.mainClock.advanceTimeByFrame() }
         val settledLayoutCount = layoutCount

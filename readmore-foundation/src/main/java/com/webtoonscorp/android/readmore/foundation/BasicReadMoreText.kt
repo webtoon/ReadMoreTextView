@@ -226,7 +226,7 @@ private fun CoreReadMoreText(
 ) {
     require(readMoreMaxLines > 0) { "readMoreMaxLines should be greater than 0" }
 
-    val overflowText: String = remember(readMoreOverflow) {
+    val overflowText: String = remember(readMoreOverflow, readMoreText) {
         buildString {
             when (readMoreOverflow) {
                 ReadMoreTextOverflow.Clip -> {

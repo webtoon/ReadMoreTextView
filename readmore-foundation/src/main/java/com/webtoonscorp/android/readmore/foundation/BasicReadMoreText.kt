@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -31,9 +32,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.platform.ViewConfiguration
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -45,6 +47,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 
 /**
@@ -195,7 +198,6 @@ public fun BasicReadMoreText(
 
 private const val ReadMoreTag = "readmore:read_more"
 private const val ReadLessTag = "readmore:read_less"
-private const val ContentsTag = "readmore:contents"
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -256,29 +258,23 @@ private fun CoreReadMoreText(
     val state = remember { ReadMoreState() }
 
     val currentText = buildAnnotatedString {
-        withContentsLink(
-            hasLink = onExpandedChange != null && toggleArea == ToggleArea.All &&
-                text.hasLinks() && state.isCollapsible,
-            linkInteractionListener = { onExpandedChange?.invoke(!expanded) },
-        ) {
-            if (expanded) {
-                appendExpandedText(
-                    text = text,
-                    onExpandedChange = onExpandedChange,
-                    readLessTextWithStyle = readLessTextWithStyle,
-                    toggleArea = toggleArea,
-                    isCollapsible = state.isCollapsible,
-                )
-            } else {
-                appendCollapsedText(
-                    text = text,
-                    collapsedText = state.collapsedText,
-                    overflowText = overflowText,
-                    onExpandedChange = onExpandedChange,
-                    readMoreTextWithStyle = readMoreTextWithStyle,
-                    toggleArea = toggleArea,
-                )
-            }
+        if (expanded) {
+            appendExpandedText(
+                text = text,
+                onExpandedChange = onExpandedChange,
+                readLessTextWithStyle = readLessTextWithStyle,
+                toggleArea = toggleArea,
+                isCollapsible = state.isCollapsible,
+            )
+        } else {
+            appendCollapsedText(
+                text = text,
+                collapsedText = state.collapsedText,
+                overflowText = overflowText,
+                onExpandedChange = onExpandedChange,
+                readMoreTextWithStyle = readMoreTextWithStyle,
+                toggleArea = toggleArea,
+            )
         }
     }
     val toggleableModifier = if (onExpandedChange != null && toggleArea == ToggleArea.All) {
@@ -289,21 +285,38 @@ private fun CoreReadMoreText(
     } else {
         Modifier
     }
+    // Each link in the text is a box with Compose's 48dp minimum touch target, which can be much
+    // larger than its glyphs and swallow the taps meant for the read more text or the padding.
+    // While the whole text is toggleable, the links receive only the taps on their glyphs.
+    val hasLinks = remember(text) { text.hasLinkAnnotations(0, text.length) }
+    val isToggleableAll = onExpandedChange != null && toggleArea == ToggleArea.All
+    val viewConfiguration = LocalViewConfiguration.current
+    val textViewConfiguration = remember(viewConfiguration, isToggleableAll && hasLinks) {
+        if (isToggleableAll && hasLinks) {
+            object : ViewConfiguration by viewConfiguration {
+                override val minimumTouchTargetSize: DpSize get() = DpSize.Zero
+            }
+        } else {
+            viewConfiguration
+        }
+    }
     BoxWithConstraints(
         modifier = modifier
             .then(toggleableModifier)
             .padding(contentPadding),
     ) {
-        BasicText(
-            text = currentText,
-            modifier = Modifier,
-            style = style,
-            onTextLayout = onTextLayout,
-            overflow = TextOverflow.Ellipsis,
-            softWrap = softWrap,
-            maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
-            inlineContent = inlineContent,
-        )
+        CompositionLocalProvider(LocalViewConfiguration provides textViewConfiguration) {
+            BasicText(
+                text = currentText,
+                modifier = Modifier,
+                style = style,
+                onTextLayout = onTextLayout,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = softWrap,
+                maxLines = if (expanded) Int.MAX_VALUE else readMoreMaxLines,
+                inlineContent = inlineContent,
+            )
+        }
 
         val constraints = Constraints(maxWidth = constraints.maxWidth)
         LaunchedEffect(
@@ -385,26 +398,6 @@ private fun AnnotatedString.Builder.appendExpandedText(
         }
     }
 }
-
-private inline fun <R : Any> AnnotatedString.Builder.withContentsLink(
-    hasLink: Boolean,
-    linkInteractionListener: LinkInteractionListener?,
-    block: AnnotatedString.Builder.() -> R,
-): R {
-    return if (hasLink) {
-        withLink(
-            LinkAnnotation.Clickable(
-                tag = ContentsTag,
-                linkInteractionListener = linkInteractionListener,
-            ),
-            block = block,
-        )
-    } else {
-        block()
-    }
-}
-
-private fun AnnotatedString.hasLinks() = hasLinkAnnotations(0, length)
 
 // ////////////////////////////////////
 // ReadMoreState

@@ -257,11 +257,15 @@ private fun CoreReadMoreText(
     val textMeasurer = rememberTextMeasurer()
     val state = remember { ReadMoreState() }
 
+    // Created here so that the compiler remembers the listeners. New listeners would make
+    // currentText a new value and lay out the text again on every recomposition.
+    val readMoreLink = LinkAnnotation.Clickable(tag = ReadMoreTag) { onExpandedChange?.invoke(true) }
+    val readLessLink = LinkAnnotation.Clickable(tag = ReadLessTag) { onExpandedChange?.invoke(false) }
     val currentText = buildAnnotatedString {
         if (expanded) {
             appendExpandedText(
                 text = text,
-                onExpandedChange = onExpandedChange,
+                readLessLink = readLessLink,
                 readLessTextWithStyle = readLessTextWithStyle,
                 toggleArea = toggleArea,
                 isCollapsible = state.isCollapsible,
@@ -271,7 +275,7 @@ private fun CoreReadMoreText(
                 text = text,
                 collapsedText = state.collapsedText,
                 overflowText = overflowText,
-                onExpandedChange = onExpandedChange,
+                readMoreLink = readMoreLink,
                 readMoreTextWithStyle = readMoreTextWithStyle,
                 toggleArea = toggleArea,
             )
@@ -351,7 +355,7 @@ private fun AnnotatedString.Builder.appendCollapsedText(
     text: AnnotatedString,
     collapsedText: AnnotatedString,
     overflowText: String,
-    onExpandedChange: ((Boolean) -> Unit)?,
+    readMoreLink: LinkAnnotation,
     readMoreTextWithStyle: AnnotatedString,
     toggleArea: ToggleArea,
 ) {
@@ -360,11 +364,7 @@ private fun AnnotatedString.Builder.appendCollapsedText(
         append(overflowText)
 
         if (toggleArea == ToggleArea.More) {
-            withLink(
-                LinkAnnotation.Clickable(tag = ReadMoreTag) {
-                    onExpandedChange?.invoke(true)
-                },
-            ) {
+            withLink(readMoreLink) {
                 append(readMoreTextWithStyle)
             }
         } else {
@@ -377,7 +377,7 @@ private fun AnnotatedString.Builder.appendCollapsedText(
 
 private fun AnnotatedString.Builder.appendExpandedText(
     text: AnnotatedString,
-    onExpandedChange: ((Boolean) -> Unit)?,
+    readLessLink: LinkAnnotation,
     readLessTextWithStyle: AnnotatedString,
     toggleArea: ToggleArea,
     isCollapsible: Boolean,
@@ -386,11 +386,7 @@ private fun AnnotatedString.Builder.appendExpandedText(
     if (isCollapsible && readLessTextWithStyle.isNotEmpty()) {
         append(' ')
         if (toggleArea == ToggleArea.More) {
-            withLink(
-                LinkAnnotation.Clickable(tag = ReadLessTag) {
-                    onExpandedChange?.invoke(false)
-                },
-            ) {
+            withLink(readLessLink) {
                 append(readLessTextWithStyle)
             }
         } else {
